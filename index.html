@@ -62,10 +62,22 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
  .panel{padding:18px;border-radius:20px}
  .section{padding:24px 0 38px}
 }
+.nav-actions{display:flex;gap:8px;align-items:center}
+.nav-actions .pill{padding:7px 11px;font-size:.82rem;line-height:1.15;min-height:34px}
+.nav-actions button.pill{background:transparent;color:white;cursor:pointer}
+.time-pick{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.time-pick select{width:100%;padding:14px 10px;border:1px solid #d5e0d8;border-radius:13px;background:#fbfdfb;font:inherit}
+.return-options{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f1f7f2;border:1px solid #d9e9de;border-radius:13px}
+.return-options input{width:18px;height:18px;accent-color:#087653}
+.fare-estimate{padding:17px 18px;border-radius:16px;background:linear-gradient(135deg,#102a20,#176b52);color:white}
+.fare-estimate small{color:#d2e9dc}
+.fare-estimate strong{display:block;font-size:1.65rem;margin-top:4px}
+.fare-estimate .hint{color:#d2e9dc}
+@media(max-width:420px){.brand{font-size:.94rem}.nav-actions{gap:5px}.nav-actions .pill{padding:7px 9px;font-size:.76rem}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap nav"><div class="brand">QR <span>CAR</span> BOOKING</div><div style="display:flex;gap:8px;align-items:center"><a class="pill" href="#booking">बुकिंग करें ↗</a><button class="pill" id="adminOpen" type="button" style="background:transparent;color:white;cursor:pointer">Admin</button></div></div></header>
+<header class="top"><div class="wrap nav"><div class="brand">QR <span>CAR</span> BOOKING</div><div class="nav-actions"><a class="pill" href="#booking">बुकिंग करें ↗</a><button class="pill" id="adminOpen" type="button">Admin</button></div></div></header>
 <main class="wrap">
 <section class="hero"><div><div class="eyebrow">आसान बुकिंग • सीधे संपर्क</div><h1>आपकी यात्रा,<br>हमारी गाड़ी।</h1><p>अपनी यात्रा की जानकारी भरें और बुकिंग रिक्वेस्ट भेजें।</p><a class="btn gold" href="#booking">अभी बुकिंग करें →</a></div><div class="hero-card"><div class="car-icon">🚘</div><div><small style="color:#c6e4d6;letter-spacing:1px;text-transform:uppercase">Your ride, your way</small><h2 style="margin:8px 0 0;font-size:1.65rem">आरामदायक सफर<br>बस एक बुकिंग दूर।</h2></div></div></section>
 <section class="section"><div class="section-title"><div><h2>हमारी गाड़ियाँ</h2><p>कार चुनें या अपनी जरूरत बताएं।</p></div></div><div class="grid" id="cars"><p class="hint">गाड़ियाँ लोड हो रही हैं…</p></div></section>
@@ -77,8 +89,12 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 <div class="field"><label for="trip">यात्रा का प्रकार *</label><select id="trip" name="trip" required><option value="एक तरफ">एक तरफ</option><option value="आना-जाना">आना-जाना</option><option value="स्थानीय बुकिंग">स्थानीय बुकिंग</option></select></div>
 <div class="field"><label for="pickup">पिकअप स्थान *</label><input id="pickup" name="pickup" required placeholder="कहाँ से जाना है?"></div>
 <div class="field"><label for="drop">ड्रॉप स्थान *</label><input id="drop" name="drop" required placeholder="कहाँ जाना है?"></div>
-<div class="field"><label for="date">यात्रा की तारीख *</label><input id="date" name="date" type="date" required></div>
-<div class="field"><label for="time">समय *</label><input id="time" name="time" type="time" required></div>
+<div class="field"><label for="date">जाने की तारीख *</label><input id="date" name="date" type="date" required></div>
+<div class="field"><label>समय चुनें *</label><div class="time-pick"><select id="timeHour" aria-label="घंटा" required><option value="">घंटा</option></select><select id="timeMinute" aria-label="मिनट" required><option value="">मिनट</option></select><select id="timePeriod" aria-label="AM या PM" required><option value="">AM/PM</option><option value="AM">AM</option><option value="PM">PM</option></select></div><input id="time" name="time" type="hidden" required></div>
+<div class="field"><label for="distanceKm">एक तरफ़ की दूरी (KM) – वैकल्पिक</label><input id="distanceKm" name="distanceKm" type="number" min="1" step="1" inputmode="numeric" placeholder="जैसे 80"></div>
+<div class="field" id="returnDateField"><label for="returnDate">वापसी की तारीख</label><input id="returnDate" name="returnDate" type="date"></div>
+<div class="field full hidden" id="sameDayWrap"><label class="return-options"><input id="sameDayReturn" type="checkbox" checked><span>उसी दिन वापसी करनी है</span></label></div>
+<div class="field full"><div class="fare-estimate" id="fareEstimate"><small>अनुमानित किराया</small><strong id="fareAmount">दूरी भरें</strong><div class="hint">अंतिम किराया बुकिंग कन्फर्म करते समय बताया जाएगा।</div></div></div>
 <div class="field full"><label for="notes">अतिरिक्त जानकारी (वैकल्पिक)</label><textarea id="notes" name="notes" rows="3" placeholder="यात्रियों की संख्या या दूसरी जरूरत"></textarea></div>
 <div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">WhatsApp में Send button दबाना होगा।</p></div>
 </div></form>
@@ -87,8 +103,9 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 <h3 style="margin-top:0">मालिक का WhatsApp नंबर</h3>
 <form id="whatsappSettingsForm" class="admin-form">
 <input id="ownerWhatsAppInput" class="wide" type="tel" inputmode="tel" placeholder="उदाहरण: 919876543210" required>
-<button class="btn" type="submit">WhatsApp नंबर सेव करें</button>
-<p class="hint wide">देश कोड सहित नंबर लिखें, जैसे भारत के लिए 91 के बाद 10 अंकों का मोबाइल नंबर। आगे से बुकिंग इसी नंबर पर खुलेगी।</p>
+<label for="dieselPriceInput" class="wide">डीज़ल की कीमत (₹ प्रति लीटर)</label><input id="dieselPriceInput" class="wide" type="number" min="1" step="0.01" placeholder="जैसे 96.45" required>
+<button class="btn" type="submit">सेटिंग सेव करें</button>
+<p class="hint wide">WhatsApp नंबर देश कोड सहित लिखें। डीज़ल की कीमत बदलने पर यहाँ नया रेट डालकर सेव करें; आगे की सभी बुकिंग का अनुमान इसी रेट से बनेगा।</p>
 </form>
 </div>
 <div class="admin-tabs"><button class="active" data-tab="carsTab" type="button">गाड़ियाँ</button><button data-tab="bookingsTab" type="button">बुकिंग</button></div><div id="carsTab"><h3>नई गाड़ी जोड़ें</h3><form class="admin-form" id="carForm"><input id="carName" required placeholder="गाड़ी का नाम"><input id="carPrice" placeholder="किराया / कीमत (जैसे ₹12/km)"><input id="carInfo" class="wide" placeholder="जानकारी (जैसे 6 सीटर)"><input id="carIcon" placeholder="Emoji (जैसे 🚙)"><input id="carImage" type="file" accept="image/*" class="wide"><button class="btn" type="submit">गाड़ी सेव करें</button></form><div id="adminCars"></div></div><div id="bookingsTab" class="hidden"><h3>बुकिंग रिक्वेस्ट</h3><div id="adminBookings"></div></div><p class="status" id="adminStatus"></p></div></section>
@@ -109,6 +126,7 @@ const firebaseConfig = {
 };
 const ADMIN_EMAIL = "aryan97.info@gmail.com";
 let ownerWhatsApp = "";
+let dieselPrice = 96.45;
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -140,6 +158,44 @@ function to24Hour(value){
   if(!Number.isInteger(hour)||hour<0||hour>23||!Number.isInteger(minute)||minute<0||minute>59)return null;
   return String(hour).padStart(2,"0")+":"+String(minute).padStart(2,"0");
 }
+function updateHiddenTime(){
+  const h=$("timeHour").value;
+  const m=$("timeMinute").value;
+  const p=$("timePeriod").value;
+  if(!h||!m||!p){$("time").value="";return;}
+  let hour=Number(h)%12;
+  if(p==="PM")hour+=12;
+  $("time").value=String(hour).padStart(2,"0")+":"+m;
+}
+for(let h=1;h<=12;h++)$("timeHour").add(new Option(String(h),String(h)));
+for(let m=0;m<60;m++)$("timeMinute").add(new Option(String(m).padStart(2,"0"),String(m).padStart(2,"0")));
+["timeHour","timeMinute","timePeriod"].forEach(id=>$(id).addEventListener("change",updateHiddenTime));
+function updateTripFields(){
+  const isReturn=$("trip").value==="आना-जाना";
+  $("sameDayWrap").classList.toggle("hidden",!isReturn);
+  $("returnDateField").classList.toggle("hidden",!isReturn||$("sameDayReturn").checked);
+  $("returnDate").required=isReturn&&!$("sameDayReturn").checked;
+  if(isReturn&&$("sameDayReturn").checked)$("returnDate").value=$("date").value;
+  updateFareEstimate();
+}
+function updateFareEstimate(){
+  const km=Number($("distanceKm").value);
+  if(!Number.isFinite(km)||km<=0){$("fareAmount").textContent="दूरी भरें";return;}
+  const isReturn=$("trip").value==="आना-जाना";
+  const totalKm=km*(isReturn?2:1);
+  const estimate=Math.round(1000+(totalKm/12)*dieselPrice);
+  $("fareAmount").textContent="₹"+estimate.toLocaleString("en-IN");
+}
+$("trip").addEventListener("change",updateTripFields);
+$("sameDayReturn").addEventListener("change",updateTripFields);
+$("date").addEventListener("change",()=>{
+  $("returnDate").min=$("date").value;
+  if($("sameDayReturn").checked)$("returnDate").value=$("date").value;
+});
+$("distanceKm").addEventListener("input",updateFareEstimate);
+$("returnDate").addEventListener("change",()=>{
+  if($("date").value&&$("returnDate").value<$("date").value)$("returnDate").value=$("date").value;
+});
 function formatTime(value){
   if(!value)return "—";
   const parts=String(value).split(":");
@@ -160,6 +216,8 @@ async function loadOwnerSettings(){
   try{
     const snap=await getDoc(doc(db,"settings","public"));
     ownerWhatsApp=snap.exists()?String(snap.data().ownerWhatsApp||""):"";
+    const savedDiesel=Number(snap.exists()?snap.data().dieselPrice:NaN);
+    dieselPrice=Number.isFinite(savedDiesel)&&savedDiesel>0?savedDiesel:96.45;
   }catch(err){console.error("WhatsApp setting load failed",err);}
 }
 loadOwnerSettings();
@@ -198,15 +256,26 @@ form.addEventListener("submit",async e=>{
   e.preventDefault();
   const d=Object.fromEntries(new FormData(form).entries());
   const time24=to24Hour(d.time);
-  if(!time24){alert("कृपया समय चुनें।");return;}
-  const payload={name:d.name,phone:d.phone,car:d.car,trip:d.trip,pickup:d.pickup,drop:d.drop,date:d.date,time:time24,notes:d.notes||"",status:"नई",createdAt:serverTimestamp()};
+  if(!time24){alert("कृपया घंटा, मिनट और AM/PM चुनें।");return;}
+  const isReturn=d.trip==="आना-जाना";
+  const sameDayReturn=isReturn&&$("sameDayReturn").checked;
+  const returnDate=isReturn?(sameDayReturn?d.date:d.returnDate):"";
+  if(isReturn&&!returnDate){alert("कृपया वापसी की तारीख चुनें।");return;}
+  if(isReturn&&returnDate<d.date){alert("वापसी की तारीख जाने की तारीख से पहले नहीं हो सकती।");return;}
+  const distanceKm=Number(d.distanceKm||0);
+  const totalDistanceKm=distanceKm*(isReturn?2:1);
+  const estimatedFare=distanceKm>0?Math.round(1000+(totalDistanceKm/12)*dieselPrice):null;
+  const payload={name:d.name,phone:d.phone,car:d.car,trip:d.trip,pickup:d.pickup,drop:d.drop,date:d.date,time:time24,returnDate,sameDayReturn,distanceKm:distanceKm||null,totalDistanceKm:distanceKm?totalDistanceKm:null,dieselPriceAtBooking:dieselPrice,estimatedFare,notes:d.notes||"",status:"नई",createdAt:serverTimestamp()};
   const submit=form.querySelector('button[type="submit"]');
   submit.disabled=true;submit.textContent="बुकिंग सेव हो रही है…";
   try{
     await addDoc(collection(db,"bookings"),payload);
-    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+formatDate(d.date),"समय: "+formatTime(d.time),"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
+    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+formatDate(d.date),"समय: "+formatTime(d.time),...(distanceKm>0?["एक तरफ़ दूरी: "+distanceKm+" KM","कुल दूरी: "+totalDistanceKm+" KM","अनुमानित कुल किराया: ₹"+estimatedFare]:[]),...(isReturn?["वापसी की तारीख: "+formatDate(returnDate)+(sameDayReturn?" (उसी दिन वापसी)":"")]:[]),"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
     form.reset();
+    $("timeHour").value="";$("timeMinute").value="";$("timePeriod").value="";$("time").value="";
+    $("sameDayReturn").checked=true;$("returnDate").value="";updateTripFields();
     dateInput.min=[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
+$("returnDate").min=dateInput.min;
     if(ownerWhatsApp.trim()){
       openWhatsApp(ownerWhatsApp,message);
     }else{
@@ -227,7 +296,7 @@ onAuthStateChanged(auth,user=>{
   if(isAdmin){
     $("adminUser").textContent=user.email;
     $("adminBox").scrollIntoView({behavior:"smooth"});
-    loadOwnerSettings().then(()=>$("ownerWhatsAppInput").value=ownerWhatsApp);
+    loadOwnerSettings().then(()=>{$("ownerWhatsAppInput").value=ownerWhatsApp;$("dieselPriceInput").value=String(dieselPrice);updateFareEstimate();});
     refreshAdmin();
   }
 });
@@ -241,7 +310,9 @@ $("whatsappSettingsForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const button=e.currentTarget.querySelector('button[type="submit"]');
   const number=normalizePhone($("ownerWhatsAppInput").value);
-  if(number.length!==12||!number.startsWith("91")){$("adminStatus").textContent="नंबर सेव नहीं हुआ: भारत का नंबर 91 के बाद 10 अंकों में लिखें।";return;}
+  const newDieselPrice=Number($("dieselPriceInput").value);
+  if(number.length!==12||!number.startsWith("91")){$("adminStatus").textContent="सेटिंग सेव नहीं हुई: भारत का नंबर 91 के बाद 10 अंकों में लिखें।";return;}
+  if(!Number.isFinite(newDieselPrice)||newDieselPrice<=0){$("adminStatus").textContent="डीज़ल की कीमत सही दर्ज करें।";return;}
   try{
     button.disabled=true;button.textContent="सेव हो रहा है…";
     const user=auth.currentUser;
@@ -249,9 +320,9 @@ $("whatsappSettingsForm").addEventListener("submit",async e=>{
     await user.getIdToken(true);
     if(user.email!==ADMIN_EMAIL||!user.emailVerified)throw new Error("Admin ईमेल या verified स्थिति सही नहीं है।");
     isAdmin=true;
-    await setDoc(doc(db,"settings","public"),{ownerWhatsApp:number,updatedAt:serverTimestamp()},{merge:true});
-    ownerWhatsApp=number;$("ownerWhatsAppInput").value=number;
-    $("adminStatus").textContent="मालिक का WhatsApp नंबर सेव हो गया।";
+    await setDoc(doc(db,"settings","public"),{ownerWhatsApp:number,dieselPrice:newDieselPrice,updatedAt:serverTimestamp()},{merge:true});
+    ownerWhatsApp=number;dieselPrice=newDieselPrice;$("ownerWhatsAppInput").value=number;$("dieselPriceInput").value=String(newDieselPrice);updateFareEstimate();
+    $("adminStatus").textContent="WhatsApp नंबर और डीज़ल की कीमत सेव हो गई।";
   }catch(err){console.error("WhatsApp save failed:",err);$("adminStatus").textContent="नंबर सेव नहीं हुआ: "+(err.code?err.code+" — ":"")+err.message;}
   finally{button.disabled=false;button.textContent="WhatsApp नंबर सेव करें";}
 });
@@ -289,6 +360,9 @@ async function refreshAdmin(){
         '<p>पिकअप: '+safeText(b.pickup||"—")+'</p>'+
         '<p>ड्रॉप: '+safeText(b.drop||"—")+'</p>'+
         '<p>तारीख: '+safeText(formatDate(b.date))+' · समय: '+safeText(formatTime(b.time))+'</p>'+
+        (b.returnDate?'<p>वापसी: '+safeText(formatDate(b.returnDate))+(b.sameDayReturn?' (उसी दिन)':'')+'</p>':'')+
+        (b.distanceKm?'<p>एक तरफ़ दूरी: '+safeText(b.distanceKm)+' KM · कुल दूरी: '+safeText(b.totalDistanceKm)+' KM</p>':'')+
+        (b.estimatedFare?'<p><b>अनुमानित कुल किराया: ₹'+safeText(b.estimatedFare)+'</b></p>':'')+
         '<p>अतिरिक्त जानकारी: '+safeText(b.notes||"कोई जानकारी नहीं")+'</p>'+
         '<p class="hint">बुकिंग समय: '+safeText(created||"उपलब्ध नहीं")+'</p>'+
         '<p>स्थिति: <b>'+safeText(b.status||"नई")+'</b></p>'+
