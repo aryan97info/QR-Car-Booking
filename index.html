@@ -107,6 +107,17 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 <p class="hint wide">WhatsApp नंबर देश कोड सहित लिखें। हर गाड़ी का डीज़ल रेट गाड़ी जोड़ते या Edit करते समय सेट होगा।</p>
 </form>
 </div>
+<div class="panel" style="margin:14px 0;background:#fff">
+<h3 style="margin-top:0">PhonePe पेमेंट QR कोड</h3>
+<form id="phonePeQrForm" class="admin-form">
+<label class="wide" for="phonePeQrFile">PhonePe QR की फोटो अपलोड करें</label>
+<input id="phonePeQrFile" class="wide" type="file" accept="image/png,image/jpeg,image/webp">
+<div class="wide" id="phonePeQrPreview" style="min-height:20px"></div>
+<button class="btn" type="submit">QR कोड सेव करें</button>
+<button class="btn secondary" id="removePhonePeQr" type="button">QR हटाएँ</button>
+<p class="hint wide">QR इमेज 700 KB से छोटी रखें। बुकिंग स्वीकार करते समय WhatsApp चैट खुलेगी; QR फोटो उसी चैट में अटैच करके Send दबाएँ।</p>
+</form>
+</div>
 <div class="admin-tabs"><button class="active" data-tab="carsTab" type="button">गाड़ियाँ</button><button data-tab="bookingsTab" type="button">बुकिंग</button></div><div id="carsTab"><h3 id="carFormHeading">नई गाड़ी जोड़ें</h3><form class="admin-form" id="carForm"><input id="carName" required placeholder="गाड़ी का नाम"><input id="carPrice" placeholder="किराया / कीमत (जैसे ₹12/km)"><input id="carInfo" class="wide" placeholder="जानकारी (जैसे 6 सीटर)"><input id="carIcon" placeholder="Emoji (जैसे 🚙)"><label for="carDieselPrice" class="wide">इस गाड़ी के लिए डीज़ल की कीमत (₹ प्रति लीटर)</label><input id="carDieselPrice" type="number" min="1" step="0.01" value="96.45" required placeholder="जैसे 96.45"><label for="carImage" class="wide">गाड़ी की फोटो (वैकल्पिक)</label><input id="carImage" type="file" accept="image/*" class="wide"><button class="btn" id="carSaveBtn" type="submit">गाड़ी सेव करें</button><button class="btn secondary hidden" id="carCancelEdit" type="button">Edit रद्द करें</button></form><div id="adminCars"></div></div><div id="bookingsTab" class="hidden"><h3>बुकिंग रिक्वेस्ट</h3><div id="adminBookings"></div></div><p class="status" id="adminStatus"></p></div></section>
 </main>
 <footer><div class="wrap foot"><div><b>QR Car Booking</b><div class="hint" style="color:#d9e5df">सरल बुकिंग, आसान सफर।</div></div><div class="hint" style="color:#d9e5df">Admin access केवल अधिकृत Google खाते के लिए।</div></div></footer>
@@ -114,7 +125,6 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-functions.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCrBkQ89ObUq1GdFQLPVqPZM1qhHYwoALs",
@@ -131,9 +141,7 @@ let editingCarId = null;
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const functions = getFunctions(app, "asia-south1");
-const createBookingPaymentLink = httpsCallable(functions, "createBookingPaymentLink");
-const cancelBookingByOwner = httpsCallable(functions, "cancelBookingByOwner");
+let phonePeQrImage = "";
 const provider = new GoogleAuthProvider();
 const $ = id => document.getElementById(id);
 const form = $("bookingForm");
@@ -225,6 +233,8 @@ async function loadOwnerSettings(){
   try{
     const snap=await getDoc(doc(db,"settings","public"));
     ownerWhatsApp=snap.exists()?String(snap.data().ownerWhatsApp||""):"";
+    phonePeQrImage=snap.exists()?String(snap.data().phonePeQrImage||""):"";
+    renderPhonePeQrPreview();
     defaultDieselPrice=96.45;
   }catch(err){console.error("WhatsApp setting load failed",err);}
 }
@@ -308,7 +318,7 @@ onAuthStateChanged(auth,user=>{
   if(isAdmin){
     $("adminUser").textContent=user.email;
     $("adminBox").scrollIntoView({behavior:"smooth"});
-    loadOwnerSettings().then(()=>{$("ownerWhatsAppInput").value=ownerWhatsApp;updateFareEstimate();});
+    loadOwnerSettings().then(()=>{$("ownerWhatsAppInput").value=ownerWhatsApp;updateFareEstimate();renderPhonePeQrPreview();});
     refreshAdmin();
   }
 });
@@ -335,6 +345,33 @@ $("whatsappSettingsForm").addEventListener("submit",async e=>{
     $("adminStatus").textContent="WhatsApp नंबर सेव हो गया।";
   }catch(err){console.error("WhatsApp save failed:",err);$("adminStatus").textContent="नंबर सेव नहीं हुआ: "+(err.code?err.code+" — ":"")+err.message;}
   finally{button.disabled=false;button.textContent="WhatsApp नंबर सेव करें";}
+});
+function renderPhonePeQrPreview(){
+  const host=$("phonePeQrPreview");
+  if(!host)return;
+  host.innerHTML=phonePeQrImage?'<img src="'+safeText(phonePeQrImage)+'" alt="PhonePe QR Code" style="display:block;max-width:220px;max-height:260px;object-fit:contain;border:1px solid #ddd;border-radius:12px;padding:8px;background:#fff"><p class="hint">वर्तमान QR कोड सेव है।</p>':'<p class="hint">अभी PhonePe QR अपलोड नहीं किया गया है।</p>';
+}
+$("phonePeQrForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const file=$("phonePeQrFile").files[0];
+  if(!file){$("adminStatus").textContent="पहले QR इमेज चुनें।";return;}
+  if(!["image/png","image/jpeg","image/webp"].includes(file.type)){$("adminStatus").textContent="PNG, JPG या WEBP इमेज चुनें।";return;}
+  if(file.size>700*1024){$("adminStatus").textContent="QR इमेज 700 KB से छोटी रखें।";return;}
+  const button=e.currentTarget.querySelector('button[type="submit"]');
+  try{
+    button.disabled=true;button.textContent="QR सेव हो रहा है…";
+    const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error("इमेज पढ़ी नहीं जा सकी।"));reader.readAsDataURL(file);});
+    await setDoc(doc(db,"settings","public"),{phonePeQrImage:dataUrl,phonePeQrUpdatedAt:serverTimestamp()},{merge:true});
+    phonePeQrImage=dataUrl;renderPhonePeQrPreview();$("phonePeQrFile").value="";
+    $("adminStatus").textContent="PhonePe QR कोड सेव हो गया।";
+  }catch(err){$("adminStatus").textContent="QR सेव नहीं हुआ: "+err.message;}
+  finally{button.disabled=false;button.textContent="QR कोड सेव करें";}
+});
+$("removePhonePeQr").addEventListener("click",async()=>{
+  if(!phonePeQrImage){$("adminStatus").textContent="कोई QR कोड सेव नहीं है।";return;}
+  if(!confirm("क्या PhonePe QR कोड हटाना है?"))return;
+  try{await updateDoc(doc(db,"settings","public"),{phonePeQrImage:""});phonePeQrImage="";renderPhonePeQrPreview();$("adminStatus").textContent="PhonePe QR हटा दिया गया।";}
+  catch(err){$("adminStatus").textContent="QR नहीं हटाया गया: "+err.message;}
 });
 $("carForm").addEventListener("submit",async e=>{
   e.preventDefault();
@@ -375,6 +412,8 @@ async function refreshAdmin(){
   if(!isAdmin)return;
   try{
     const [cs,bs]=await Promise.all([getDocs(collection(db,"cars")),getDocs(query(collection(db,"bookings"),orderBy("createdAt","desc")))]);
+    const nowMs=Date.now();
+    for(const bookingDoc of bs.docs){const booking=bookingDoc.data();const expiry=booking.paymentExpiresAt?.toDate?booking.paymentExpiresAt.toDate().getTime():new Date(booking.paymentExpiresAt||0).getTime();if(booking.status==="पेमेंट बाकी"&&booking.paymentStatus==="pending"&&expiry&&expiry<=nowMs){await updateDoc(doc(db,"bookings",bookingDoc.id),{status:"समय पर भुगतान नहीं - रद्द",paymentStatus:"expired",expiredAt:serverTimestamp()});}}
     carsCache=cs.docs.map(d=>({id:d.id,...d.data()}));
     $("adminCars").innerHTML=carsCache.map(c=>'<div class="admin-row">'+(c.imageData?'<img src="'+safeText(c.imageData)+'" alt="'+safeText(c.name)+'" style="width:150px;height:100px;object-fit:contain;background:#f2f5f2;border-radius:12px;padding:5px">':"")+'<b>'+safeText(c.name)+'</b><p class="hint">'+safeText(c.price||"किराया पूछें")+' · '+safeText(c.info||"")+'</p><p class="hint">डीज़ल: ₹'+safeText(c.dieselPrice||defaultDieselPrice)+' / लीटर</p><button class="btn secondary" data-editcar="'+c.id+'" type="button">Edit / संपादित करें</button> <button class="btn secondary" data-delcar="'+c.id+'" type="button">गाड़ी हटाएँ</button></div>').join("")||'<p class="hint">अभी कोई गाड़ी नहीं है।</p>';
     $("adminCars").querySelectorAll("[data-editcar]").forEach(b=>b.addEventListener("click",()=>{
@@ -412,7 +451,7 @@ async function refreshAdmin(){
         (b.paymentExpiresAt?'<p class="hint">पेमेंट की अंतिम समय-सीमा: '+safeText(b.paymentExpiresAt.toDate?b.paymentExpiresAt.toDate().toLocaleString("hi-IN"):"4 घंटे")+'</p>':'')+
         (b.estimatedFare?'<p>₹500 सिक्योरिटी किराये में शामिल · बाकी देय: ₹'+safeText(Math.max(0,Number(b.estimatedFare)-500))+'</p>':'')+
         '<p>स्थिति: <b>'+safeText(b.status||"नई")+'</b></p>'+
-        (b.status==="नई"?'<button class="btn" data-acceptpayment="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">बुकिंग स्वीकार करें और ₹500 पेमेंट लिंक भेजें</button> ':'')+
+        (b.status==="नई"?'<button class="btn" data-acceptpayment="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">बुकिंग स्वीकार करें और WhatsApp खोलें</button> ':'')+
         (b.paymentStatus==="paid"?'<p class="hint">पेमेंट प्राप्त: ₹500 · Payment ID: '+safeText(b.paymentId||"—")+'</p>':'')+
         (b.paymentStatus==="pending"?'<p class="hint">ग्राहक से 4 घंटे के भीतर ₹500 भुगतान अपेक्षित है।</p>':'')+
         (["पेमेंट बाकी","कन्फर्म"].includes(b.status)?'<button class="btn secondary" data-ownercancel="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">मालिक की तरफ़ से रद्द करें'+(b.paymentStatus==="paid"?' और ₹500 Refund करें':'')+'</button> ':'')+
@@ -420,56 +459,63 @@ async function refreshAdmin(){
       '</div>';
     }).join("")||'<p class="hint">अभी कोई बुकिंग नहीं है।</p>';
     $("adminBookings").querySelectorAll("[data-acceptpayment]").forEach(b=>b.addEventListener("click",async()=>{
-      if(!confirm("क्या यह बुकिंग स्वीकार करके ग्राहक को ₹500 का 4 घंटे वाला पेमेंट लिंक भेजना है?"))return;
-      b.disabled=true;b.textContent="पेमेंट लिंक बन रहा है…";
+      if(!phonePeQrImage){alert("पहले Admin Panel में PhonePe QR कोड अपलोड करें।");return;}
+      if(!confirm("बुकिंग स्वीकार करके ग्राहक को ₹500 पेमेंट की जानकारी भेजनी है?"))return;
+      b.disabled=true;b.textContent="बुकिंग स्वीकार हो रही है…";
       try{
-        const result=await createBookingPaymentLink({bookingId:b.dataset.acceptpayment});
-        const shortUrl=result.data.shortUrl;
-        const bookingSnap=await getDoc(doc(db,"bookings",b.dataset.acceptpayment));
-        const selected=bookingSnap.exists()?bookingSnap.data():{};
+        const bookingRef=doc(db,"bookings",b.dataset.acceptpayment);
+        const bookingSnap=await getDoc(bookingRef);
+        if(!bookingSnap.exists())throw new Error("बुकिंग नहीं मिली।");
+        const selected=bookingSnap.data();
+        const acceptedAt=new Date();
+        const expiresAt=new Date(acceptedAt.getTime()+4*60*60*1000);
+        await updateDoc(bookingRef,{status:"पेमेंट बाकी",acceptedAt,paymentAmount:500,paymentExpiresAt:expiresAt,paymentStatus:"pending"});
         const customerNumber=normalizePhone(b.dataset.phone);
         const customerMessage=[
           "नमस्ते "+(selected.name||""),
           "आपकी कार बुकिंग रिक्वेस्ट स्वीकार कर ली गई है।",
           "बुकिंग सिक्योरिटी अमाउंट: ₹500",
           "यह ₹500 आपके कुल किराये में एडजस्ट होगा।",
-          "भुगतान की समय-सीमा: इस मैसेज/लिंक के जारी होने से 4 घंटे।",
-          "कृपया 4 घंटे के भीतर इस लिंक से भुगतान करें: "+shortUrl,
-          "4 घंटे में भुगतान नहीं होने पर आपकी बुकिंग स्वतः निरस्त हो जाएगी।",
-          "रद्द करने के नियम:",
-          "• ग्राहक अपनी तरफ़ से बुकिंग रद्द करता है तो ₹500 वापस नहीं होगा।",
-          "• मालिक की तरफ़ से बुकिंग रद्द होने पर ₹500 पूरा Refund किया जाएगा।",
-          "पेमेंट सफल होने और सत्यापन के बाद ही बुकिंग Confirm होगी।",
+          "कृपया PhonePe QR कोड स्कैन करके 4 घंटे के अंदर ₹500 जमा करें।",
+          "समय-सीमा: "+expiresAt.toLocaleString("hi-IN"),
+          "4 घंटे में भुगतान नहीं होने पर बुकिंग रद्द मानी जाएगी।",
+          "पेमेंट करने के बाद UTR/स्क्रीनशॉट WhatsApp पर भेजें। पेमेंट जाँचने के बाद ही बुकिंग Confirm होगी।",
+          "ग्राहक की तरफ़ से रद्द करने पर ₹500 वापस नहीं होगा। मालिक की तरफ़ से रद्द होने पर जमा ₹500 पूरा लौटाया जाएगा।",
           "अनुमानित कुल किराया: ₹"+(selected.estimatedFare||"अंतिम पुष्टि पर बताया जाएगा"),
           ...(selected.estimatedFare?["₹500 जमा होने के बाद बाकी किराया: ₹"+Math.max(0,Number(selected.estimatedFare)-500)]:[])
         ].join("\n");
         await refreshAdmin();
-        if(customerNumber.length===12)openWhatsApp(customerNumber,customerMessage);
-        else alert("पेमेंट लिंक बन गया, लेकिन ग्राहक का मोबाइल नंबर सही नहीं है। लिंक: "+shortUrl);
-      }catch(err){
-        console.error("Payment link creation failed",err);
-        alert("पेमेंट लिंक नहीं बन पाया: "+(err.message||err));
-        b.disabled=false;b.textContent="बुकिंग स्वीकार करें और ₹500 पेमेंट लिंक भेजें";
-      }
+        if(customerNumber.length===12){
+          openWhatsApp(customerNumber,customerMessage);
+          alert("WhatsApp चैट खुलने पर Admin Panel में दिख रहे QR कोड को डाउनलोड/शेयर करके उसी चैट में फोटो अटैच करें, फिर Send दबाएँ।");
+        }else alert("बुकिंग स्वीकार हो गई, लेकिन ग्राहक का मोबाइल नंबर सही नहीं है।");
+      }catch(err){console.error(err);alert("बुकिंग स्वीकार नहीं हुई: "+err.message);b.disabled=false;b.textContent="बुकिंग स्वीकार करें और WhatsApp खोलें";}
+    }));
+    $("adminBookings").querySelectorAll("[data-markpaid]").forEach(b=>b.addEventListener("click",async()=>{
+      if(!confirm("क्या आपने PhonePe में ₹500 पेमेंट वास्तव में प्राप्त और सत्यापित कर लिया है?"))return;
+      try{
+        const ref=doc(db,"bookings",b.dataset.markpaid);
+        const snap=await getDoc(ref);if(!snap.exists())throw new Error("बुकिंग नहीं मिली।");
+        const booking=snap.data();
+        if(booking.status!=="पेमेंट बाकी"||booking.paymentStatus!=="pending")throw new Error("यह बुकिंग अब पेमेंट की प्रतीक्षा में नहीं है।");
+        const expiry=booking.paymentExpiresAt?.toDate?booking.paymentExpiresAt.toDate().getTime():new Date(booking.paymentExpiresAt||0).getTime();
+        if(expiry&&Date.now()>expiry)throw new Error("4 घंटे की समय-सीमा निकल चुकी है।");
+        await updateDoc(ref,{status:"कन्फर्म",paymentStatus:"paid",paidAt:serverTimestamp()});
+        const n=normalizePhone(b.dataset.phone);
+        await refreshAdmin();
+        if(n.length===12)openWhatsApp(n,"नमस्ते "+(booking.name||"")+", आपका ₹500 PhonePe पेमेंट प्राप्त और सत्यापित हो गया है। आपकी कार बुकिंग Confirm कर दी गई है। यह राशि कुल किराये में एडजस्ट होगी। धन्यवाद।");
+      }catch(err){alert("पेमेंट कन्फर्म नहीं हुआ: "+err.message);}
     }));
     $("adminBookings").querySelectorAll("[data-ownercancel]").forEach(b=>b.addEventListener("click",async()=>{
       const paid=b.closest(".admin-row").textContent.includes("पेमेंट प्राप्त: ₹500");
-      const promptText=paid?"क्या मालिक की तरफ़ से बुकिंग रद्द करके ग्राहक को ₹500 पूरा Refund करना है?":"क्या मालिक की तरफ़ से बुकिंग रद्द करके सक्रिय पेमेंट लिंक बंद करना है?";
-      if(!confirm(promptText))return;
-      b.disabled=true;b.textContent="रद्द/Refund हो रहा है…";
+      if(!confirm(paid?"क्या मालिक की तरफ़ से बुकिंग रद्द करके ₹500 का Refund PhonePe से अलग से कर दिया गया है?":"क्या मालिक की तरफ़ से बुकिंग रद्द करनी है?"))return;
       try{
-        const result=await cancelBookingByOwner({bookingId:b.dataset.ownercancel});
-        const customerNumber=normalizePhone(b.dataset.phone);
-        const message=paid
-          ?"मालिक की तरफ़ से आपकी बुकिंग रद्द की गई है। आपका ₹500 सिक्योरिटी अमाउंट पूरा Refund कर दिया गया है। Refund बैंक/UPI में दिखने में Razorpay/बैंक के अनुसार कुछ समय लग सकता है।"
-          :"मालिक की तरफ़ से आपकी बुकिंग रद्द कर दी गई है। आपका पेमेंट लिंक बंद कर दिया गया है।";
+        const ref=doc(db,"bookings",b.dataset.ownercancel);
+        await updateDoc(ref,{status:paid?"मालिक ने रद्द - Refund":"मालिक ने रद्द",paymentStatus:paid?"refunded":"not_paid",cancelledBy:"owner",cancelledAt:serverTimestamp()});
+        const n=normalizePhone(b.dataset.phone);
         await refreshAdmin();
-        if(customerNumber.length===12)openWhatsApp(customerNumber,message);
-      }catch(err){
-        console.error("Owner cancellation failed",err);
-        alert("बुकिंग रद्द/Refund नहीं हो पाया: "+(err.message||err));
-        b.disabled=false;b.textContent=paid?"मालिक की तरफ़ से रद्द करें और ₹500 Refund करें":"मालिक की तरफ़ से रद्द करें";
-      }
+        if(n.length===12)openWhatsApp(n,paid?"मालिक की तरफ़ से आपकी बुकिंग रद्द की गई है। ₹500 का Refund PhonePe से किया गया है।":"मालिक की तरफ़ से आपकी बुकिंग रद्द कर दी गई है।");
+      }catch(err){alert("बुकिंग रद्द नहीं हुई: "+err.message);}
     }));
     $("adminBookings").querySelectorAll("[data-deletebooking]").forEach(b=>b.addEventListener("click",async()=>{
       if(!confirm("क्या यह बुकिंग हमेशा के लिए हटानी है?"))return;
