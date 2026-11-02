@@ -196,6 +196,7 @@ $("distanceKm").addEventListener("input",updateFareEstimate);
 $("returnDate").addEventListener("change",()=>{
   if($("date").value&&$("returnDate").value<$("date").value)$("returnDate").value=$("date").value;
 });
+updateTripFields();
 function formatTime(value){
   if(!value)return "—";
   const parts=String(value).split(":");
