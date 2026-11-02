@@ -7,7 +7,7 @@
 <title>QR Car Booking</title>
 <style>
 :root{--ink:#10231f;--green:#176b52;--mint:#e7f4ee;--gold:#f2bd55;--muted:#65736e;--paper:#f7f8f5;--line:#e0e7e2}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--ink)}a{color:inherit}.wrap{width:min(1080px,92%);margin:auto}.top{background:var(--ink);color:white;padding:16px 0}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;font-size:1.12rem}.brand span{color:var(--gold)}.pill{border:1px solid #ffffff50;padding:8px 12px;border-radius:99px;text-decoration:none;font-size:.88rem}.hero{padding:42px 0 28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}.eyebrow{color:var(--green);font-weight:800;font-size:.8rem;letter-spacing:1.4px}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;margin:12px 0}.hero p{color:var(--muted);font-size:1.04rem;line-height:1.7}.hero-card{background:var(--ink);color:white;border-radius:24px;padding:24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}.car-icon{font-size:4rem}.section{padding:22px 0 44px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}.section-title h2{margin:0;font-size:1.6rem}.section-title p{margin:4px 0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.car,.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.car-art{height:100px;border-radius:13px;background:var(--mint);display:grid;place-items:center;font-size:3.4rem}.car h3{margin:14px 0 4px}.meta,.hint{color:var(--muted);font-size:.88rem;line-height:1.5}.price{font-weight:800;font-size:1.15rem;margin:12px 0}.btn{border:0;border-radius:12px;background:var(--green);color:white;padding:12px 16px;font-weight:750;font-size:.96rem;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}.btn.secondary{background:var(--mint);color:var(--green)}.btn.gold{background:var(--gold);color:var(--ink)}.btn.full{width:100%}.booking-layout{display:grid;grid-template-columns:1fr .7fr;gap:18px}.panel h2{margin-top:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:.9rem;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cfd9d2;border-radius:10px;font:inherit;background:#fff}.notice{background:#fff5d9;border:1px solid #f4df9c;border-radius:12px;padding:12px;color:#654b12;font-size:.88rem;line-height:1.5}.features{display:grid;grid-template-columns:1fr;gap:12px}.feature{padding:16px;background:var(--mint);border-radius:14px}.feature b{display:block;margin-bottom:5px}.feature span{font-size:.88rem;color:var(--muted)}footer{background:var(--ink);color:#d9e5df;padding:26px 0;margin-top:20px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.hidden{display:none!important}.admin-box{margin:20px 0 40px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.admin-tabs button{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 14px;cursor:pointer}.admin-tabs button.active{background:var(--ink);color:white}.admin-row{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:#fff}.admin-row p{margin:5px 0}.admin-form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.admin-form input,.admin-form textarea{width:100%;padding:11px;border:1px solid #cfd9d2;border-radius:9px;font:inherit}.admin-form .wide{grid-column:1/-1}.status{font-size:.84rem;color:var(--muted);margin:8px 0}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--ink)}a{color:inherit}.wrap{width:min(1080px,92%);margin:auto}.top{background:var(--ink);color:white;padding:16px 0}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;font-size:1.12rem}.brand span{color:var(--gold)}.pill{border:1px solid #ffffff50;padding:8px 12px;border-radius:99px;text-decoration:none;font-size:.88rem}.hero{padding:42px 0 28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}.eyebrow{color:var(--green);font-weight:800;font-size:.8rem;letter-spacing:1.4px}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;margin:12px 0}.hero p{color:var(--muted);font-size:1.04rem;line-height:1.7}.hero-card{background:var(--ink);color:white;border-radius:24px;padding:24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}.car-icon{font-size:4rem}.section{padding:22px 0 44px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}.section-title h2{margin:0;font-size:1.6rem}.section-title p{margin:4px 0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.car,.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.car-art{height:150px;border-radius:13px;background:var(--mint);display:grid;place-items:center;font-size:3.4rem;overflow:hidden}.car-art img{width:100%;height:100%;object-fit:cover}.car h3{margin:14px 0 4px}.meta,.hint{color:var(--muted);font-size:.88rem;line-height:1.5}.price{font-weight:800;font-size:1.15rem;margin:12px 0}.btn{border:0;border-radius:12px;background:var(--green);color:white;padding:12px 16px;font-weight:750;font-size:.96rem;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}.btn.secondary{background:var(--mint);color:var(--green)}.btn.gold{background:var(--gold);color:var(--ink)}.btn.full{width:100%}.booking-layout{display:grid;grid-template-columns:1fr .7fr;gap:18px}.panel h2{margin-top:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:.9rem;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cfd9d2;border-radius:10px;font:inherit;background:#fff}.notice{background:#fff5d9;border:1px solid #f4df9c;border-radius:12px;padding:12px;color:#654b12;font-size:.88rem;line-height:1.5}.features{display:grid;grid-template-columns:1fr;gap:12px}.feature{padding:16px;background:var(--mint);border-radius:14px}.feature b{display:block;margin-bottom:5px}.feature span{font-size:.88rem;color:var(--muted)}footer{background:var(--ink);color:#d9e5df;padding:26px 0;margin-top:20px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.hidden{display:none!important}.admin-box{margin:20px 0 40px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.admin-tabs button{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 14px;cursor:pointer}.admin-tabs button.active{background:var(--ink);color:white}.admin-row{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:#fff}.admin-row p{margin:5px 0}.admin-form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.admin-form input,.admin-form textarea{width:100%;padding:11px;border:1px solid #cfd9d2;border-radius:9px;font:inherit}.admin-form .wide{grid-column:1/-1}.status{font-size:.84rem;color:var(--muted);margin:8px 0}
 @media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:30px}.hero-card{min-height:170px}.grid,.booking-layout,.features{grid-template-columns:1fr}.section-title{align-items:start;flex-direction:column}.form-grid,.admin-form{grid-template-columns:1fr}.field.full,.admin-form .wide{grid-column:auto}.nav{align-items:flex-start}.hero h1{letter-spacing:-.8px}}
 </style>
 </head>
@@ -38,7 +38,7 @@
 <p class="hint wide">देश कोड सहित नंबर लिखें, जैसे भारत के लिए 91 के बाद 10 अंकों का मोबाइल नंबर। आगे से बुकिंग इसी नंबर पर खुलेगी।</p>
 </form>
 </div>
-<div class="admin-tabs"><button class="active" data-tab="carsTab" type="button">गाड़ियाँ</button><button data-tab="bookingsTab" type="button">बुकिंग</button></div><div id="carsTab"><h3>नई गाड़ी जोड़ें</h3><form class="admin-form" id="carForm"><input id="carName" required placeholder="गाड़ी का नाम"><input id="carPrice" placeholder="किराया / कीमत (जैसे ₹12/km)"><input id="carInfo" class="wide" placeholder="जानकारी (जैसे 6 सीटर)"><input id="carIcon" placeholder="Emoji (जैसे 🚙)"><button class="btn" type="submit">गाड़ी सेव करें</button></form><div id="adminCars"></div></div><div id="bookingsTab" class="hidden"><h3>बुकिंग रिक्वेस्ट</h3><div id="adminBookings"></div></div><p class="status" id="adminStatus"></p></div></section>
+<div class="admin-tabs"><button class="active" data-tab="carsTab" type="button">गाड़ियाँ</button><button data-tab="bookingsTab" type="button">बुकिंग</button></div><div id="carsTab"><h3>नई गाड़ी जोड़ें</h3><form class="admin-form" id="carForm"><input id="carName" required placeholder="गाड़ी का नाम"><input id="carPrice" placeholder="किराया / कीमत (जैसे ₹12/km)"><input id="carInfo" class="wide" placeholder="जानकारी (जैसे 6 सीटर)"><input id="carIcon" placeholder="Emoji (जैसे 🚙)"><input id="carImage" type="file" accept="image/*" class="wide"><button class="btn" type="submit">गाड़ी सेव करें</button></form><div id="adminCars"></div></div><div id="bookingsTab" class="hidden"><h3>बुकिंग रिक्वेस्ट</h3><div id="adminBookings"></div></div><p class="status" id="adminStatus"></p></div></section>
 </main>
 <footer><div class="wrap foot"><div><b>QR Car Booking</b><div class="hint" style="color:#d9e5df">सरल बुकिंग, आसान सफर।</div></div><div class="hint" style="color:#d9e5df">Admin access केवल अधिकृत Google खाते के लिए।</div></div></footer>
 <script type="module">
@@ -87,6 +87,20 @@ async function loadOwnerSettings(){
 }
 loadOwnerSettings();
 function safeText(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+async function compressCarImage(file){
+  if(!file)return "";
+  if(!file.type.startsWith("image/"))throw new Error("कृपया JPG, PNG या WEBP इमेज चुनें।");
+  const bitmap=await createImageBitmap(file);
+  const scale=Math.min(1,800/Math.max(bitmap.width,bitmap.height));
+  const canvas=document.createElement("canvas");
+  canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+  canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+  canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);
+  bitmap.close();
+  const data=canvas.toDataURL("image/jpeg",0.72);
+  if(data.length>850000)throw new Error("इमेज बहुत बड़ी है। छोटी फोटो चुनें।");
+  return data;
+}
 async function loadCars(){
   const host=$("cars");
   try{
@@ -95,7 +109,7 @@ async function loadCars(){
     if(!carsCache.length){
       host.innerHTML='<article class="car"><div class="car-art">🚙</div><h3>अपनी गाड़ी जोड़ें</h3><p class="meta">Admin में Google Login करके गाड़ी जोड़ें।</p></article>';
     }else{
-      host.innerHTML=carsCache.map(c=>'<article class="car"><div class="car-art">'+safeText(c.icon||"🚘")+'</div><h3>'+safeText(c.name)+'</h3><div class="meta">'+safeText(c.info||"बुकिंग के लिए उपलब्ध")+'</div><div class="price">'+safeText(c.price||"किराया पूछें")+'</div><button class="btn secondary full" type="button" data-select="'+safeText(c.name)+'">यह कार चुनें</button></article>').join("");
+      host.innerHTML=carsCache.map(c=>'<article class="car"><div class="car-art">'+(c.imageData?'<img src="'+safeText(c.imageData)+'" alt="'+safeText(c.name)+'">':safeText(c.icon||"🚘"))+'</div><h3>'+safeText(c.name)+'</h3><div class="meta">'+safeText(c.info||"बुकिंग के लिए उपलब्ध")+'</div><div class="price">'+safeText(c.price||"किराया पूछें")+'</div><button class="btn secondary full" type="button" data-select="'+safeText(c.name)+'">यह कार चुनें</button></article>').join("");
     }
     $("car").innerHTML='<option value="">कार चुनें</option>'+carsCache.map(c=>'<option>'+safeText(c.name)+'</option>').join("");
     document.querySelectorAll("[data-select]").forEach(b=>b.addEventListener("click",()=>{$("car").value=b.dataset.select;$("booking").scrollIntoView({behavior:"smooth"});}));
@@ -146,32 +160,46 @@ document.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click
 }));
 $("whatsappSettingsForm").addEventListener("submit",async e=>{
   e.preventDefault();
-  if(!isAdmin)return;
+  const button=e.currentTarget.querySelector('button[type="submit"]');
   const number=normalizePhone($("ownerWhatsAppInput").value);
-  if(number.length!==12||!number.startsWith("91")){
-    $("adminStatus").textContent="भारत का नंबर 91 के बाद 10 अंकों में लिखें।";
-    return;
-  }
+  if(number.length!==12||!number.startsWith("91")){$("adminStatus").textContent="नंबर सेव नहीं हुआ: भारत का नंबर 91 के बाद 10 अंकों में लिखें।";return;}
   try{
+    button.disabled=true;button.textContent="सेव हो रहा है…";
+    const user=auth.currentUser;
+    if(!user)throw new Error("Admin Google Login नहीं मिला।");
+    await user.getIdToken(true);
+    if(user.email!==ADMIN_EMAIL||!user.emailVerified)throw new Error("Admin ईमेल या verified स्थिति सही नहीं है।");
+    isAdmin=true;
     await setDoc(doc(db,"settings","public"),{ownerWhatsApp:number,updatedAt:serverTimestamp()},{merge:true});
-    ownerWhatsApp=number;
-    $("ownerWhatsAppInput").value=number;
-    $("adminStatus").textContent="मालिक का WhatsApp नंबर सेव हो गया। अब नई बुकिंग इसी नंबर पर खुलेगी।";
-  }catch(err){$("adminStatus").textContent="नंबर सेव नहीं हुआ: "+err.message;}
+    ownerWhatsApp=number;$("ownerWhatsAppInput").value=number;
+    $("adminStatus").textContent="मालिक का WhatsApp नंबर सेव हो गया।";
+  }catch(err){console.error("WhatsApp save failed:",err);$("adminStatus").textContent="नंबर सेव नहीं हुआ: "+(err.code?err.code+" — ":"")+err.message;}
+  finally{button.disabled=false;button.textContent="WhatsApp नंबर सेव करें";}
 });
 $("carForm").addEventListener("submit",async e=>{
-  e.preventDefault();if(!isAdmin)return;
+  e.preventDefault();
+  if(!isAdmin){$("adminStatus").textContent="गाड़ी सेव नहीं हुई: Admin लॉगिन उपलब्ध नहीं है।";return;}
+  const button=e.currentTarget.querySelector('button[type="submit"]');
   try{
-    await addDoc(collection(db,"cars"),{name:$("carName").value.trim(),price:$("carPrice").value.trim(),info:$("carInfo").value.trim(),icon:$("carIcon").value.trim()||"🚘",createdAt:serverTimestamp()});
-    e.target.reset();$("adminStatus").textContent="गाड़ी सेव हो गई।";await refreshAdmin();
-  }catch(err){$("adminStatus").textContent="गाड़ी सेव नहीं हुई: "+err.message;}
+    button.disabled=true;button.textContent="गाड़ी सेव हो रही है…";
+    const imageData=await compressCarImage($("carImage").files[0]);
+    await addDoc(collection(db,"cars"),{name:$("carName").value.trim(),price:$("carPrice").value.trim(),info:$("carInfo").value.trim(),icon:$("carIcon").value.trim()||"🚘",imageData,createdAt:serverTimestamp()});
+    e.target.reset();$("adminStatus").textContent="गाड़ी और फोटो सेव हो गई।";await refreshAdmin();
+  }catch(err){console.error("Car save failed:",err);$("adminStatus").textContent="गाड़ी सेव नहीं हुई: "+(err.code?err.code+" — ":"")+err.message;}
+  finally{button.disabled=false;button.textContent="गाड़ी सेव करें";}
 });
 async function refreshAdmin(){
   if(!isAdmin)return;
   try{
     const [cs,bs]=await Promise.all([getDocs(collection(db,"cars")),getDocs(query(collection(db,"bookings"),orderBy("createdAt","desc")))]);
     carsCache=cs.docs.map(d=>({id:d.id,...d.data()}));
-    $("adminCars").innerHTML=carsCache.map(c=>'<div class="admin-row"><b>'+safeText(c.name)+'</b><p class="hint">'+safeText(c.price||"किराया पूछें")+' · '+safeText(c.info||"")+'</p><button class="btn secondary" data-delcar="'+c.id+'" type="button">हटाएँ</button></div>').join("")||'<p class="hint">अभी कोई गाड़ी नहीं है।</p>';
+    $("adminCars").innerHTML=carsCache.map(c=>'<div class="admin-row">'+(c.imageData?'<img src="'+safeText(c.imageData)+'" alt="'+safeText(c.name)+'" style="width:110px;height:75px;object-fit:cover;border-radius:9px">':"")+'<b>'+safeText(c.name)+'</b><p class="hint">'+safeText(c.price||"किराया पूछें")+' · '+safeText(c.info||"")+'</p><button class="btn secondary" data-delcar="'+c.id+'" type="button">गाड़ी हटाएँ</button></div>').join("")||'<p class="hint">अभी कोई गाड़ी नहीं है।</p>';
+    $("adminCars").querySelectorAll("[data-delcar]").forEach(b=>b.addEventListener("click",async()=>{
+      if(!confirm("क्या यह गाड़ी हमेशा के लिए हटानी है?"))return;
+      b.disabled=true;
+      try{await deleteDoc(doc(db,"cars",b.dataset.delcar));$("adminStatus").textContent="गाड़ी हटा दी गई।";await refreshAdmin();}
+      catch(err){b.disabled=false;$("adminStatus").textContent="गाड़ी नहीं हटाई गई: "+(err.code?err.code+" — ":"")+err.message;}
+    }));
     $("adminBookings").innerHTML=bs.docs.map(d=>{
       const b=d.data();
       const created=b.createdAt?.toDate?b.createdAt.toDate().toLocaleString("hi-IN"):"";
