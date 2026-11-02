@@ -294,7 +294,7 @@ form.addEventListener("submit",async e=>{
   submit.disabled=true;submit.textContent="बुकिंग सेव हो रही है…";
   try{
     await addDoc(collection(db,"bookings"),payload);
-    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+formatDate(d.date),"समय: "+formatTime(d.time),...(distanceKm>0?["आपकी बताई एक तरफ़ दूरी: "+distanceKm+" KM","डीज़ल गणना (आना-जाना): "+totalDistanceKm+" KM","फिक्स चार्ज: ₹"+fixedCharges,"डीज़ल रेट: ₹"+bookingDieselPrice+"/लीटर","अनुमानित कुल किराया: ₹"+estimatedFare]:[]),...(isReturn?["वापसी की तारीख: "+formatDate(returnDate)+(sameDayReturn?" (उसी दिन वापसी)":"")]:[]),"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
+    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+formatDate(d.date),"समय: "+formatTime(d.time),...(distanceKm>0?["आपकी बताई एक तरफ़ दूरी: "+distanceKm+" KM","Fuel गणना (आना-जाना): "+totalDistanceKm+" KM","फिक्स चार्ज: ₹"+fixedCharges,"डीज़ल रेट: ₹"+bookingDieselPrice+"/लीटर","अनुमानित कुल किराया: ₹"+estimatedFare]:[]),...(isReturn?["वापसी की तारीख: "+formatDate(returnDate)+(sameDayReturn?" (उसी दिन वापसी)":"")]:[]),"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
     form.reset();
     $("timeHour").value="";$("timeMinute").value="";$("timePeriod").value="";$("time").value="";
     $("sameDayReturn").checked=true;$("returnDate").value="";updateTripFields();
@@ -447,7 +447,7 @@ async function refreshAdmin(){
         '<p>ड्रॉप: '+safeText(b.drop||"—")+'</p>'+
         '<p>तारीख: '+safeText(formatDate(b.date))+' · समय: '+safeText(formatTime(b.time))+'</p>'+
         (b.returnDate?'<p>वापसी: '+safeText(formatDate(b.returnDate))+(b.sameDayReturn?' (उसी दिन)':'')+'</p>':'')+
-        (b.distanceKm?'<p>बताई गई एक तरफ़ दूरी: '+safeText(b.distanceKm)+' KM · डीज़ल गणना (आना-जाना): '+safeText(b.totalDistanceKm)+' KM</p>':'')+
+        (b.distanceKm?'<p>बताई गई एक तरफ़ दूरी: '+safeText(b.distanceKm)+' KM · Fuel गणना (आना-जाना): '+safeText(b.totalDistanceKm)+' KM</p>':'')+
         (b.distanceKm?'<p>फिक्स चार्ज: ₹'+safeText(b.trip==="आना-जाना"?1000:800)+' · बुकिंग के समय Fuel रेट: ₹'+safeText(b.dieselPriceAtBooking||"—")+'/लीटर</p>':'')+
         (b.estimatedFare?'<p><b>अनुमानित कुल किराया: ₹'+safeText(b.estimatedFare)+'</b></p>':'')+
         '<p>अतिरिक्त जानकारी: '+safeText(b.notes||"कोई जानकारी नहीं")+'</p>'+
