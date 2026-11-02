@@ -99,15 +99,7 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 <div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">WhatsApp में Send button दबाना होगा।</p></div>
 </div></form>
 <aside class="panel"><h2>बुकिंग कैसे होगी?</h2><div class="features"><div class="feature"><b>1. जानकारी भरें</b><span>पिकअप, ड्रॉप और समय चुनें।</span></div><div class="feature"><b>2. WhatsApp खोलें</b><span>बुकिंग की जानकारी मैसेज में तैयार होगी।</span></div><div class="feature"><b>3. बुकिंग कन्फर्म करें</b><span>कार और किराया फोन पर कन्फर्म होगा।</span></div></div><p class="notice" style="margin-top:16px">बुकिंग स्वीकार होने पर ₹500 सिक्योरिटी अमाउंट PhonePe QR से 4 घंटे के अंदर जमा करना होगा। यह राशि कुल किराये में एडजस्ट होगी।</p></aside></div></section>
-<section class="admin-box hidden" id="adminBox"><div class="panel"><div class="admin-head"><div><h2 style="margin:0">Admin Panel</h2><p class="hint" id="adminUser"></p></div><button class="btn secondary" id="logoutBtn" type="button">Logout</button></div><div class="panel" style="margin:14px 0;background:var(--mint)">
-<h3 style="margin-top:0">मालिक का WhatsApp नंबर</h3>
-<form id="whatsappSettingsForm" class="admin-form">
-<input id="ownerWhatsAppInput" class="wide" type="tel" inputmode="tel" placeholder="उदाहरण: 919876543210" required>
-<button class="btn" type="submit">WhatsApp नंबर सेव करें</button>
-<p class="hint wide">WhatsApp नंबर देश कोड सहित लिखें। हर गाड़ी का डीज़ल रेट गाड़ी जोड़ते या Edit करते समय सेट होगा।</p>
-</form>
-</div>
-<div class="panel" style="margin:14px 0;background:#fff">
+<section class="admin-box hidden" id="adminBox"><div class="panel"><div class="admin-head"><div><h2 style="margin:0">Admin Panel</h2><p class="hint" id="adminUser"></p></div><button class="btn secondary" id="logoutBtn" type="button">Logout</button></div><div class="panel" style="margin:14px 0;background:#fff">
 <h3 style="margin-top:0">PhonePe पेमेंट QR कोड</h3>
 <form id="phonePeQrForm" class="admin-form">
 <label class="wide" for="phonePeQrFile">PhonePe QR की फोटो अपलोड करें</label>
@@ -115,9 +107,18 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 <div class="wide" id="phonePeQrPreview" style="min-height:20px"></div>
 <button class="btn" type="submit">QR कोड सेव करें</button>
 <button class="btn secondary" id="removePhonePeQr" type="button">QR हटाएँ</button>
-<p class="hint wide">QR इमेज 700 KB से छोटी रखें। बुकिंग स्वीकार करते समय WhatsApp चैट खुलेगी; QR फोटो उसी चैट में अटैच करके Send दबाएँ।</p>
+<p class="hint wide">QR इमेज 700 KB से छोटी रखें। बुकिंग स्वीकार करते समय मोबाइल का Share विकल्प खुलेगा; WhatsApp चुनकर QR फोटो और शर्तें एक साथ भेजें।</p>
 </form>
 </div>
+<div class="panel" style="margin:14px 0;background:var(--mint)">
+<h3 style="margin-top:0">मालिक का WhatsApp नंबर</h3>
+<form id="whatsappSettingsForm" class="admin-form">
+<input id="ownerWhatsAppInput" class="wide" type="tel" inputmode="tel" placeholder="उदाहरण: 919876543210" required>
+<button class="btn" type="submit">WhatsApp नंबर सेव करें</button>
+<p class="hint wide">WhatsApp नंबर देश कोड सहित लिखें। हर गाड़ी का डीज़ल रेट गाड़ी जोड़ते या Edit करते समय सेट होगा।</p>
+</form>
+</div>
+
 <div class="admin-tabs"><button class="active" data-tab="carsTab" type="button">गाड़ियाँ</button><button data-tab="bookingsTab" type="button">बुकिंग</button></div><div id="carsTab"><h3 id="carFormHeading">नई गाड़ी जोड़ें</h3><form class="admin-form" id="carForm"><input id="carName" required placeholder="गाड़ी का नाम"><input id="carPrice" placeholder="किराया / कीमत (जैसे ₹12/km)"><input id="carInfo" class="wide" placeholder="जानकारी (जैसे 6 सीटर)"><input id="carIcon" placeholder="Emoji (जैसे 🚙)"><label for="carDieselPrice" class="wide">इस गाड़ी के लिए डीज़ल की कीमत (₹ प्रति लीटर)</label><input id="carDieselPrice" type="number" min="1" step="0.01" value="96.45" required placeholder="जैसे 96.45"><label for="carImage" class="wide">गाड़ी की फोटो (वैकल्पिक)</label><input id="carImage" type="file" accept="image/*" class="wide"><button class="btn" id="carSaveBtn" type="submit">गाड़ी सेव करें</button><button class="btn secondary hidden" id="carCancelEdit" type="button">Edit रद्द करें</button></form><div id="adminCars"></div></div><div id="bookingsTab" class="hidden"><h3>बुकिंग रिक्वेस्ट</h3><div id="adminBookings"></div></div><p class="status" id="adminStatus"></p></div></section>
 </main>
 <footer><div class="wrap foot"><div><b>QR Car Booking</b><div class="hint" style="color:#d9e5df">सरल बुकिंग, आसान सफर।</div></div><div class="hint" style="color:#d9e5df">Admin access केवल अधिकृत Google खाते के लिए।</div></div></footer>
@@ -473,7 +474,6 @@ async function refreshAdmin(){
         const selected=bookingSnap.data();
         const acceptedAt=new Date();
         const expiresAt=new Date(acceptedAt.getTime()+4*60*60*1000);
-        await updateDoc(bookingRef,{status:"पेमेंट बाकी",acceptedAt,paymentAmount:500,paymentExpiresAt:expiresAt,paymentStatus:"pending"});
         const customerNumber=normalizePhone(b.dataset.phone);
         const customerMessage=[
           "नमस्ते "+(selected.name||""),
@@ -488,10 +488,23 @@ async function refreshAdmin(){
           "अनुमानित कुल किराया: ₹"+(selected.estimatedFare||"अंतिम पुष्टि पर बताया जाएगा"),
           ...(selected.estimatedFare?["₹500 जमा होने के बाद बाकी किराया: ₹"+Math.max(0,Number(selected.estimatedFare)-500)]:[])
         ].join("\n");
+        let sharePromise=null;
+        if(customerNumber.length===12&&navigator.share&&navigator.canShare){
+          try{
+            const response=await fetch(phonePeQrImage);
+            const blob=await response.blob();
+            const qrFile=new File([blob],"PhonePe-QR.png",{type:blob.type||"image/png"});
+            if(navigator.canShare({files:[qrFile]}))sharePromise=navigator.share({files:[qrFile],title:"PhonePe Payment QR",text:customerMessage});
+          }catch(shareSetupError){console.warn("QR share setup unavailable:",shareSetupError);}
+        }
+        await updateDoc(bookingRef,{status:"पेमेंट बाकी",acceptedAt,paymentAmount:500,paymentExpiresAt:expiresAt,paymentStatus:"pending"});
         await refreshAdmin();
-        if(customerNumber.length===12){
+        if(sharePromise){
+          try{await sharePromise;}
+          catch(shareError){if(shareError.name!=="AbortError")console.warn("Native share failed:",shareError);if(customerNumber.length===12)openWhatsApp(customerNumber,customerMessage);}
+        }else if(customerNumber.length===12){
           openWhatsApp(customerNumber,customerMessage);
-          alert("WhatsApp चैट खुलने पर Admin Panel में दिख रहे QR कोड को डाउनलोड/शेयर करके उसी चैट में फोटो अटैच करें, फिर Send दबाएँ।");
+          alert("इस ब्राउज़र में QR फोटो के साथ शेयर उपलब्ध नहीं है। WhatsApp चैट में Admin Panel से QR डाउनलोड करके अटैच करें, फिर Send दबाएँ।");
         }else alert("बुकिंग स्वीकार हो गई, लेकिन ग्राहक का मोबाइल नंबर सही नहीं है।");
       }catch(err){console.error(err);alert("बुकिंग स्वीकार नहीं हुई: "+err.message);b.disabled=false;b.textContent="बुकिंग स्वीकार करें और WhatsApp खोलें";}
     }));
