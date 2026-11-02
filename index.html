@@ -98,7 +98,7 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 <div class="field full"><label for="notes">अतिरिक्त जानकारी (वैकल्पिक)</label><textarea id="notes" name="notes" rows="3" placeholder="यात्रियों की संख्या या दूसरी जरूरत"></textarea></div>
 <div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">WhatsApp में Send button दबाना होगा।</p></div>
 </div></form>
-<aside class="panel"><h2>बुकिंग कैसे होगी?</h2><div class="features"><div class="feature"><b>1. जानकारी भरें</b><span>पिकअप, ड्रॉप और समय चुनें।</span></div><div class="feature"><b>2. WhatsApp खोलें</b><span>बुकिंग की जानकारी मैसेज में तैयार होगी।</span></div><div class="feature"><b>3. बुकिंग कन्फर्म करें</b><span>कार और किराया फोन पर कन्फर्म होगा।</span></div></div><p class="notice" style="margin-top:16px">ऑनलाइन एडवांस पेमेंट अभी सक्रिय नहीं है।</p></aside></div></section>
+<aside class="panel"><h2>बुकिंग कैसे होगी?</h2><div class="features"><div class="feature"><b>1. जानकारी भरें</b><span>पिकअप, ड्रॉप और समय चुनें।</span></div><div class="feature"><b>2. WhatsApp खोलें</b><span>बुकिंग की जानकारी मैसेज में तैयार होगी।</span></div><div class="feature"><b>3. बुकिंग कन्फर्म करें</b><span>कार और किराया फोन पर कन्फर्म होगा।</span></div></div><p class="notice" style="margin-top:16px">बुकिंग स्वीकार होने पर ₹500 सिक्योरिटी अमाउंट PhonePe QR से 4 घंटे के अंदर जमा करना होगा। यह राशि कुल किराये में एडजस्ट होगी।</p></aside></div></section>
 <section class="admin-box hidden" id="adminBox"><div class="panel"><div class="admin-head"><div><h2 style="margin:0">Admin Panel</h2><p class="hint" id="adminUser"></p></div><button class="btn secondary" id="logoutBtn" type="button">Logout</button></div><div class="panel" style="margin:14px 0;background:var(--mint)">
 <h3 style="margin-top:0">मालिक का WhatsApp नंबर</h3>
 <form id="whatsappSettingsForm" class="admin-form">
@@ -413,7 +413,8 @@ async function refreshAdmin(){
   try{
     const [cs,bs]=await Promise.all([getDocs(collection(db,"cars")),getDocs(query(collection(db,"bookings"),orderBy("createdAt","desc")))]);
     const nowMs=Date.now();
-    for(const bookingDoc of bs.docs){const booking=bookingDoc.data();const expiry=booking.paymentExpiresAt?.toDate?booking.paymentExpiresAt.toDate().getTime():new Date(booking.paymentExpiresAt||0).getTime();if(booking.status==="पेमेंट बाकी"&&booking.paymentStatus==="pending"&&expiry&&expiry<=nowMs){await updateDoc(doc(db,"bookings",bookingDoc.id),{status:"समय पर भुगतान नहीं - रद्द",paymentStatus:"expired",expiredAt:serverTimestamp()});}}
+    const expiredBookingIds=new Set();
+    for(const bookingDoc of bs.docs){const booking=bookingDoc.data();const expiry=booking.paymentExpiresAt?.toDate?booking.paymentExpiresAt.toDate().getTime():new Date(booking.paymentExpiresAt||0).getTime();if(booking.status==="पेमेंट बाकी"&&booking.paymentStatus==="pending"&&expiry&&expiry<=nowMs){await updateDoc(doc(db,"bookings",bookingDoc.id),{status:"समय पर भुगतान नहीं - रद्द",paymentStatus:"expired",expiredAt:serverTimestamp()});expiredBookingIds.add(bookingDoc.id);}}
     carsCache=cs.docs.map(d=>({id:d.id,...d.data()}));
     $("adminCars").innerHTML=carsCache.map(c=>'<div class="admin-row">'+(c.imageData?'<img src="'+safeText(c.imageData)+'" alt="'+safeText(c.name)+'" style="width:150px;height:100px;object-fit:contain;background:#f2f5f2;border-radius:12px;padding:5px">':"")+'<b>'+safeText(c.name)+'</b><p class="hint">'+safeText(c.price||"किराया पूछें")+' · '+safeText(c.info||"")+'</p><p class="hint">डीज़ल: ₹'+safeText(c.dieselPrice||defaultDieselPrice)+' / लीटर</p><button class="btn secondary" data-editcar="'+c.id+'" type="button">Edit / संपादित करें</button> <button class="btn secondary" data-delcar="'+c.id+'" type="button">गाड़ी हटाएँ</button></div>').join("")||'<p class="hint">अभी कोई गाड़ी नहीं है।</p>';
     $("adminCars").querySelectorAll("[data-editcar]").forEach(b=>b.addEventListener("click",()=>{
@@ -433,6 +434,7 @@ async function refreshAdmin(){
     }));
     $("adminBookings").innerHTML=bs.docs.map(d=>{
       const b=d.data();
+      if(expiredBookingIds.has(d.id)){b.status="समय पर भुगतान नहीं - रद्द";b.paymentStatus="expired";}
       const created=b.createdAt?.toDate?b.createdAt.toDate().toLocaleString("hi-IN"):"";
       return '<div class="admin-row">'+
         '<b>'+safeText(b.name||"नाम नहीं दिया")+' · '+safeText(b.car||"कार नहीं चुनी")+'</b>'+
