@@ -491,9 +491,12 @@ async function refreshAdmin(){
         let sharePromise=null;
         if(customerNumber.length===12&&navigator.share&&navigator.canShare){
           try{
-            const response=await fetch(phonePeQrImage);
-            const blob=await response.blob();
-            const qrFile=new File([blob],"PhonePe-QR.png",{type:blob.type||"image/png"});
+            const parts=phonePeQrImage.split(",");
+            const mime=(parts[0].match(/data:(.*?);base64/)||[])[1]||"image/png";
+            const binary=atob(parts[1]);
+            const bytes=new Uint8Array(binary.length);
+            for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+            const qrFile=new File([bytes], "PhonePe-QR.png", {type:mime});
             if(navigator.canShare({files:[qrFile]}))sharePromise=navigator.share({files:[qrFile],title:"PhonePe Payment QR",text:customerMessage});
           }catch(shareSetupError){console.warn("QR share setup unavailable:",shareSetupError);}
         }
