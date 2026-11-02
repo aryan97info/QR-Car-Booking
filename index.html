@@ -457,7 +457,7 @@ async function refreshAdmin(){
         (b.estimatedFare?'<p>₹500 सिक्योरिटी किराये में शामिल · बाकी देय: ₹'+safeText(Math.max(0,Number(b.estimatedFare)-500))+'</p>':'')+
         '<p>स्थिति: <b>'+safeText(b.status||"नई")+'</b></p>'+
         (b.status==="नई"?'<button class="btn" data-acceptpayment="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">बुकिंग स्वीकार करें और WhatsApp खोलें</button> ':'')+
-        (b.paymentStatus==="paid"?'<p class="hint">पेमेंट प्राप्त: ₹500 · Payment ID: '+safeText(b.paymentId||"—")+'</p>':'')+
+        (b.paymentStatus==="paid"?'<p class="hint">PhonePe पेमेंट प्राप्त: ₹500</p>':'')+
         (b.paymentStatus==="pending"?'<p class="hint">ग्राहक से 4 घंटे के भीतर ₹500 भुगतान अपेक्षित है।</p><button class="btn secondary" data-markpaid="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">PhonePe पेमेंट मिल गया – Confirm करें</button> ':'')+
         (["पेमेंट बाकी","कन्फर्म"].includes(b.status)?'<button class="btn secondary" data-ownercancel="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">मालिक की तरफ़ से रद्द करें'+(b.paymentStatus==="paid"?' और ₹500 Refund करें':'')+'</button> ':'')+
         '<button class="btn" style="background:#a83232" data-deletebooking="'+d.id+'" type="button">बुकिंग हटाएँ</button>'+
