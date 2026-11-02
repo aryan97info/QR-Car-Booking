@@ -7,39 +7,128 @@
 <title>QR Car Booking</title>
 <style>
 :root{--ink:#10231f;--green:#176b52;--mint:#e7f4ee;--gold:#f2bd55;--muted:#65736e;--paper:#f7f8f5;--line:#e0e7e2}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--ink)}a{color:inherit}.wrap{width:min(1080px,92%);margin:auto}.top{background:var(--ink);color:white;padding:16px 0}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;font-size:1.12rem;letter-spacing:.2px}.brand span{color:var(--gold)}.pill{border:1px solid #ffffff50;padding:8px 12px;border-radius:99px;text-decoration:none;font-size:.88rem}.hero{padding:42px 0 28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}.eyebrow{color:var(--green);font-weight:800;font-size:.8rem;letter-spacing:1.4px;text-transform:uppercase}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;letter-spacing:-1.4px;margin:12px 0}.hero p{color:var(--muted);font-size:1.04rem;line-height:1.7}.hero-card{background:var(--ink);color:white;border-radius:24px;padding:24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 18px 50px #10231f20}.car-icon{font-size:4rem}.hero-card small{color:#d1dfd8}.section{padding:22px 0 44px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}.section-title h2{margin:0;font-size:1.6rem}.section-title p{margin:4px 0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.car{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.car-art{height:100px;border-radius:13px;background:var(--mint);display:grid;place-items:center;font-size:3.4rem}.car h3{margin:14px 0 4px}.meta{color:var(--muted);font-size:.9rem}.price{font-weight:800;font-size:1.15rem;margin:12px 0}.btn{border:0;border-radius:12px;background:var(--green);color:white;padding:12px 16px;font-weight:750;font-size:.96rem;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}.btn.secondary{background:var(--mint);color:var(--green)}.btn.gold{background:var(--gold);color:var(--ink)}.btn.full{width:100%}.booking-layout{display:grid;grid-template-columns:1fr .7fr;gap:18px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:22px}.panel h2{margin-top:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:.9rem;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cfd9d2;border-radius:10px;font:inherit;background:#fff}.hint{font-size:.82rem;color:var(--muted);line-height:1.5}.notice{background:#fff5d9;border:1px solid #f4df9c;border-radius:12px;padding:12px;color:#654b12;font-size:.88rem;line-height:1.5}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.feature{padding:16px;background:var(--mint);border-radius:14px}.feature b{display:block;margin-bottom:5px}.feature span{font-size:.88rem;color:var(--muted)}footer{background:var(--ink);color:#d9e5df;padding:26px 0;margin-top:20px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.hidden{display:none!important}
-@media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:30px}.hero-card{min-height:170px}.grid{grid-template-columns:1fr}.booking-layout{grid-template-columns:1fr}.features{grid-template-columns:1fr}.section-title{align-items:start;flex-direction:column}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.nav{align-items:flex-start}.hero h1{letter-spacing:-.8px}}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--ink)}a{color:inherit}.wrap{width:min(1080px,92%);margin:auto}.top{background:var(--ink);color:white;padding:16px 0}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;font-size:1.12rem}.brand span{color:var(--gold)}.pill{border:1px solid #ffffff50;padding:8px 12px;border-radius:99px;text-decoration:none;font-size:.88rem}.hero{padding:42px 0 28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}.eyebrow{color:var(--green);font-weight:800;font-size:.8rem;letter-spacing:1.4px}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;margin:12px 0}.hero p{color:var(--muted);font-size:1.04rem;line-height:1.7}.hero-card{background:var(--ink);color:white;border-radius:24px;padding:24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}.car-icon{font-size:4rem}.section{padding:22px 0 44px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}.section-title h2{margin:0;font-size:1.6rem}.section-title p{margin:4px 0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.car,.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.car-art{height:100px;border-radius:13px;background:var(--mint);display:grid;place-items:center;font-size:3.4rem}.car h3{margin:14px 0 4px}.meta,.hint{color:var(--muted);font-size:.88rem;line-height:1.5}.price{font-weight:800;font-size:1.15rem;margin:12px 0}.btn{border:0;border-radius:12px;background:var(--green);color:white;padding:12px 16px;font-weight:750;font-size:.96rem;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}.btn.secondary{background:var(--mint);color:var(--green)}.btn.gold{background:var(--gold);color:var(--ink)}.btn.full{width:100%}.booking-layout{display:grid;grid-template-columns:1fr .7fr;gap:18px}.panel h2{margin-top:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:.9rem;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cfd9d2;border-radius:10px;font:inherit;background:#fff}.notice{background:#fff5d9;border:1px solid #f4df9c;border-radius:12px;padding:12px;color:#654b12;font-size:.88rem;line-height:1.5}.features{display:grid;grid-template-columns:1fr;gap:12px}.feature{padding:16px;background:var(--mint);border-radius:14px}.feature b{display:block;margin-bottom:5px}.feature span{font-size:.88rem;color:var(--muted)}footer{background:var(--ink);color:#d9e5df;padding:26px 0;margin-top:20px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.hidden{display:none!important}.admin-box{margin:20px 0 40px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.admin-tabs button{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 14px;cursor:pointer}.admin-tabs button.active{background:var(--ink);color:white}.admin-row{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:#fff}.admin-row p{margin:5px 0}.admin-form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.admin-form input,.admin-form textarea{width:100%;padding:11px;border:1px solid #cfd9d2;border-radius:9px;font:inherit}.admin-form .wide{grid-column:1/-1}.status{font-size:.84rem;color:var(--muted);margin:8px 0}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:30px}.hero-card{min-height:170px}.grid,.booking-layout,.features{grid-template-columns:1fr}.section-title{align-items:start;flex-direction:column}.form-grid,.admin-form{grid-template-columns:1fr}.field.full,.admin-form .wide{grid-column:auto}.nav{align-items:flex-start}.hero h1{letter-spacing:-.8px}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap nav"><div class="brand">QR <span>CAR</span> BOOKING</div><a class="pill" href="#booking">बुकिंग करें ↗</a></div></header>
+<header class="top"><div class="wrap nav"><div class="brand">QR <span>CAR</span> BOOKING</div><div style="display:flex;gap:8px;align-items:center"><a class="pill" href="#booking">बुकिंग करें ↗</a><button class="pill" id="adminOpen" type="button" style="background:transparent;color:white;cursor:pointer">Admin</button></div></div></header>
 <main class="wrap">
-<section class="hero"><div><div class="eyebrow">आसान बुकिंग • सीधे संपर्क</div><h1>आपकी यात्रा,<br>हमारी गाड़ी।</h1><p>अपनी यात्रा की जानकारी भरें और बुकिंग रिक्वेस्ट WhatsApp पर भेजें। मोबाइल और लैपटॉप—दोनों पर आसान अनुभव।</p><a class="btn gold" href="#booking">अभी बुकिंग करें <span>→</span></a></div><div class="hero-card"><div class="car-icon">🚘</div><div><small>आपकी अगली यात्रा यहाँ से शुरू होती है</small><h2 style="margin:5px 0 0">सुविधाजनक कार बुकिंग</h2></div></div></section>
-<section class="section"><div class="section-title"><div><h2>हमारी गाड़ियाँ</h2><p>कार चुनें या अपनी जरूरत बताएं।</p></div></div><div class="grid" id="cars">
-<article class="car"><div class="car-art">🚙</div><h3>Mahindra XUV300</h3><div class="meta">आरामदायक • परिवार और शहर से बाहर की यात्रा</div><div class="price">किराया पूछें</div><button class="btn secondary full" type="button" data-car="Mahindra XUV300">यह कार चुनें</button></article>
-<article class="car"><div class="car-art">🚗</div><h3>सेडान कार</h3><div class="meta">शहर और लंबी यात्रा के लिए</div><div class="price">किराया पूछें</div><button class="btn secondary full" type="button" data-car="सेडान कार">यह कार चुनें</button></article>
-<article class="car"><div class="car-art">🚐</div><h3>अन्य गाड़ी</h3><div class="meta">अपनी जरूरत के अनुसार गाड़ी पूछें</div><div class="price">किराया पूछें</div><button class="btn secondary full" type="button" data-car="अन्य गाड़ी">यह कार चुनें</button></article>
-</div><p class="hint">ये शुरुआती नमूना कार कार्ड हैं। असली कारें, फोटो और किराये Admin/डेटाबेस जोड़ने के अगले चरण में सेट होंगे।</p></section>
+<section class="hero"><div><div class="eyebrow">आसान बुकिंग • सीधे संपर्क</div><h1>आपकी यात्रा,<br>हमारी गाड़ी।</h1><p>अपनी यात्रा की जानकारी भरें और बुकिंग रिक्वेस्ट भेजें। मोबाइल और लैपटॉप—दोनों पर आसान अनुभव।</p><a class="btn gold" href="#booking">अभी बुकिंग करें →</a></div><div class="hero-card"><div class="car-icon">🚘</div><div><small>आपकी अगली यात्रा यहाँ से शुरू होती है</small><h2 style="margin:5px 0 0">सुविधाजनक कार बुकिंग</h2></div></div></section>
+<section class="section"><div class="section-title"><div><h2>हमारी गाड़ियाँ</h2><p>कार चुनें या अपनी जरूरत बताएं।</p></div></div><div class="grid" id="cars"><p class="hint">गाड़ियाँ लोड हो रही हैं…</p></div></section>
 <section class="section" id="booking"><div class="section-title"><div><h2>बुकिंग रिक्वेस्ट</h2><p>जानकारी भरें, फिर WhatsApp पर भेजें।</p></div></div>
 <div class="booking-layout"><form class="panel" id="bookingForm"><div class="form-grid">
 <div class="field"><label for="name">आपका नाम *</label><input id="name" name="name" autocomplete="name" required placeholder="पूरा नाम"></div>
-<div class="field"><label for="phone">मोबाइल नंबर *</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required pattern="[0-9+() -]{10,16}" placeholder="10 अंकों का नंबर"></div>
-<div class="field"><label for="car">कार चुनें *</label><select id="car" name="car" required><option value="">कार चुनें</option><option>Mahindra XUV300</option><option>सेडान कार</option><option>अन्य गाड़ी</option></select></div>
+<div class="field"><label for="phone">मोबाइल नंबर *</label><input id="phone" name="phone" type="tel" inputmode="tel" required pattern="[0-9+() -]{10,16}" placeholder="10 अंकों का नंबर"></div>
+<div class="field"><label for="car">कार चुनें *</label><select id="car" name="car" required><option value="">कार चुनें</option></select></div>
 <div class="field"><label for="trip">यात्रा का प्रकार *</label><select id="trip" name="trip" required><option value="एक तरफ">एक तरफ</option><option value="आना-जाना">आना-जाना</option><option value="स्थानीय बुकिंग">स्थानीय बुकिंग</option></select></div>
 <div class="field"><label for="pickup">पिकअप स्थान *</label><input id="pickup" name="pickup" required placeholder="कहाँ से जाना है?"></div>
 <div class="field"><label for="drop">ड्रॉप स्थान *</label><input id="drop" name="drop" required placeholder="कहाँ जाना है?"></div>
 <div class="field"><label for="date">यात्रा की तारीख *</label><input id="date" name="date" type="date" required></div>
 <div class="field"><label for="time">समय *</label><input id="time" name="time" type="time" required></div>
 <div class="field full"><label for="notes">अतिरिक्त जानकारी (वैकल्पिक)</label><textarea id="notes" name="notes" rows="3" placeholder="यात्रियों की संख्या या दूसरी जरूरत"></textarea></div>
-<div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">अभी यह बटन WhatsApp में मैसेज तैयार करेगा। बुकिंग तभी भेजी जाएगी जब आप WhatsApp में Send दबाएँगे।</p></div>
+<div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">बुकिंग पहले Firebase में सेव होगी, फिर WhatsApp मैसेज खुलेगा। WhatsApp में Send दबाना होगा।</p></div>
 </div></form>
-<aside class="panel"><h2>बुकिंग कैसे होगी?</h2><div class="features" style="grid-template-columns:1fr"><div class="feature"><b>1. जानकारी भरें</b><span>पिकअप, ड्रॉप और समय चुनें।</span></div><div class="feature"><b>2. WhatsApp खोलें</b><span>बुकिंग की जानकारी मैसेज में तैयार होगी।</span></div><div class="feature"><b>3. बुकिंग कन्फर्म करें</b><span>कार और किराया फोन पर कन्फर्म होगा।</span></div></div><p class="notice" style="margin-top:16px">ऑनलाइन एडवांस पेमेंट अभी सक्रिय नहीं है। पेमेंट तभी जोड़ेंगे जब सुरक्षित बैकएंड और पेमेंट गेटवे सेट हो जाएँ।</p></aside></div></section>
+<aside class="panel"><h2>बुकिंग कैसे होगी?</h2><div class="features"><div class="feature"><b>1. जानकारी भरें</b><span>पिकअप, ड्रॉप और समय चुनें।</span></div><div class="feature"><b>2. WhatsApp खोलें</b><span>बुकिंग की जानकारी मैसेज में तैयार होगी।</span></div><div class="feature"><b>3. बुकिंग कन्फर्म करें</b><span>कार और किराया फोन पर कन्फर्म होगा।</span></div></div><p class="notice" style="margin-top:16px">ऑनलाइन एडवांस पेमेंट अभी सक्रिय नहीं है।</p></aside></div></section>
+<section class="admin-box hidden" id="adminBox"><div class="panel"><div class="admin-head"><div><h2 style="margin:0">Admin Panel</h2><p class="hint" id="adminUser"></p></div><button class="btn secondary" id="logoutBtn" type="button">Logout</button></div><div class="admin-tabs"><button class="active" data-tab="carsTab" type="button">गाड़ियाँ</button><button data-tab="bookingsTab" type="button">बुकिंग</button></div><div id="carsTab"><h3>नई गाड़ी जोड़ें</h3><form class="admin-form" id="carForm"><input id="carName" required placeholder="गाड़ी का नाम"><input id="carPrice" placeholder="किराया / कीमत (जैसे ₹12/km)"><input id="carInfo" class="wide" placeholder="जानकारी (जैसे 6 सीटर)"><input id="carIcon" placeholder="Emoji (जैसे 🚙)"><button class="btn" type="submit">गाड़ी सेव करें</button></form><div id="adminCars"></div></div><div id="bookingsTab" class="hidden"><h3>बुकिंग रिक्वेस्ट</h3><div id="adminBookings"></div></div><p class="status" id="adminStatus"></p></div></section>
 </main>
-<footer><div class="wrap foot"><div><b>QR Car Booking</b><div class="hint" style="color:#d9e5df">सरल बुकिंग, आसान सफर।</div></div><div class="hint" style="color:#d9e5df">अपना WhatsApp नंबर और वास्तविक कार विवरण सेट करना बाकी है।</div></div></footer>
-<script>
-const form=document.getElementById('bookingForm');
-document.querySelectorAll('[data-car]').forEach(b=>b.addEventListener('click',()=>{document.getElementById('car').value=b.dataset.car;document.getElementById('booking').scrollIntoView({behavior:'smooth'});}));
-const dateInput=document.getElementById('date');const today=new Date();dateInput.min=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
-form.addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(form).entries());const message=['नई कार बुकिंग रिक्वेस्ट','नाम: '+d.name,'मोबाइल: '+d.phone,'कार: '+d.car,'यात्रा: '+d.trip,'पिकअप: '+d.pickup,'ड्रॉप: '+d.drop,'तारीख: '+d.date,'समय: '+d.time,'अतिरिक्त जानकारी: '+(d.notes||'नहीं')].join('\n');const owner=prompt('अपना WhatsApp नंबर country code सहित डालें (उदाहरण: 919876543210)। यह नंबर वेबसाइट में सेव नहीं होगा:');if(!owner)return;const number=owner.replace(/\D/g,'');if(number.length<10){alert('कृपया सही WhatsApp नंबर डालें।');return;}window.open('https://wa.me/'+number+'?text='+encodeURIComponent(message),'_blank','noopener');});
+<footer><div class="wrap foot"><div><b>QR Car Booking</b><div class="hint" style="color:#d9e5df">सरल बुकिंग, आसान सफर।</div></div><div class="hint" style="color:#d9e5df">Admin access केवल अधिकृत Google खाते के लिए।</div></div></footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCrBkQ89ObUq1GdFQLPVqPZM1qhHYwoALs",
+  authDomain: "qr-car-booking.firebaseapp.com",
+  projectId: "qr-car-booking",
+  storageBucket: "qr-car-booking.firebasestorage.app",
+  messagingSenderId: "789846776944",
+  appId: "1:789846776944:web:ef217df9e56a47852d28b5"
+};
+const ADMIN_EMAIL = "aryan97.info@gmail.com";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+const $ = id => document.getElementById(id);
+const form = $("bookingForm");
+const dateInput = $("date");
+const now = new Date();
+dateInput.min = [now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
+let carsCache = [];
+let isAdmin = false;
+
+function safeText(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+async function loadCars(){
+  const host=$("cars");
+  try{
+    const snap=await getDocs(collection(db,"cars"));
+    carsCache=snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!carsCache.length){
+      host.innerHTML='<article class="car"><div class="car-art">🚙</div><h3>अपनी गाड़ी जोड़ें</h3><p class="meta">Admin में Google Login करके गाड़ी जोड़ें।</p></article>';
+    }else{
+      host.innerHTML=carsCache.map(c=>'<article class="car"><div class="car-art">'+safeText(c.icon||"🚘")+'</div><h3>'+safeText(c.name)+'</h3><div class="meta">'+safeText(c.info||"बुकिंग के लिए उपलब्ध")+'</div><div class="price">'+safeText(c.price||"किराया पूछें")+'</div><button class="btn secondary full" type="button" data-select="'+safeText(c.name)+'">यह कार चुनें</button></article>').join("");
+    }
+    $("car").innerHTML='<option value="">कार चुनें</option>'+carsCache.map(c=>'<option>'+safeText(c.name)+'</option>').join("");
+    document.querySelectorAll("[data-select]").forEach(b=>b.addEventListener("click",()=>{$("car").value=b.dataset.select;$("booking").scrollIntoView({behavior:"smooth"});}));
+  }catch(e){host.innerHTML='<p class="notice">गाड़ियाँ लोड नहीं हो पाईं। Firebase Rules Publish हुए हैं या नहीं, जाँचें।</p>';console.error(e);}
+}
+loadCars();
+
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(form).entries());
+  const payload={name:d.name,phone:d.phone,car:d.car,trip:d.trip,pickup:d.pickup,drop:d.drop,date:d.date,time:d.time,notes:d.notes||"",status:"नई",createdAt:serverTimestamp()};
+  const submit=form.querySelector('button[type="submit"]');
+  submit.disabled=true;submit.textContent="बुकिंग सेव हो रही है…";
+  try{
+    await addDoc(collection(db,"bookings"),payload);
+    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+d.date,"समय: "+d.time,"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
+    const owner=prompt("मालिक का WhatsApp नंबर country code सहित डालें (उदाहरण: 919876543210):");
+    if(owner){const number=owner.replace(/\D/g,"");if(number.length>=10)window.open("https://wa.me/"+number+"?text="+encodeURIComponent(message),"_blank","noopener");}
+    alert("बुकिंग रिक्वेस्ट सेव हो गई।");
+    form.reset();dateInput.min=[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
+  }catch(err){console.error(err);alert("बुकिंग सेव नहीं हुई। Firebase Rules Publish होने के बाद दोबारा कोशिश करें।");}
+  finally{submit.disabled=false;submit.textContent="WhatsApp पर बुकिंग भेजें ↗";}
+});
+
+$("adminOpen").addEventListener("click",async()=>{
+  if(auth.currentUser){$("adminBox").classList.toggle("hidden");$("adminBox").scrollIntoView({behavior:"smooth"});return;}
+  try{await signInWithPopup(auth,provider);}catch(e){alert("Google Login नहीं हो पाया: "+e.message);}
+});
+onAuthStateChanged(auth,user=>{
+  isAdmin=!!user&&user.email===ADMIN_EMAIL&&user.emailVerified===true;
+  if(user&&!isAdmin){alert("यह Google account Admin के लिए अधिकृत नहीं है।");signOut(auth);return;}
+  $("adminBox").classList.toggle("hidden",!isAdmin);
+  if(isAdmin){$("adminUser").textContent=user.email;$("adminBox").scrollIntoView({behavior:"smooth"});refreshAdmin();}
+});
+$("logoutBtn").addEventListener("click",()=>signOut(auth));
+document.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("active",x===btn));
+  $("carsTab").classList.toggle("hidden",btn.dataset.tab!=="carsTab");
+  $("bookingsTab").classList.toggle("hidden",btn.dataset.tab!=="bookingsTab");
+}));
+$("carForm").addEventListener("submit",async e=>{
+  e.preventDefault();if(!isAdmin)return;
+  try{
+    await addDoc(collection(db,"cars"),{name:$("carName").value.trim(),price:$("carPrice").value.trim(),info:$("carInfo").value.trim(),icon:$("carIcon").value.trim()||"🚘",createdAt:serverTimestamp()});
+    e.target.reset();$("adminStatus").textContent="गाड़ी सेव हो गई।";await refreshAdmin();
+  }catch(err){$("adminStatus").textContent="गाड़ी सेव नहीं हुई: "+err.message;}
+});
+async function refreshAdmin(){
+  if(!isAdmin)return;
+  try{
+    const [cs,bs]=await Promise.all([getDocs(collection(db,"cars")),getDocs(query(collection(db,"bookings"),orderBy("createdAt","desc")))]);
+    carsCache=cs.docs.map(d=>({id:d.id,...d.data()}));
+    $("adminCars").innerHTML=carsCache.map(c=>'<div class="admin-row"><b>'+safeText(c.name)+'</b><p class="hint">'+safeText(c.price||"किराया पूछें")+' · '+safeText(c.info||"")+'</p><button class="btn secondary" data-delcar="'+c.id+'" type="button">हटाएँ</button></div>').join("")||'<p class="hint">अभी कोई गाड़ी नहीं है।</p>';
+    $("adminBookings").innerHTML=bs.docs.map(d=>{const b=d.data();return '<div class="admin-row"><b>'+safeText(b.name)+' · '+safeText(b.car)+'</b><p>'+safeText(b.pickup)+' → '+safeText(b.drop)+'</p><p class="hint">'+safeText(b.date)+' '+safeText(b.time)+' · '+safeText(b.phone)+'</p><p>स्थिति: '+safeText(b.status||"नई")+'</p><button class="btn secondary" data-status="'+d.id+'" data-value="कन्फर्म" type="button">कन्फर्म</button> <button class="btn secondary" data-status="'+d.id+'" data-value="रद्द" type="button">रद्द</button></div>';}).join("")||'<p class="hint">अभी कोई बुकिंग नहीं है।</p>';
+    $("adminCars").querySelectorAll("[data-delcar]").forEach(b=>b.addEventListener("click",async()=>{if(confirm("इस गाड़ी को हटाएँ?")){await deleteDoc(doc(db,"cars",b.dataset.delcar));refreshAdmin();loadCars();}}));
+    $("adminBookings").querySelectorAll("[data-status]").forEach(b=>b.addEventListener("click",async()=>{await updateDoc(doc(db,"bookings",b.dataset.status),{status:b.dataset.value});refreshAdmin();}));
+    $("adminStatus").textContent="डेटा अपडेट हो गया।";
+    loadCars();
+  }catch(err){$("adminStatus").textContent="डेटा नहीं खुला: "+err.message;}
+}
 </script>
-</body></html>
+</body>
+</html>
