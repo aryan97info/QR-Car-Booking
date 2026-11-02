@@ -30,13 +30,21 @@
 <div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">बुकिंग पहले Firebase में सेव होगी, फिर WhatsApp मैसेज खुलेगा। WhatsApp में Send दबाना होगा।</p></div>
 </div></form>
 <aside class="panel"><h2>बुकिंग कैसे होगी?</h2><div class="features"><div class="feature"><b>1. जानकारी भरें</b><span>पिकअप, ड्रॉप और समय चुनें।</span></div><div class="feature"><b>2. WhatsApp खोलें</b><span>बुकिंग की जानकारी मैसेज में तैयार होगी।</span></div><div class="feature"><b>3. बुकिंग कन्फर्म करें</b><span>कार और किराया फोन पर कन्फर्म होगा।</span></div></div><p class="notice" style="margin-top:16px">ऑनलाइन एडवांस पेमेंट अभी सक्रिय नहीं है।</p></aside></div></section>
-<section class="admin-box hidden" id="adminBox"><div class="panel"><div class="admin-head"><div><h2 style="margin:0">Admin Panel</h2><p class="hint" id="adminUser"></p></div><button class="btn secondary" id="logoutBtn" type="button">Logout</button></div><div class="admin-tabs"><button class="active" data-tab="carsTab" type="button">गाड़ियाँ</button><button data-tab="bookingsTab" type="button">बुकिंग</button></div><div id="carsTab"><h3>नई गाड़ी जोड़ें</h3><form class="admin-form" id="carForm"><input id="carName" required placeholder="गाड़ी का नाम"><input id="carPrice" placeholder="किराया / कीमत (जैसे ₹12/km)"><input id="carInfo" class="wide" placeholder="जानकारी (जैसे 6 सीटर)"><input id="carIcon" placeholder="Emoji (जैसे 🚙)"><button class="btn" type="submit">गाड़ी सेव करें</button></form><div id="adminCars"></div></div><div id="bookingsTab" class="hidden"><h3>बुकिंग रिक्वेस्ट</h3><div id="adminBookings"></div></div><p class="status" id="adminStatus"></p></div></section>
+<section class="admin-box hidden" id="adminBox"><div class="panel"><div class="admin-head"><div><h2 style="margin:0">Admin Panel</h2><p class="hint" id="adminUser"></p></div><button class="btn secondary" id="logoutBtn" type="button">Logout</button></div><div class="panel" style="margin:14px 0;background:var(--mint)">
+<h3 style="margin-top:0">मालिक का WhatsApp नंबर</h3>
+<form id="whatsappSettingsForm" class="admin-form">
+<input id="ownerWhatsAppInput" class="wide" type="tel" inputmode="tel" placeholder="उदाहरण: 919876543210" required>
+<button class="btn" type="submit">WhatsApp नंबर सेव करें</button>
+<p class="hint wide">देश कोड सहित नंबर लिखें, जैसे भारत के लिए 91 के बाद 10 अंकों का मोबाइल नंबर। आगे से बुकिंग इसी नंबर पर खुलेगी।</p>
+</form>
+</div>
+<div class="admin-tabs"><button class="active" data-tab="carsTab" type="button">गाड़ियाँ</button><button data-tab="bookingsTab" type="button">बुकिंग</button></div><div id="carsTab"><h3>नई गाड़ी जोड़ें</h3><form class="admin-form" id="carForm"><input id="carName" required placeholder="गाड़ी का नाम"><input id="carPrice" placeholder="किराया / कीमत (जैसे ₹12/km)"><input id="carInfo" class="wide" placeholder="जानकारी (जैसे 6 सीटर)"><input id="carIcon" placeholder="Emoji (जैसे 🚙)"><button class="btn" type="submit">गाड़ी सेव करें</button></form><div id="adminCars"></div></div><div id="bookingsTab" class="hidden"><h3>बुकिंग रिक्वेस्ट</h3><div id="adminBookings"></div></div><p class="status" id="adminStatus"></p></div></section>
 </main>
 <footer><div class="wrap foot"><div><b>QR Car Booking</b><div class="hint" style="color:#d9e5df">सरल बुकिंग, आसान सफर।</div></div><div class="hint" style="color:#d9e5df">Admin access केवल अधिकृत Google खाते के लिए।</div></div></footer>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCrBkQ89ObUq1GdFQLPVqPZM1qhHYwoALs",
@@ -47,8 +55,7 @@ const firebaseConfig = {
   appId: "1:789846776944:web:ef217df9e56a47852d28b5"
 };
 const ADMIN_EMAIL = "aryan97.info@gmail.com";
-// मालिक का WhatsApp नंबर country code सहित यहाँ सेट होगा (उदाहरण: 919876543210).
-const OWNER_WHATSAPP = "";
+let ownerWhatsApp = "";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -72,6 +79,13 @@ function openWhatsApp(number,message){
   window.location.href="https://wa.me/"+n+"?text="+encodeURIComponent(message);
   return true;
 }
+async function loadOwnerSettings(){
+  try{
+    const snap=await getDoc(doc(db,"settings","public"));
+    ownerWhatsApp=snap.exists()?String(snap.data().ownerWhatsApp||""):"";
+  }catch(err){console.error("WhatsApp setting load failed",err);}
+}
+loadOwnerSettings();
 function safeText(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 async function loadCars(){
   const host=$("cars");
@@ -100,8 +114,8 @@ form.addEventListener("submit",async e=>{
     const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+d.date,"समय: "+d.time,"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
     form.reset();
     dateInput.min=[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
-    if(OWNER_WHATSAPP.trim()){
-      openWhatsApp(OWNER_WHATSAPP,message);
+    if(ownerWhatsApp.trim()){
+      openWhatsApp(ownerWhatsApp,message);
     }else{
       alert("बुकिंग Firebase में सेव हो गई है। मालिक का WhatsApp नंबर अभी वेबसाइट में सेट नहीं है, इसलिए मैसेज नहीं खुला। Admin Panel में पूरी बुकिंग देख सकते हैं।");
     }
@@ -117,7 +131,12 @@ onAuthStateChanged(auth,user=>{
   isAdmin=!!user&&user.email===ADMIN_EMAIL&&user.emailVerified===true;
   if(user&&!isAdmin){alert("यह Google account Admin के लिए अधिकृत नहीं है।");signOut(auth);return;}
   $("adminBox").classList.toggle("hidden",!isAdmin);
-  if(isAdmin){$("adminUser").textContent=user.email;$("adminBox").scrollIntoView({behavior:"smooth"});refreshAdmin();}
+  if(isAdmin){
+    $("adminUser").textContent=user.email;
+    $("adminBox").scrollIntoView({behavior:"smooth"});
+    loadOwnerSettings().then(()=>$("ownerWhatsAppInput").value=ownerWhatsApp);
+    refreshAdmin();
+  }
 });
 $("logoutBtn").addEventListener("click",()=>signOut(auth));
 document.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click",()=>{
@@ -125,6 +144,21 @@ document.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click
   $("carsTab").classList.toggle("hidden",btn.dataset.tab!=="carsTab");
   $("bookingsTab").classList.toggle("hidden",btn.dataset.tab!=="bookingsTab");
 }));
+$("whatsappSettingsForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!isAdmin)return;
+  const number=normalizePhone($("ownerWhatsAppInput").value);
+  if(number.length!==12||!number.startsWith("91")){
+    $("adminStatus").textContent="भारत का नंबर 91 के बाद 10 अंकों में लिखें।";
+    return;
+  }
+  try{
+    await setDoc(doc(db,"settings","public"),{ownerWhatsApp:number,updatedAt:serverTimestamp()},{merge:true});
+    ownerWhatsApp=number;
+    $("ownerWhatsAppInput").value=number;
+    $("adminStatus").textContent="मालिक का WhatsApp नंबर सेव हो गया। अब नई बुकिंग इसी नंबर पर खुलेगी।";
+  }catch(err){$("adminStatus").textContent="नंबर सेव नहीं हुआ: "+err.message;}
+});
 $("carForm").addEventListener("submit",async e=>{
   e.preventDefault();if(!isAdmin)return;
   try{
