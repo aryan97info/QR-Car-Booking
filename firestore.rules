@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == "aryan97.info@gmail.com"
+        && request.auth.token.email_verified == true;
+    }
+
+    match /cars/{carId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /bookings/{bookingId} {
+      allow create: if
+        request.resource.data.keys().hasAll([
+          'name', 'phone', 'car', 'trip', 'pickup', 'drop', 'date', 'time',
+          'notes', 'status', 'createdAt'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() >= 10
+        && request.resource.data.car is string
+        && request.resource.data.pickup is string
+        && request.resource.data.drop is string
+        && request.resource.data.status == 'नई'
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}
