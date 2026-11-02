@@ -92,16 +92,18 @@ exports.razorpayWebhook = onRequest(
     if (matches.empty) return res.status(200).send("Booking not found");
 
     const bookingRef = matches.docs[0].ref;
+    const currentBooking = matches.docs[0].data();
     if (event === "payment_link.paid") {
+      if (currentBooking.paymentStatus === "refunded") return res.status(200).send("Already refunded");
       const payment = req.body?.payload?.payment?.entity;
       const linkedPayment = Array.isArray(entity.payments) ? entity.payments.find(p => p.status === "captured" || p.status === "paid") || entity.payments[0] : null;
       await bookingRef.update({
         status: "कन्फर्म",
         paymentStatus: "paid",
-        paymentId: payment?.id || linkedPayment?.payment_id || linkedPayment?.id || null,
+        paymentId: payment?.id || linkedPayment?.payment_id || linkedPayment?.id || currentBooking.paymentId || null,
         paidAt: FieldValue.serverTimestamp()
       });
-    } else if (event === "payment_link.expired" || event === "payment_link.cancelled") {
+    } else if ((event === "payment_link.expired" || event === "payment_link.cancelled") && currentBooking.paymentStatus === "pending" && currentBooking.cancelledBy !== "owner") {
       await bookingRef.update({
         status: "समय पर भुगतान नहीं - रद्द",
         paymentStatus: "expired",
