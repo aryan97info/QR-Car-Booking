@@ -150,6 +150,7 @@ const now = new Date();
 dateInput.min = [now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
 let carsCache = [];
 let isAdmin = false;
+let adminExpiryTimer = null;
 
 function normalizePhone(value){
   let n=String(value||"").replace(/\D/g,"");
@@ -320,7 +321,8 @@ onAuthStateChanged(auth,user=>{
     $("adminBox").scrollIntoView({behavior:"smooth"});
     loadOwnerSettings().then(()=>{$("ownerWhatsAppInput").value=ownerWhatsApp;updateFareEstimate();renderPhonePeQrPreview();});
     refreshAdmin();
-  }
+    if(!adminExpiryTimer)adminExpiryTimer=window.setInterval(refreshAdmin,60000);
+  }else if(adminExpiryTimer){window.clearInterval(adminExpiryTimer);adminExpiryTimer=null;}
 });
 $("logoutBtn").addEventListener("click",()=>signOut(auth));
 document.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click",()=>{
