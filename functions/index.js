@@ -94,10 +94,11 @@ exports.razorpayWebhook = onRequest(
     const bookingRef = matches.docs[0].ref;
     if (event === "payment_link.paid") {
       const payment = req.body?.payload?.payment?.entity;
+      const linkedPayment = Array.isArray(entity.payments) ? entity.payments.find(p => p.status === "captured" || p.status === "paid") || entity.payments[0] : null;
       await bookingRef.update({
         status: "कन्फर्म",
         paymentStatus: "paid",
-        paymentId: payment?.id || null,
+        paymentId: payment?.id || linkedPayment?.payment_id || linkedPayment?.id || null,
         paidAt: FieldValue.serverTimestamp()
       });
     } else if (event === "payment_link.expired" || event === "payment_link.cancelled") {
@@ -128,8 +129,17 @@ exports.cancelBookingByOwner = onCall(
 
     const authHeader = "Basic " + Buffer.from(razorpayKeyId.value() + ":" + razorpayKeySecret.value()).toString("base64");
     if (booking.paymentStatus === "paid") {
-      if (!booking.paymentId) throw new HttpsError("failed-precondition", "पेमेंट ID उपलब्ध नहीं है। Razorpay Dashboard से जाँच आवश्यक है।");
-      const refundResponse = await fetch("https://api.razorpay.com/v1/payments/" + encodeURIComponent(booking.paymentId) + "/refund", {
+      let paymentId = booking.paymentId;
+      if (!paymentId && booking.paymentLinkId) {
+        const linkResponse = await fetch("https://api.razorpay.com/v1/payment_links/" + encodeURIComponent(booking.paymentLinkId), {
+          headers: { "Authorization": authHeader }
+        });
+        const linkDetails = await linkResponse.json();
+        const linkedPayment = Array.isArray(linkDetails.payments) ? linkDetails.payments.find(p => p.status === "captured" || p.status === "paid") || linkDetails.payments[0] : null;
+        paymentId = linkedPayment?.payment_id || linkedPayment?.id || null;
+      }
+      if (!paymentId) throw new HttpsError("failed-precondition", "पेमेंट ID उपलब्ध नहीं है। Razorpay Dashboard से जाँच आवश्यक है।");
+      const refundResponse = await fetch("https://api.razorpay.com/v1/payments/" + encodeURIComponent(paymentId) + "/refund", {
         method: "POST",
         headers: { "Authorization": authHeader, "Content-Type": "application/json" },
         body: JSON.stringify({ amount: 50000, notes: { bookingId, reason: "Owner cancelled booking; full security amount refund" } })
