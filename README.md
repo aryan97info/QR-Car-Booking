@@ -1,6 +1,6 @@
-# QR Car Booking
+# Aryan Car Booking
 
-Mobile-first Hindi car booking website using Firebase Authentication, Firestore and WhatsApp.
+Mobile-first Hindi car booking website for Aryan Car Booking using Firebase Authentication, Firestore and WhatsApp.
 
 ## Current features
 - Customer booking form; booking requests are saved in Firestore.
