@@ -7,14 +7,14 @@
 <title>QR Car Booking</title>
 <style>
 :root{--ink:#10231f;--green:#176b52;--mint:#e7f4ee;--gold:#f2bd55;--muted:#65736e;--paper:#f7f8f5;--line:#e0e7e2}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--ink)}a{color:inherit}.wrap{width:min(1080px,92%);margin:auto}.top{background:var(--ink);color:white;padding:16px 0}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;font-size:1.12rem}.brand span{color:var(--gold)}.pill{border:1px solid #ffffff50;padding:8px 12px;border-radius:99px;text-decoration:none;font-size:.88rem}.hero{padding:42px 0 28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}.eyebrow{color:var(--green);font-weight:800;font-size:.8rem;letter-spacing:1.4px}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;margin:12px 0}.hero p{color:var(--muted);font-size:1.04rem;line-height:1.7}.hero-card{background:var(--ink);color:white;border-radius:24px;padding:24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}.car-icon{font-size:4rem}.section{padding:22px 0 44px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}.section-title h2{margin:0;font-size:1.6rem}.section-title p{margin:4px 0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.car,.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:18px}.car-art{height:150px;border-radius:13px;background:var(--mint);display:grid;place-items:center;font-size:3.4rem;overflow:hidden}.car-art img{width:100%;height:100%;object-fit:cover}.car h3{margin:14px 0 4px}.meta,.hint{color:var(--muted);font-size:.88rem;line-height:1.5}.price{font-weight:800;font-size:1.15rem;margin:12px 0}.btn{border:0;border-radius:12px;background:var(--green);color:white;padding:12px 16px;font-weight:750;font-size:.96rem;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}.btn.secondary{background:var(--mint);color:var(--green)}.btn.gold{background:var(--gold);color:var(--ink)}.btn.full{width:100%}.booking-layout{display:grid;grid-template-columns:1fr .7fr;gap:18px}.panel h2{margin-top:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:.9rem;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cfd9d2;border-radius:10px;font:inherit;background:#fff}.notice{background:#fff5d9;border:1px solid #f4df9c;border-radius:12px;padding:12px;color:#654b12;font-size:.88rem;line-height:1.5}.features{display:grid;grid-template-columns:1fr;gap:12px}.feature{padding:16px;background:var(--mint);border-radius:14px}.feature b{display:block;margin-bottom:5px}.feature span{font-size:.88rem;color:var(--muted)}footer{background:var(--ink);color:#d9e5df;padding:26px 0;margin-top:20px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.hidden{display:none!important}.admin-box{margin:20px 0 40px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.admin-tabs button{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 14px;cursor:pointer}.admin-tabs button.active{background:var(--ink);color:white}.admin-row{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:#fff}.admin-row p{margin:5px 0}.admin-form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.admin-form input,.admin-form textarea{width:100%;padding:11px;border:1px solid #cfd9d2;border-radius:9px;font:inherit}.admin-form .wide{grid-column:1/-1}.status{font-size:.84rem;color:var(--muted);margin:8px 0}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--ink)}a{color:inherit}.wrap{width:min(1080px,92%);margin:auto}.top{background:var(--ink);color:white;padding:16px 0}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;font-size:1.12rem}.brand span{color:var(--gold)}.pill{border:1px solid #ffffff50;padding:8px 12px;border-radius:99px;text-decoration:none;font-size:.88rem}.hero{padding:52px 0 34px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}.eyebrow{color:var(--green);font-weight:800;font-size:.8rem;letter-spacing:1.4px}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;margin:12px 0}.hero p{color:var(--muted);font-size:1.04rem;line-height:1.7}.hero-card{background:radial-gradient(circle at 85% 15%,#347d65 0,transparent 38%),linear-gradient(135deg,#10231f,#183d32);color:white;border-radius:28px;padding:28px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 18px 45px #10231f20}.car-icon{font-size:4rem}.section{padding:22px 0 44px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}.section-title h2{margin:0;font-size:1.6rem}.section-title p{margin:4px 0;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.car,.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 8px 24px #10231f08}.car{transition:transform .2s ease,box-shadow .2s ease}.car:hover{transform:translateY(-3px);box-shadow:0 14px 30px #10231f12}.car-art{height:170px;border-radius:14px;background:linear-gradient(145deg,#f0f5f1,#e4eee8);display:grid;place-items:center;font-size:3.4rem;overflow:hidden;padding:10px}.car-art img{width:100%;height:100%;object-fit:contain;display:block}.car h3{margin:14px 0 4px}.meta,.hint{color:var(--muted);font-size:.88rem;line-height:1.5}.price{font-weight:800;font-size:1.15rem;margin:12px 0}.btn{border:0;border-radius:12px;background:var(--green);color:white;padding:12px 16px;font-weight:750;font-size:.96rem;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}.btn.secondary{background:var(--mint);color:var(--green)}.btn.gold{background:var(--gold);color:var(--ink)}.btn.full{width:100%}.booking-layout{display:grid;grid-template-columns:1fr .7fr;gap:18px}.panel h2{margin-top:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:.9rem;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cfd9d2;border-radius:10px;font:inherit;background:#fff}.notice{background:#fff5d9;border:1px solid #f4df9c;border-radius:12px;padding:12px;color:#654b12;font-size:.88rem;line-height:1.5}.features{display:grid;grid-template-columns:1fr;gap:12px}.feature{padding:16px;background:var(--mint);border-radius:14px}.feature b{display:block;margin-bottom:5px}.feature span{font-size:.88rem;color:var(--muted)}footer{background:var(--ink);color:#d9e5df;padding:26px 0;margin-top:20px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.hidden{display:none!important}.admin-box{margin:20px 0 40px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.admin-tabs button{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 14px;cursor:pointer}.admin-tabs button.active{background:var(--ink);color:white}.admin-row{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:#fff}.admin-row p{margin:5px 0}.admin-form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.admin-form input,.admin-form textarea{width:100%;padding:11px;border:1px solid #cfd9d2;border-radius:9px;font:inherit}.admin-form .wide{grid-column:1/-1}.status{font-size:.84rem;color:var(--muted);margin:8px 0}
 @media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:30px}.hero-card{min-height:170px}.grid,.booking-layout,.features{grid-template-columns:1fr}.section-title{align-items:start;flex-direction:column}.form-grid,.admin-form{grid-template-columns:1fr}.field.full,.admin-form .wide{grid-column:auto}.nav{align-items:flex-start}.hero h1{letter-spacing:-.8px}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap nav"><div class="brand">QR <span>CAR</span> BOOKING</div><div style="display:flex;gap:8px;align-items:center"><a class="pill" href="#booking">बुकिंग करें ↗</a><button class="pill" id="adminOpen" type="button" style="background:transparent;color:white;cursor:pointer">Admin</button></div></div></header>
 <main class="wrap">
-<section class="hero"><div><div class="eyebrow">आसान बुकिंग • सीधे संपर्क</div><h1>आपकी यात्रा,<br>हमारी गाड़ी।</h1><p>अपनी यात्रा की जानकारी भरें और बुकिंग रिक्वेस्ट भेजें। मोबाइल और लैपटॉप—दोनों पर आसान अनुभव।</p><a class="btn gold" href="#booking">अभी बुकिंग करें →</a></div><div class="hero-card"><div class="car-icon">🚘</div><div><small>आपकी अगली यात्रा यहाँ से शुरू होती है</small><h2 style="margin:5px 0 0">सुविधाजनक कार बुकिंग</h2></div></div></section>
+<section class="hero"><div><div class="eyebrow">आसान बुकिंग • सीधे संपर्क</div><h1>आपकी यात्रा,<br>हमारी गाड़ी।</h1><p>अपनी यात्रा की जानकारी भरें और बुकिंग रिक्वेस्ट भेजें।</p><a class="btn gold" href="#booking">अभी बुकिंग करें →</a></div><div class="hero-card"><div class="car-icon">🚘</div><div><small style="color:#c6e4d6;letter-spacing:1px;text-transform:uppercase">Your ride, your way</small><h2 style="margin:8px 0 0;font-size:1.65rem">आरामदायक सफर<br>बस एक बुकिंग दूर।</h2></div></div></section>
 <section class="section"><div class="section-title"><div><h2>हमारी गाड़ियाँ</h2><p>कार चुनें या अपनी जरूरत बताएं।</p></div></div><div class="grid" id="cars"><p class="hint">गाड़ियाँ लोड हो रही हैं…</p></div></section>
 <section class="section" id="booking"><div class="section-title"><div><h2>बुकिंग रिक्वेस्ट</h2><p>जानकारी भरें, फिर WhatsApp पर भेजें।</p></div></div>
 <div class="booking-layout"><form class="panel" id="bookingForm"><div class="form-grid">
@@ -27,7 +27,7 @@
 <div class="field"><label for="date">यात्रा की तारीख *</label><input id="date" name="date" type="date" required></div>
 <div class="field"><label for="time">समय *</label><input id="time" name="time" type="time" required></div>
 <div class="field full"><label for="notes">अतिरिक्त जानकारी (वैकल्पिक)</label><textarea id="notes" name="notes" rows="3" placeholder="यात्रियों की संख्या या दूसरी जरूरत"></textarea></div>
-<div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">बुकिंग पहले Firebase में सेव होगी, फिर WhatsApp मैसेज खुलेगा। WhatsApp में Send दबाना होगा।</p></div>
+<div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">WhatsApp में Send दबाना होगा।</p></div>
 </div></form>
 <aside class="panel"><h2>बुकिंग कैसे होगी?</h2><div class="features"><div class="feature"><b>1. जानकारी भरें</b><span>पिकअप, ड्रॉप और समय चुनें।</span></div><div class="feature"><b>2. WhatsApp खोलें</b><span>बुकिंग की जानकारी मैसेज में तैयार होगी।</span></div><div class="feature"><b>3. बुकिंग कन्फर्म करें</b><span>कार और किराया फोन पर कन्फर्म होगा।</span></div></div><p class="notice" style="margin-top:16px">ऑनलाइन एडवांस पेमेंट अभी सक्रिय नहीं है।</p></aside></div></section>
 <section class="admin-box hidden" id="adminBox"><div class="panel"><div class="admin-head"><div><h2 style="margin:0">Admin Panel</h2><p class="hint" id="adminUser"></p></div><button class="btn secondary" id="logoutBtn" type="button">Logout</button></div><div class="panel" style="margin:14px 0;background:var(--mint)">
@@ -72,6 +72,21 @@ function normalizePhone(value){
   let n=String(value||"").replace(/\D/g,"");
   if(n.length===10)n="91"+n;
   return n;
+}
+function formatDate(value){
+  if(!value)return "—";
+  const parts=String(value).split("-");
+  return parts.length===3?parts[2]+"/"+parts[1]+"/"+parts[0]:value;
+}
+function formatTime(value){
+  if(!value)return "—";
+  const parts=String(value).split(":");
+  if(parts.length<2)return value;
+  let hour=Number(parts[0]);
+  if(!Number.isFinite(hour))return value;
+  const suffix=hour>=12?"PM":"AM";
+  hour=hour%12||12;
+  return String(hour).padStart(2,"0")+":"+parts[1]+" "+suffix;
 }
 function openWhatsApp(number,message){
   const n=normalizePhone(number);
@@ -125,7 +140,7 @@ form.addEventListener("submit",async e=>{
   submit.disabled=true;submit.textContent="बुकिंग सेव हो रही है…";
   try{
     await addDoc(collection(db,"bookings"),payload);
-    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+d.date,"समय: "+d.time,"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
+    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+formatDate(d.date),"समय: "+formatTime(d.time),"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
     form.reset();
     dateInput.min=[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
     if(ownerWhatsApp.trim()){
@@ -209,7 +224,7 @@ async function refreshAdmin(){
         '<p>यात्रा का प्रकार: '+safeText(b.trip||"—")+'</p>'+
         '<p>पिकअप: '+safeText(b.pickup||"—")+'</p>'+
         '<p>ड्रॉप: '+safeText(b.drop||"—")+'</p>'+
-        '<p>तारीख: '+safeText(b.date||"—")+' · समय: '+safeText(b.time||"—")+'</p>'+
+        '<p>तारीख: '+safeText(formatDate(b.date))+' · समय: '+safeText(formatTime(b.time))+'</p>'+
         '<p>अतिरिक्त जानकारी: '+safeText(b.notes||"कोई जानकारी नहीं")+'</p>'+
         '<p class="hint">बुकिंग समय: '+safeText(created||"उपलब्ध नहीं")+'</p>'+
         '<p>स्थिति: <b>'+safeText(b.status||"नई")+'</b></p>'+
@@ -232,7 +247,7 @@ async function refreshAdmin(){
         "कार: "+(selected.car||"—"),
         "पिकअप: "+(selected.pickup||"—"),
         "ड्रॉप: "+(selected.drop||"—"),
-        "तारीख: "+(selected.date||"—")+" समय: "+(selected.time||"—"),
+        "तारीख: "+formatDate(selected.date)+" समय: "+formatTime(selected.time),
         "यात्रा: "+(selected.trip||"—")
       ].join("\n");
       await refreshAdmin();
