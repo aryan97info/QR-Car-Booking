@@ -78,7 +78,7 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 <div class="field"><label for="pickup">पिकअप स्थान *</label><input id="pickup" name="pickup" required placeholder="कहाँ से जाना है?"></div>
 <div class="field"><label for="drop">ड्रॉप स्थान *</label><input id="drop" name="drop" required placeholder="कहाँ जाना है?"></div>
 <div class="field"><label for="date">यात्रा की तारीख *</label><input id="date" name="date" type="date" required></div>
-<div class="field"><label for="time">समय *</label><input id="time" name="time" type="text" inputmode="text" autocomplete="off" placeholder="जैसे 12:18 PM" pattern="(0?[1-9]|1[0-2]):[0-5][0-9] ?(AM|PM)" title="समय 12:18 PM जैसे AM या PM के साथ लिखें" required></div>
+<div class="field"><label for="time">समय *</label><input id="time" name="time" type="time" required></div>
 <div class="field full"><label for="notes">अतिरिक्त जानकारी (वैकल्पिक)</label><textarea id="notes" name="notes" rows="3" placeholder="यात्रियों की संख्या या दूसरी जरूरत"></textarea></div>
 <div class="field full"><button class="btn full" type="submit">WhatsApp पर बुकिंग भेजें ↗</button><p class="hint">WhatsApp में Send button दबाना होगा।</p></div>
 </div></form>
@@ -131,7 +131,16 @@ function formatDate(value){
   const parts=String(value).split("-");
   return parts.length===3?parts[2]+"/"+parts[1]+"/"+parts[0]:value;
 }
-function to24Hour(value){\n  const m=String(value||"").trim().match(/^(0?[1-9]|1[0-2]):([0-5][0-9])\\s*(AM|PM)$/i);\n  if(!m)return null;\n  let h=Number(m[1])%12;\n  if(m[3].toUpperCase()==="PM")h+=12;\n  return String(h).padStart(2,"0")+":"+m[2];\n}\nfunction formatTime(value){
+function to24Hour(value){
+  if(!value)return null;
+  const parts=String(value).split(":");
+  if(parts.length<2)return null;
+  let hour=Number(parts[0]);
+  const minute=Number(parts[1]);
+  if(!Number.isInteger(hour)||hour<0||hour>23||!Number.isInteger(minute)||minute<0||minute>59)return null;
+  return String(hour).padStart(2,"0")+":"+String(minute).padStart(2,"0");
+}
+function formatTime(value){
   if(!value)return "—";
   const parts=String(value).split(":");
   if(parts.length<2)return value;
@@ -188,7 +197,7 @@ loadCars();
 form.addEventListener("submit",async e=>{
   e.preventDefault();
   const d=Object.fromEntries(new FormData(form).entries());
-  const time24=to24Hour(d.time);\n  if(!time24){alert("समय 12:18 PM जैसे AM या PM के साथ भरें।");return;}\n  const payload={name:d.name,phone:d.phone,car:d.car,trip:d.trip,pickup:d.pickup,drop:d.drop,date:d.date,time:time24,notes:d.notes||"",status:"नई",createdAt:serverTimestamp()};
+  const time24=to24Hour(d.time);\n  if(!time24){alert("कृपया समय चुनें।");return;}\n  const payload={name:d.name,phone:d.phone,car:d.car,trip:d.trip,pickup:d.pickup,drop:d.drop,date:d.date,time:time24,notes:d.notes||"",status:"नई",createdAt:serverTimestamp()};
   const submit=form.querySelector('button[type="submit"]');
   submit.disabled=true;submit.textContent="बुकिंग सेव हो रही है…";
   try{
