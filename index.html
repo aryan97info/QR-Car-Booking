@@ -260,12 +260,81 @@ footer{margin-top:0;padding:36px 0}
 }
 @media(prefers-reduced-motion:reduce){.visual-car,.orbit-two{animation:none}}
 
+
+/* Premium glass finish + gentle interactive Ertiga motion */
+:root{--ink:#142d28;--green:#28735f;--paper:#f5f7f4;--line:#dfe9e2}
+body{background:radial-gradient(ellipse at 12% 6%,#e4eee7 0,transparent 34%),#f6f8f5}
+.top{background:rgba(17,48,39,.91);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid #ffffff18}
+.hero-redesign{gap:5%;padding-top:58px;padding-bottom:48px}
+.hero-copy h1{letter-spacing:-2.8px}
+.hero-copy .eyebrow{display:inline-flex;align-items:center;gap:10px;background:#ffffffa8;border:1px solid #dce8df;border-radius:999px;box-shadow:0 8px 25px #234e3910;backdrop-filter:blur(12px)}
+.hero-visual{overflow:hidden;border:1px solid #ffffff40;border-radius:32px;background:linear-gradient(145deg,#dcebe1 0%,#a9c8b6 46%,#477c66 100%);box-shadow:0 25px 65px #17372e20,inset 0 1px 0 #ffffff99;isolation:isolate;touch-action:pan-y;cursor:grab}
+.hero-visual:active{cursor:grabbing}
+.hero-visual:before{z-index:0;background:radial-gradient(ellipse at 50% 58%,#ffffff8a,transparent 48%),linear-gradient(135deg,#ffffff55,transparent 50%,#143e3022)}
+.visual-orbit{z-index:0;border-color:#ffffff70;box-shadow:inset 0 0 35px #ffffff1b}
+.orbit-one{width:79%;box-shadow:0 0 0 20px #ffffff20,0 0 0 44px #ffffff12}
+.orbit-two{width:62%;border-style:solid;border-color:#ffffff4c}
+.visual-tag{z-index:3;color:#234f3e;letter-spacing:2.5px;font-weight:750;background:#ffffff78;border:1px solid #ffffff80;border-radius:999px;padding:8px 12px;backdrop-filter:blur(10px)}
+.visual-car{z-index:2;inset:8% -3% 7%;display:flex;align-items:center;justify-content:center;font-size:initial;filter:none;animation:ertigaHover 5.8s cubic-bezier(.45,0,.55,1) infinite;transform-origin:50% 65%;will-change:transform;transition:filter .35s ease}
+.ertiga-art{width:112%;max-width:none;height:auto;overflow:visible;filter:drop-shadow(0 23px 14px #183b2b42);transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .5s ease}
+.hero-visual:hover .ertiga-art{transform:scale(1.045) translateY(-4px);filter:drop-shadow(0 30px 20px #183b2b4d)}
+.hero-visual.is-touched .ertiga-art{transform:scale(1.07) translateY(-8px) rotate(-.6deg);filter:drop-shadow(0 32px 21px #183b2b50)}
+.visual-glow{z-index:1;width:66%;height:45px;bottom:65px;background:#ecfff18c;filter:blur(24px);transition:transform .5s ease,opacity .5s ease}
+.hero-visual.is-touched .visual-glow{transform:translateX(-50%) scale(1.16);opacity:.9}
+.visual-bottom{z-index:3;color:#eff8f0;background:#173f32a8;border:1px solid #ffffff30;border-radius:17px;padding:13px 16px;bottom:19px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.visual-bottom span{color:#c7e2d0}
+.trust-strip,.car,#bookingForm,#booking .booking-layout>aside,.panel{border:1px solid #ffffffc9;box-shadow:0 14px 40px #1a44320b}
+.trust-strip{border-radius:20px;background:#dfe9e2;box-shadow:0 16px 38px #18372d0b}
+.trust-strip>div{background:#ffffffb8;backdrop-filter:blur(14px)}
+.car{border-radius:24px;background:#ffffffbd;backdrop-filter:blur(15px);transition:transform .3s ease,box-shadow .3s ease}
+.car:hover{transform:translateY(-5px);box-shadow:0 20px 44px #1a44321a}
+.car-art{border-radius:17px;background:linear-gradient(145deg,#edf3ee,#e4ece5)}
+#booking:before{background:linear-gradient(135deg,#e8f0e9,#f2f5f0)}
+#bookingForm,#booking .booking-layout>aside{background:#ffffffc9;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid #ffffff}
+.field input,.field select,.field textarea,.time-pick select{border-radius:13px;background:#ffffffc9;border-color:#dce6df;transition:border-color .2s,box-shadow .2s,background .2s}
+.field input:focus,.field select:focus,.field textarea:focus,.time-pick select:focus{border-color:#6ca58c;box-shadow:0 0 0 4px #6ca58c20;background:#fff;outline:none}
+.btn{transition:transform .22s ease,box-shadow .22s ease,filter .22s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 9px 22px #173d2c20}
+.btn:active{transform:translateY(0) scale(.985)}
+@keyframes ertigaHover{0%,100%{transform:translate3d(0,5px,0) rotate(-.45deg)}50%{transform:translate3d(0,-8px,0) rotate(.45deg)}}
+@media(max-width:760px){.hero-visual{min-height:290px;border-radius:26px}.visual-car{inset:12% -8% 12%}.ertiga-art{width:125%}.visual-tag{top:17px;left:17px;font-size:.58rem}.visual-bottom{left:17px;right:17px;bottom:14px}.hero-redesign{padding-top:36px}}
+@media(prefers-reduced-motion:reduce){.visual-car{animation:none!important}.ertiga-art,.car,.btn{transition:none!important}}
+
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap nav"><div class="brand">ARYAN <span>CAR</span> BOOKING</div><div class="nav-actions"><a class="pill" href="#booking">बुकिंग करें ↗</a><button class="pill" id="adminOpen" type="button">Admin</button></div></div></header>
 <main class="wrap">
-<section class="hero hero-redesign"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> आपकी सवारी, आपकी सुविधा</div><h1>सफर हो शानदार,<br><em>बुकिंग हो आसान।</em></h1><p>परिवार के साथ यात्रा हो या जरूरी काम—अपनी पसंद की गाड़ी चुनें और कुछ ही मिनटों में बुकिंग रिक्वेस्ट भेजें।</p><div class="hero-actions"><a class="btn gold" href="#booking">अपनी गाड़ी बुक करें <span>↗</span></a><span class="hero-note">सीधा WhatsApp संपर्क · आसान प्रक्रिया</span></div><div class="hero-proof"><span>✓ आसान बुकिंग</span><span>✓ साफ किराया जानकारी</span><span>✓ सीधे संपर्क</span></div></div><div class="hero-visual"><div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-tag">COMFORT • SAFETY • JOURNEY</div><div class="visual-car">🚙</div><div class="visual-bottom"><span>ARYAN</span><strong>हर सफर, खास सफर।</strong></div><div class="visual-glow"></div></div></section><section class="trust-strip" aria-label="बुकिंग की सुविधाएँ"><div><b>01</b><span>अपनी पसंद की कार</span></div><div><b>02</b><span>आसान बुकिंग फॉर्म</span></div><div><b>03</b><span>WhatsApp पर संपर्क</span></div></section>
+<section class="hero hero-redesign"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> आपकी सवारी, आपकी सुविधा</div><h1>सफर हो शानदार,<br><em>बुकिंग हो आसान।</em></h1><p>परिवार के साथ यात्रा हो या जरूरी काम—अपनी पसंद की गाड़ी चुनें और कुछ ही मिनटों में बुकिंग रिक्वेस्ट भेजें।</p><div class="hero-actions"><a class="btn gold" href="#booking">अपनी गाड़ी बुक करें <span>↗</span></a><span class="hero-note">सीधा WhatsApp संपर्क · आसान प्रक्रिया</span></div><div class="hero-proof"><span>✓ आसान बुकिंग</span><span>✓ साफ किराया जानकारी</span><span>✓ सीधे संपर्क</span></div></div><div class="hero-visual"><div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-tag">COMFORT • SAFETY • JOURNEY</div><div class="visual-car" id="heroCar" role="img" aria-label="Maruti Suzuki Ertiga car illustration">
+<svg class="ertiga-art" viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+ <linearGradient id="bodyPaint" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".38" stop-color="#e9eee9"/><stop offset=".72" stop-color="#b9c8c2"/><stop offset="1" stop-color="#f7faf8"/></linearGradient>
+ <linearGradient id="glassPaint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#254b4b"/><stop offset=".5" stop-color="#8fb5b2"/><stop offset="1" stop-color="#315c5b"/></linearGradient>
+ <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#73847f"/></linearGradient>
+ <filter id="carShadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<ellipse cx="367" cy="270" rx="258" ry="22" fill="#081d17" opacity=".36" filter="url(#carShadow)"/>
+<g class="car-body">
+ <path d="M101 211 L116 172 Q124 156 151 148 L220 129 L276 72 Q291 57 321 56 L448 59 Q468 61 484 78 L541 140 L589 154 Q611 161 620 184 L628 216 Q628 232 607 239 L112 239 Q91 236 101 211Z" fill="url(#bodyPaint)" stroke="#e5eee9" stroke-width="3"/>
+ <path d="M235 127 L287 78 Q297 68 320 68 L355 69 L355 129Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="4"/>
+ <path d="M367 69 L444 72 Q460 73 472 88 L508 130 L367 130Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="4"/>
+ <path d="M515 138 L553 148 Q574 153 587 170 L534 170Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="3"/>
+ <path d="M355 70 L355 221 M515 138 L501 221 M226 132 L213 220" fill="none" stroke="#879b94" stroke-width="3"/>
+ <path d="M117 178 Q145 162 178 165 L203 170 L194 190 L109 194Z" fill="#fff5d6" stroke="#d8ded8" stroke-width="3"/>
+ <path d="M544 174 L593 177 Q602 181 605 193 L552 196Z" fill="#a33b35" stroke="#f4f7f4" stroke-width="3"/>
+ <path d="M117 205 Q280 217 607 204 L615 221 Q615 233 596 237 L124 237 Q102 233 105 220Z" fill="#657770"/>
+ <path d="M123 218 Q319 230 607 216" fill="none" stroke="url(#chrome)" stroke-width="5"/>
+ <path d="M259 137 L259 205 M397 137 L397 205 M516 145 L516 202" stroke="#9aa9a3" stroke-width="2" fill="none"/>
+ <path d="M272 153 L340 153 M380 153 L447 153" stroke="#fff" stroke-width="2" opacity=".8"/>
+ <rect x="337" y="208" width="83" height="20" rx="4" fill="#e7eee9" stroke="#879a91" stroke-width="2"/>
+ <text x="378" y="222" font-size="11" font-weight="700" text-anchor="middle" fill="#23473b">ERTIGA</text>
+ <path d="M223 180 L251 180 M412 180 L445 180" stroke="#f8fbf9" stroke-width="3" stroke-linecap="round"/>
+ <path d="M96 208 L118 202 L129 208 L122 221 L99 220Z" fill="#dbe7df"/>
+ <path d="M566 202 L604 199 L612 209 L606 219 L573 218Z" fill="#f5f8f5"/>
+ <g><circle cx="216" cy="231" r="39" fill="#1b2421"/><circle cx="216" cy="231" r="25" fill="#b8c5bf"/><circle cx="216" cy="231" r="16" fill="#53665e"/><circle cx="216" cy="231" r="6" fill="#e7eee9"/><path d="M216 208V254 M193 231H239 M200 215L232 247 M232 215L200 247" stroke="#e3ebe6" stroke-width="4"/></g>
+ <g><circle cx="528" cy="231" r="39" fill="#1b2421"/><circle cx="528" cy="231" r="25" fill="#b8c5bf"/><circle cx="528" cy="231" r="16" fill="#53665e"/><circle cx="528" cy="231" r="6" fill="#e7eee9"/><path d="M528 208V254 M505 231H551 M512 215L544 247 M544 215L512 247" stroke="#e3ebe6" stroke-width="4"/></g>
+ <path d="M143 155 L211 139 M461 84 L489 113" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+</g></svg></div><div class="visual-bottom"><span>ARYAN</span><strong>हर सफर, खास सफर।</strong></div><div class="visual-glow"></div></div></section><section class="trust-strip" aria-label="बुकिंग की सुविधाएँ"><div><b>01</b><span>अपनी पसंद की कार</span></div><div><b>02</b><span>आसान बुकिंग फॉर्म</span></div><div><b>03</b><span>WhatsApp पर संपर्क</span></div></section>
 <section class="section"><div class="section-title"><div><h2>हमारी गाड़ियाँ</h2><p>कार चुनें या अपनी जरूरत बताएं।</p></div></div><div class="grid" id="cars"><p class="hint">गाड़ियाँ लोड हो रही हैं…</p></div></section>
 <section class="section" id="booking"><div class="section-title"><div><h2>बुकिंग रिक्वेस्ट</h2><p>जानकारी भरें, फिर WhatsApp पर भेजें।</p></div></div>
 <div class="booking-layout"><form class="panel" id="bookingForm"><div class="form-grid">
@@ -736,5 +805,10 @@ async function refreshAdmin(){
   }catch(err){$("adminStatus").textContent="डेटा नहीं खुला: "+err.message;}
 }
 </script>
+
+<script>
+(()=>{const stage=document.querySelector(".hero-visual");if(!stage)return;let timer;const tap=()=>{stage.classList.add("is-touched");clearTimeout(timer);timer=setTimeout(()=>stage.classList.remove("is-touched"),850)};stage.addEventListener("pointerdown",tap,{passive:true});stage.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tap()}});stage.setAttribute("tabindex","0");stage.setAttribute("aria-label","Floating Ertiga car animation. Tap to animate.");})();
+</script>
+
 </body>
 </html>
