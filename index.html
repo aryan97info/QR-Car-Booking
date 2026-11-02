@@ -172,7 +172,7 @@ async function refreshAdmin(){
         "ड्रॉप: "+(selected.drop||"—"),
         "तारीख: "+(selected.date||"—")+" समय: "+(selected.time||"—"),
         "यात्रा: "+(selected.trip||"—")
-      ].join("\\n");
+      ].join("\n");
       await refreshAdmin();
       if(customerNumber.length>=11)openWhatsApp(customerNumber,customerMessage);
     }));
