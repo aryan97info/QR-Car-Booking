@@ -184,8 +184,9 @@ function updateFareEstimate(){
   const selectedCar=carsCache.find(c=>c.name===$("car").value);
   const dieselRate=Number(selectedCar?.dieselPrice)>0?Number(selectedCar.dieselPrice):defaultDieselPrice;
   const isReturn=$("trip").value==="आना-जाना";
-  const totalKm=km*(isReturn?2:1);
-  const estimate=Math.round(1000+(totalKm/12)*dieselRate);
+  const totalKm=km*2;
+  const fixedCharges=isReturn?1000:800;
+  const estimate=Math.round(fixedCharges+(totalKm/12)*dieselRate);
   $("fareAmount").textContent="₹"+estimate.toLocaleString("en-IN");
 }
 $("trip").addEventListener("change",updateTripFields);
@@ -267,16 +268,17 @@ form.addEventListener("submit",async e=>{
   if(isReturn&&!returnDate){alert("कृपया वापसी की तारीख चुनें।");return;}
   if(isReturn&&returnDate<d.date){alert("वापसी की तारीख जाने की तारीख से पहले नहीं हो सकती।");return;}
   const distanceKm=Number(d.distanceKm||0);
-  const totalDistanceKm=distanceKm*(isReturn?2:1);
+  const totalDistanceKm=distanceKm*2;
   const selectedCar=carsCache.find(c=>c.name===d.car);
   const bookingDieselPrice=Number(selectedCar?.dieselPrice)>0?Number(selectedCar.dieselPrice):defaultDieselPrice;
-  const estimatedFare=distanceKm>0?Math.round(1000+(totalDistanceKm/12)*bookingDieselPrice):null;
+  const fixedCharges=isReturn?1000:800;
+  const estimatedFare=distanceKm>0?Math.round(fixedCharges+(totalDistanceKm/12)*bookingDieselPrice):null;
   const payload={name:d.name,phone:d.phone,car:d.car,trip:d.trip,pickup:d.pickup,drop:d.drop,date:d.date,time:time24,returnDate,sameDayReturn,distanceKm:distanceKm||null,totalDistanceKm:distanceKm?totalDistanceKm:null,dieselPriceAtBooking:bookingDieselPrice,estimatedFare,notes:d.notes||"",status:"नई",createdAt:serverTimestamp()};
   const submit=form.querySelector('button[type="submit"]');
   submit.disabled=true;submit.textContent="बुकिंग सेव हो रही है…";
   try{
     await addDoc(collection(db,"bookings"),payload);
-    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+formatDate(d.date),"समय: "+formatTime(d.time),...(distanceKm>0?["एक तरफ़ दूरी: "+distanceKm+" KM","कुल दूरी: "+totalDistanceKm+" KM","अनुमानित कुल किराया: ₹"+estimatedFare]:[]),...(isReturn?["वापसी की तारीख: "+formatDate(returnDate)+(sameDayReturn?" (उसी दिन वापसी)":"")]:[]),"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
+    const message=["नई कार बुकिंग रिक्वेस्ट","नाम: "+d.name,"मोबाइल: "+d.phone,"कार: "+d.car,"यात्रा: "+d.trip,"पिकअप: "+d.pickup,"ड्रॉप: "+d.drop,"तारीख: "+formatDate(d.date),"समय: "+formatTime(d.time),...(distanceKm>0?["आपकी बताई एक तरफ़ दूरी: "+distanceKm+" KM","डीज़ल गणना (आना-जाना): "+totalDistanceKm+" KM","फिक्स चार्ज: ₹"+fixedCharges,"डीज़ल रेट: ₹"+bookingDieselPrice+"/लीटर","अनुमानित कुल किराया: ₹"+estimatedFare]:[]),...(isReturn?["वापसी की तारीख: "+formatDate(returnDate)+(sameDayReturn?" (उसी दिन वापसी)":"")]:[]),"अतिरिक्त जानकारी: "+(d.notes||"नहीं")].join("\n");
     form.reset();
     $("timeHour").value="";$("timeMinute").value="";$("timePeriod").value="";$("time").value="";
     $("sameDayReturn").checked=true;$("returnDate").value="";updateTripFields();
@@ -397,7 +399,8 @@ async function refreshAdmin(){
         '<p>ड्रॉप: '+safeText(b.drop||"—")+'</p>'+
         '<p>तारीख: '+safeText(formatDate(b.date))+' · समय: '+safeText(formatTime(b.time))+'</p>'+
         (b.returnDate?'<p>वापसी: '+safeText(formatDate(b.returnDate))+(b.sameDayReturn?' (उसी दिन)':'')+'</p>':'')+
-        (b.distanceKm?'<p>एक तरफ़ दूरी: '+safeText(b.distanceKm)+' KM · कुल दूरी: '+safeText(b.totalDistanceKm)+' KM</p>':'')+
+        (b.distanceKm?'<p>बताई गई एक तरफ़ दूरी: '+safeText(b.distanceKm)+' KM · डीज़ल गणना (आना-जाना): '+safeText(b.totalDistanceKm)+' KM</p>':'')+
+        (b.distanceKm?'<p>फिक्स चार्ज: ₹'+safeText(b.trip==="आना-जाना"?1000:800)+' · बुकिंग के समय डीज़ल रेट: ₹'+safeText(b.dieselPriceAtBooking||"—")+'/लीटर</p>':'')+
         (b.estimatedFare?'<p><b>अनुमानित कुल किराया: ₹'+safeText(b.estimatedFare)+'</b></p>':'')+
         '<p>अतिरिक्त जानकारी: '+safeText(b.notes||"कोई जानकारी नहीं")+'</p>'+
         '<p class="hint">बुकिंग समय: '+safeText(created||"उपलब्ध नहीं")+'</p>'+
@@ -424,7 +427,7 @@ async function refreshAdmin(){
         "तारीख: "+formatDate(selected.date)+" समय: "+formatTime(selected.time),
         "यात्रा: "+(selected.trip||"—"),
         ...(selected.returnDate?["वापसी की तारीख: "+formatDate(selected.returnDate)]:[]),
-        ...(selected.distanceKm?["कुल दूरी: "+selected.totalDistanceKm+" KM","अनुमानित किराया: ₹"+selected.estimatedFare]:[])
+        ...(selected.distanceKm?["डीज़ल गणना (आना-जाना): "+selected.totalDistanceKm+" KM","फिक्स चार्ज: ₹"+(selected.trip==="आना-जाना"?1000:800),"डीज़ल रेट: ₹"+selected.dieselPriceAtBooking+"/लीटर","अनुमानित किराया: ₹"+selected.estimatedFare]:[])
       ].join("\n");
       await refreshAdmin();
       if(customerNumber.length>=11)openWhatsApp(customerNumber,customerMessage);
