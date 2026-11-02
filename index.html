@@ -325,7 +325,7 @@ $("whatsappSettingsForm").addEventListener("submit",async e=>{
     ownerWhatsApp=number;dieselPrice=newDieselPrice;$("ownerWhatsAppInput").value=number;$("dieselPriceInput").value=String(newDieselPrice);updateFareEstimate();
     $("adminStatus").textContent="WhatsApp नंबर और डीज़ल की कीमत सेव हो गई।";
   }catch(err){console.error("WhatsApp save failed:",err);$("adminStatus").textContent="नंबर सेव नहीं हुआ: "+(err.code?err.code+" — ":"")+err.message;}
-  finally{button.disabled=false;button.textContent="WhatsApp नंबर सेव करें";}
+  finally{button.disabled=false;button.textContent="सेटिंग सेव करें";}
 });
 $("carForm").addEventListener("submit",async e=>{
   e.preventDefault();
@@ -387,7 +387,9 @@ async function refreshAdmin(){
         "पिकअप: "+(selected.pickup||"—"),
         "ड्रॉप: "+(selected.drop||"—"),
         "तारीख: "+formatDate(selected.date)+" समय: "+formatTime(selected.time),
-        "यात्रा: "+(selected.trip||"—")
+        "यात्रा: "+(selected.trip||"—"),
+        ...(selected.returnDate?["वापसी की तारीख: "+formatDate(selected.returnDate)]:[]),
+        ...(selected.distanceKm?["कुल दूरी: "+selected.totalDistanceKm+" KM","अनुमानित किराया: ₹"+selected.estimatedFare]:[])
       ].join("\n");
       await refreshAdmin();
       if(customerNumber.length>=11)openWhatsApp(customerNumber,customerMessage);
