@@ -197,7 +197,9 @@ loadCars();
 form.addEventListener("submit",async e=>{
   e.preventDefault();
   const d=Object.fromEntries(new FormData(form).entries());
-  const time24=to24Hour(d.time);\n  if(!time24){alert("कृपया समय चुनें।");return;}\n  const payload={name:d.name,phone:d.phone,car:d.car,trip:d.trip,pickup:d.pickup,drop:d.drop,date:d.date,time:time24,notes:d.notes||"",status:"नई",createdAt:serverTimestamp()};
+  const time24=to24Hour(d.time);
+  if(!time24){alert("कृपया समय चुनें।");return;}
+  const payload={name:d.name,phone:d.phone,car:d.car,trip:d.trip,pickup:d.pickup,drop:d.drop,date:d.date,time:time24,notes:d.notes||"",status:"नई",createdAt:serverTimestamp()};
   const submit=form.querySelector('button[type="submit"]');
   submit.disabled=true;submit.textContent="बुकिंग सेव हो रही है…";
   try{
