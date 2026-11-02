@@ -349,7 +349,7 @@ $("whatsappSettingsForm").addEventListener("submit",async e=>{
 function renderPhonePeQrPreview(){
   const host=$("phonePeQrPreview");
   if(!host)return;
-  host.innerHTML=phonePeQrImage?'<img src="'+safeText(phonePeQrImage)+'" alt="PhonePe QR Code" style="display:block;max-width:220px;max-height:260px;object-fit:contain;border:1px solid #ddd;border-radius:12px;padding:8px;background:#fff"><p class="hint">वर्तमान QR कोड सेव है।</p>':'<p class="hint">अभी PhonePe QR अपलोड नहीं किया गया है।</p>';
+  host.innerHTML=phonePeQrImage?'<img src="'+safeText(phonePeQrImage)+'" alt="PhonePe QR Code" style="display:block;max-width:220px;max-height:260px;object-fit:contain;border:1px solid #ddd;border-radius:12px;padding:8px;background:#fff"><a class="btn secondary" style="margin-top:8px" href="'+safeText(phonePeQrImage)+'" download="PhonePe-QR.png">QR डाउनलोड करें</a><p class="hint">वर्तमान QR कोड सेव है।</p>':'<p class="hint">अभी PhonePe QR अपलोड नहीं किया गया है।</p>';
 }
 $("phonePeQrForm").addEventListener("submit",async e=>{
   e.preventDefault();
@@ -453,7 +453,7 @@ async function refreshAdmin(){
         '<p>स्थिति: <b>'+safeText(b.status||"नई")+'</b></p>'+
         (b.status==="नई"?'<button class="btn" data-acceptpayment="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">बुकिंग स्वीकार करें और WhatsApp खोलें</button> ':'')+
         (b.paymentStatus==="paid"?'<p class="hint">पेमेंट प्राप्त: ₹500 · Payment ID: '+safeText(b.paymentId||"—")+'</p>':'')+
-        (b.paymentStatus==="pending"?'<p class="hint">ग्राहक से 4 घंटे के भीतर ₹500 भुगतान अपेक्षित है।</p>':'')+
+        (b.paymentStatus==="pending"?'<p class="hint">ग्राहक से 4 घंटे के भीतर ₹500 भुगतान अपेक्षित है।</p><button class="btn secondary" data-markpaid="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">PhonePe पेमेंट मिल गया – Confirm करें</button> ':'')+
         (["पेमेंट बाकी","कन्फर्म"].includes(b.status)?'<button class="btn secondary" data-ownercancel="'+d.id+'" data-phone="'+safeText(b.phone||"")+'" type="button">मालिक की तरफ़ से रद्द करें'+(b.paymentStatus==="paid"?' और ₹500 Refund करें':'')+'</button> ':'')+
         '<button class="btn" style="background:#a83232" data-deletebooking="'+d.id+'" type="button">बुकिंग हटाएँ</button>'+
       '</div>';
