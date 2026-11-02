@@ -186,12 +186,86 @@ a,button,input,select,textarea{-webkit-tap-highlight-color:transparent}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
+
+/* Full homepage layout redesign */
+:root{--ink:#18332c;--green:#26735f;--mint:#eaf2eb;--gold:#e9c78f;--paper:#f6f6f1;--muted:#77847d;--line:#e4e7df}
+body{background:#f6f6f1;color:#18332c}
+.top{background:#17372e;padding:15px 0}
+.nav{min-height:42px}
+.brand{font-size:1.18rem;letter-spacing:1.5px}
+.brand:before{content:"A";display:inline-grid;place-items:center;width:31px;height:31px;margin-right:9px;border-radius:10px;background:#e9c78f;color:#18372e;font-size:1rem;vertical-align:middle}
+.hero-redesign{position:relative;grid-template-columns:1.08fr .92fr;gap:6%;padding:70px 0 42px;min-height:500px}
+.hero-copy{position:relative;z-index:2}
+.hero-copy .eyebrow{font-size:.76rem;letter-spacing:.5px;padding:9px 14px}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#4c9c78;box-shadow:0 0 0 4px #4c9c781c}
+.hero-copy h1{font-size:clamp(2.8rem,5.8vw,5rem);line-height:1.08;letter-spacing:-2.5px;margin:22px 0 16px;color:#17372e}
+.hero-copy h1 em{font-style:normal;color:#42836d}
+.hero-copy p{max-width:510px;font-size:1.08rem;line-height:1.9;color:#718078}
+.hero-actions{display:flex;align-items:center;gap:17px;flex-wrap:wrap;margin-top:27px}
+.hero-actions .btn{padding:15px 21px;border-radius:13px}
+.hero-note{font-size:.82rem;color:#7c8982}
+.hero-proof{display:flex;gap:17px;flex-wrap:wrap;margin-top:29px;color:#5e7669;font-size:.8rem;font-weight:650}
+.hero-visual{position:relative;min-height:385px;overflow:hidden;border-radius:10px 90px 10px 90px;background:linear-gradient(145deg,#1b4337,#2d6853 70%,#477c62);box-shadow:0 28px 60px #17372e25;isolation:isolate}
+.hero-visual:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 43%,#b8d2a52c,transparent 42%),linear-gradient(120deg,transparent 40%,#ffffff0a);z-index:-1}
+.visual-orbit{position:absolute;border:1px solid #ffffff22;border-radius:50%;left:50%;top:48%;transform:translate(-50%,-50%);aspect-ratio:1}
+.orbit-one{width:75%;box-shadow:0 0 0 22px #ffffff08}
+.orbit-two{width:55%;border-style:dashed;animation:spinOrbit 38s linear infinite}
+.visual-tag{position:absolute;top:28px;left:28px;color:#d5e6d9;font-size:.65rem;letter-spacing:2px}
+.visual-car{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(7rem,15vw,12rem);filter:drop-shadow(0 22px 20px #071a1266);animation:carFloatNew 5s ease-in-out infinite}
+.visual-bottom{position:absolute;left:28px;right:28px;bottom:25px;display:flex;justify-content:space-between;align-items:end;color:#d9e8dd}
+.visual-bottom span{font-size:.7rem;letter-spacing:3px;color:#b7d1c0}
+.visual-bottom strong{font-size:1.05rem}
+.visual-glow{position:absolute;width:220px;height:70px;border-radius:50%;background:#b6d4a52c;filter:blur(30px);bottom:74px;left:50%;transform:translateX(-50%)}
+.trust-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e1e7df;border:1px solid #e1e7df;border-radius:16px;overflow:hidden;margin:0 0 45px;box-shadow:0 12px 30px #18372d09}
+.trust-strip>div{display:flex;align-items:center;gap:13px;padding:19px 22px;background:#fff}
+.trust-strip b{font-size:1.15rem;color:#4d8b72;letter-spacing:1px}
+.trust-strip span{font-size:.88rem;color:#50665b;font-weight:650}
+.section{padding:35px 0 62px}
+.section-title{margin-bottom:25px}
+.section-title h2{font-size:2rem;letter-spacing:-.8px}
+#cars{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.car{border-radius:20px;padding:13px;background:#fff;box-shadow:0 12px 32px #1a3c2e0b}
+.car-art{height:210px;border-radius:13px;background:#f0f3ed}
+.car .btn{width:100%;margin-top:7px}
+#booking{position:relative;padding:54px 0 68px;margin-top:15px}
+#booking:before{content:"";position:absolute;inset:0 calc((100vw - min(1080px,92vw))/ -2);background:#edf1e9;z-index:-1}
+#booking .section-title h2{font-size:2.15rem}
+.booking-layout{grid-template-columns:minmax(0,1.45fr) minmax(270px,.75fr);gap:24px}
+#bookingForm{border-radius:22px;padding:28px;box-shadow:0 18px 45px #1d44330c}
+#booking .booking-layout>aside{position:sticky;top:95px;border-radius:22px}
+.form-grid{gap:17px}
+.field input,.field select,.field textarea,.time-pick select{min-height:49px}
+.fare-estimate{border-radius:15px;padding:20px}
+.features{gap:10px}
+.feature{display:flex;align-items:flex-start;gap:13px;padding:17px;border-radius:13px}
+.feature b{min-width:150px;margin:0}
+footer{margin-top:0;padding:36px 0}
+@keyframes spinOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes carFloatNew{0%,100%{transform:translateY(4px) rotate(-2deg)}50%{transform:translateY(-11px) rotate(2deg)}}
+@media(max-width:760px){
+ .hero-redesign{grid-template-columns:1fr;padding:42px 0 28px;gap:27px;min-height:0}
+ .hero-copy h1{font-size:clamp(2.7rem,12vw,4rem);letter-spacing:-1.8px}
+ .hero-visual{min-height:285px;border-radius:10px 54px 10px 54px}
+ .visual-car{font-size:8rem}
+ .trust-strip{grid-template-columns:1fr;margin-bottom:22px}
+ .trust-strip>div{padding:14px 17px}
+ #cars{grid-template-columns:1fr;gap:17px}
+ .car-art{height:230px}
+ #booking{padding:37px 0 45px}
+ .booking-layout{grid-template-columns:1fr}
+ #booking .booking-layout>aside{position:static}
+ #bookingForm{padding:19px}
+ .feature{display:block}
+ .feature b{display:block;margin-bottom:5px}
+}
+@media(prefers-reduced-motion:reduce){.visual-car,.orbit-two{animation:none}}
+
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap nav"><div class="brand">ARYAN <span>CAR</span> BOOKING</div><div class="nav-actions"><a class="pill" href="#booking">बुकिंग करें ↗</a><button class="pill" id="adminOpen" type="button">Admin</button></div></div></header>
 <main class="wrap">
-<section class="hero"><div><div class="eyebrow">आसान बुकिंग • सीधे संपर्क</div><h1>आपकी यात्रा,<br>हमारी गाड़ी।</h1><p>अपनी यात्रा की जानकारी भरें और बुकिंग रिक्वेस्ट भेजें।</p><a class="btn gold" href="#booking">अभी बुकिंग करें →</a></div><div class="hero-card"><div class="car-icon">🚘</div><div><small style="color:#c6e4d6;letter-spacing:1px;text-transform:uppercase">Your ride, your way</small><h2 style="margin:8px 0 0;font-size:1.65rem">आरामदायक सफर<br>बस एक बुकिंग दूर।</h2></div></div></section>
+<section class="hero hero-redesign"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> आपकी सवारी, आपकी सुविधा</div><h1>सफर हो शानदार,<br><em>बुकिंग हो आसान।</em></h1><p>परिवार के साथ यात्रा हो या जरूरी काम—अपनी पसंद की गाड़ी चुनें और कुछ ही मिनटों में बुकिंग रिक्वेस्ट भेजें।</p><div class="hero-actions"><a class="btn gold" href="#booking">अपनी गाड़ी बुक करें <span>↗</span></a><span class="hero-note">सीधा WhatsApp संपर्क · आसान प्रक्रिया</span></div><div class="hero-proof"><span>✓ आसान बुकिंग</span><span>✓ साफ किराया जानकारी</span><span>✓ सीधे संपर्क</span></div></div><div class="hero-visual"><div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-tag">COMFORT • SAFETY • JOURNEY</div><div class="visual-car">🚙</div><div class="visual-bottom"><span>ARYAN</span><strong>हर सफर, खास सफर।</strong></div><div class="visual-glow"></div></div></section><section class="trust-strip" aria-label="बुकिंग की सुविधाएँ"><div><b>01</b><span>अपनी पसंद की कार</span></div><div><b>02</b><span>आसान बुकिंग फॉर्म</span></div><div><b>03</b><span>WhatsApp पर संपर्क</span></div></section>
 <section class="section"><div class="section-title"><div><h2>हमारी गाड़ियाँ</h2><p>कार चुनें या अपनी जरूरत बताएं।</p></div></div><div class="grid" id="cars"><p class="hint">गाड़ियाँ लोड हो रही हैं…</p></div></section>
 <section class="section" id="booking"><div class="section-title"><div><h2>बुकिंग रिक्वेस्ट</h2><p>जानकारी भरें, फिर WhatsApp पर भेजें।</p></div></div>
 <div class="booking-layout"><form class="panel" id="bookingForm"><div class="form-grid">
