@@ -74,6 +74,118 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
 .fare-estimate strong{display:block;font-size:1.65rem;margin-top:4px}
 .fare-estimate .hint{color:#d2e9dc}
 @media(max-width:420px){.brand{font-size:.94rem}.nav-actions{gap:5px}.nav-actions .pill{padding:7px 9px;font-size:.76rem}}
+
+/* Aryan Car Booking — calm modern theme */
+:root{
+  --ink:#172b28;--green:#267765;--mint:#eaf4ef;--gold:#e8bd72;
+  --muted:#71817b;--paper:#f5f7f4;--line:#e3ebe5;
+}
+html{scroll-behavior:smooth;scroll-padding-top:82px}
+body{
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse at 8% 5%,rgba(212,231,219,.48),transparent 34%),
+    radial-gradient(ellipse at 94% 32%,rgba(232,221,197,.24),transparent 30%),
+    #f6f8f5;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.top{
+  position:sticky;top:0;z-index:50;padding:13px 0;
+  background:rgba(19,43,38,.91);backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);border-bottom:1px solid #ffffff18;
+  box-shadow:0 8px 28px rgba(23,43,40,.10)
+}
+.brand{font-size:1.08rem;letter-spacing:1.1px}
+.brand span{color:#e9c98e}
+.pill{border-color:#ffffff42;border-radius:999px;padding:9px 15px}
+.pill:hover{background:#ffffff18}
+.hero{padding:76px 0 62px;gap:44px}
+.hero h1{font-size:clamp(2.6rem,6vw,4.7rem);letter-spacing:-2.4px;line-height:1.06;color:#183b32}
+.hero p{max-width:490px;color:#6b7c74;line-height:1.85}
+.eyebrow{
+  background:#e8f1e9;color:#347866;border:1px solid #d5e6da;
+  box-shadow:0 4px 14px #234b3a0b
+}
+.hero-card{
+  min-height:330px;border-radius:34px;padding:34px;
+  background:radial-gradient(circle at 78% 18%,#9bc7a855,transparent 34%),
+  linear-gradient(145deg,#173b32 0%,#245b4b 58%,#36745d 100%);
+  box-shadow:0 28px 65px rgba(25,67,52,.19);
+  animation:cardFloat 7s ease-in-out infinite
+}
+.hero-card:before{
+  content:"";position:absolute;width:190px;height:190px;border-radius:50%;
+  border:1px solid #ffffff20;right:24px;top:42px;
+  box-shadow:0 0 0 22px #ffffff09,0 0 0 46px #ffffff06;
+  pointer-events:none
+}
+.car-icon{animation:carDrift 5s ease-in-out infinite}
+.section{padding:38px 0 58px}
+.section-title{margin-bottom:25px}
+.section-title h2{color:#1d4036;font-size:clamp(1.55rem,3vw,2rem);letter-spacing:-.7px}
+.section-title p{color:#7a8982}
+.car,.panel{
+  background:rgba(255,255,255,.88);border:1px solid rgba(220,231,222,.9);
+  border-radius:26px;box-shadow:0 12px 38px rgba(31,63,48,.055);
+  backdrop-filter:blur(8px)
+}
+.car{padding:16px;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.car:hover{transform:translateY(-7px);border-color:#c9dfd1;box-shadow:0 22px 48px rgba(31,63,48,.12)}
+.car-art{
+  border-radius:20px;background:linear-gradient(145deg,#f3f7f2,#e8f0e9);
+  height:230px;transition:background .3s
+}
+.car:hover .car-art{background:linear-gradient(145deg,#eef6ef,#e2eee5)}
+.car h3{color:#203f35}
+.meta,.hint{color:#788780}
+.price{color:#27715d}
+.panel{padding:28px}
+.panel h2,.panel h3{color:#23483c}
+.field label{color:#38554a}
+.field input,.field select,.field textarea,.admin-form input,.admin-form textarea,.time-pick select{
+  border:1px solid #dce7df;border-radius:14px;background:#fbfdfb;
+  transition:border-color .22s,box-shadow .22s,background .22s
+}
+.field input:focus,.field select:focus,.field textarea:focus,
+.admin-form input:focus,.admin-form textarea:focus,.time-pick select:focus{
+  outline:none;border-color:#6da891;box-shadow:0 0 0 4px rgba(76,145,113,.13);background:#fff
+}
+.btn{
+  border-radius:15px;background:linear-gradient(135deg,#287965,#1d6653);
+  box-shadow:0 7px 18px rgba(39,117,96,.17);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,filter .25s
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 25px rgba(39,117,96,.23);filter:saturate(1.08)}
+.btn.gold{background:linear-gradient(135deg,#f0d49e,#e4b96e);color:#35483e;box-shadow:0 8px 20px #c99b4a25}
+.btn.secondary{background:#eaf3ed;color:#2b705d;box-shadow:none;border:1px solid #dcebe1}
+.fare-estimate{
+  background:linear-gradient(125deg,#1a4035,#2c7861);
+  box-shadow:inset 0 1px #ffffff18,0 12px 28px #1c5d4920
+}
+.feature{background:linear-gradient(145deg,#f1f7f1,#eaf3ec);border:1px solid #e0ebe2;border-radius:18px}
+.notice{background:#fbf5e9;border-color:#f0e3c8;color:#75603b;border-radius:16px}
+.admin-row{border:1px solid #e2ebe4;border-radius:17px;padding:16px;box-shadow:0 6px 20px #183d2d08}
+.admin-tabs button{border-radius:12px;padding:11px 16px;transition:all .2s}
+.admin-tabs button.active{background:#214f40;box-shadow:0 5px 14px #214f4022}
+footer{background:linear-gradient(110deg,#142e27,#214f40);padding:32px 0}
+a,button,input,select,textarea{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid #8dbca4;outline-offset:3px}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes carDrift{0%,100%{transform:translateY(4px) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
+@media(max-width:720px){
+  .hero{padding:42px 0 30px;gap:24px}
+  .hero h1{font-size:clamp(2.55rem,12vw,3.65rem);letter-spacing:-1.8px}
+  .hero-card{min-height:255px;padding:25px;border-radius:27px}
+  .section{padding:28px 0 42px}
+  .panel{padding:19px;border-radius:21px}
+  .car-art{height:220px}
+  .top{padding:11px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
 </style>
 </head>
 <body>
