@@ -340,17 +340,17 @@ body{background:radial-gradient(ellipse at 12% 6%,#e4eee7 0,transparent 34%),#f6
 .road-glint{position:absolute;width:34vw;height:50px;top:28px;left:32%;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(34px);pointer-events:none}
 .road-car{position:absolute;z-index:2;width:clamp(310px,43vw,500px);height:170px;top:12px;will-change:transform;filter:drop-shadow(0 17px 12px rgba(20,43,31,.24))}
 .road-car svg{display:block;width:100%;height:100%;overflow:visible}
-.road-car-a{animation:premiumDriveLeft 23s linear infinite}
-.road-car-b{animation:premiumDriveRight 23s linear infinite}
+.road-car-a{animation:premiumDriveLeft 14s linear infinite}
+.road-car-b{animation:premiumDriveRight 14s linear infinite}
 .road-car-b svg{transform:scaleX(-1)}
 @keyframes premiumDriveLeft{
  0%{transform:translate3d(112vw,0,0)}
- 43%{transform:translate3d(-145%,0,0)}
+ 48%{transform:translate3d(-145%,0,0)}
  100%{transform:translate3d(-145%,0,0)}
 }
 @keyframes premiumDriveRight{
- 0%,45%{transform:translate3d(-145%,0,0)}
- 88%{transform:translate3d(112vw,0,0)}
+ 0%,50%{transform:translate3d(-145%,0,0)}
+ 98%{transform:translate3d(112vw,0,0)}
  100%{transform:translate3d(112vw,0,0)}
 }
 .road-scene.is-touched{box-shadow:inset 0 15px 35px rgba(255,255,255,.72),inset 0 -18px 32px rgba(40,72,57,.08),0 0 0 3px rgba(83,145,111,.16),0 18px 42px rgba(29,62,45,.12)}
@@ -368,64 +368,70 @@ body{background:radial-gradient(ellipse at 12% 6%,#e4eee7 0,transparent 34%),#f6
 <main class="wrap">
 <section class="hero hero-redesign"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> आपकी सवारी, आपकी सुविधा</div><h1>सफर हो शानदार,<br><em>बुकिंग हो आसान।</em></h1><p>परिवार के साथ यात्रा हो या जरूरी काम—अपनी पसंद की गाड़ी चुनें और कुछ ही मिनटों में बुकिंग रिक्वेस्ट भेजें।</p><div class="hero-actions"><a class="btn gold" href="#booking">अपनी गाड़ी बुक करें <span>↗</span></a><span class="hero-note">सीधा WhatsApp संपर्क · आसान प्रक्रिया</span></div><div class="hero-proof"><span>✓ आसान बुकिंग</span><span>✓ साफ किराया जानकारी</span><span>✓ सीधे संपर्क</span></div></div></section><div class="road-scene" id="roadScene" aria-label="लक्ज़री कारों का स्क्रीन पर सहजता से गुजरता एनिमेशन">
   <div class="scene-glass"></div><div class="road-glint"></div><div class="road-horizon"></div>
-  <div class="road-car road-car-a" aria-hidden="true"><svg class="premium-mpv-art" viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <div class="road-car road-car-a" aria-hidden="true"><svg viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs>
- <linearGradient id="bodyPaint" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".38" stop-color="#e9eee9"/><stop offset=".72" stop-color="#b9c8c2"/><stop offset="1" stop-color="#f7faf8"/></linearGradient>
- <linearGradient id="glassPaint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#254b4b"/><stop offset=".5" stop-color="#8fb5b2"/><stop offset="1" stop-color="#315c5b"/></linearGradient>
- <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#73847f"/></linearGradient>
- <filter id="carShadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="8"/></filter>
+ <linearGradient id="paintA" x1="0" y1="0" x2=".15" y2="1"><stop stop-color="#ffffff"/><stop offset=".25" stop-color="#e8efed"/><stop offset=".62" stop-color="#aebfba"/><stop offset=".84" stop-color="#f5f8f6"/><stop offset="1" stop-color="#849890"/></linearGradient>
+ <linearGradient id="glassA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102d35"/><stop offset=".48" stop-color="#527b80"/><stop offset="1" stop-color="#172f38"/></linearGradient>
+ <linearGradient id="metalA" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#9baaa5"/><stop offset="1" stop-color="#eef3f0"/></linearGradient>
+ <linearGradient id="lampA" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fff"/><stop offset=".55" stop-color="#bdeaff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+ <filter id="shadowA" x="-30%" y="-50%" width="160%" height="220%"><feGaussianBlur stdDeviation="10"/></filter>
 </defs>
-<ellipse cx="367" cy="270" rx="258" ry="22" fill="#081d17" opacity=".36" filter="url(#carShadow)"/>
-<g class="car-body">
- <path d="M101 211 L116 172 Q124 156 151 148 L220 129 L276 72 Q291 57 321 56 L448 59 Q468 61 484 78 L541 140 L589 154 Q611 161 620 184 L628 216 Q628 232 607 239 L112 239 Q91 236 101 211Z" fill="url(#bodyPaint)" stroke="#e5eee9" stroke-width="3"/>
- <path d="M235 127 L287 78 Q297 68 320 68 L355 69 L355 129Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="4"/>
- <path d="M367 69 L444 72 Q460 73 472 88 L508 130 L367 130Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="4"/>
- <path d="M515 138 L553 148 Q574 153 587 170 L534 170Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="3"/>
- <path d="M355 70 L355 221 M515 138 L501 221 M226 132 L213 220" fill="none" stroke="#879b94" stroke-width="3"/>
- <path d="M117 178 Q145 162 178 165 L203 170 L194 190 L109 194Z" fill="#fff5d6" stroke="#d8ded8" stroke-width="3"/>
- <path d="M544 174 L593 177 Q602 181 605 193 L552 196Z" fill="#a33b35" stroke="#f4f7f4" stroke-width="3"/>
- <path d="M117 205 Q280 217 607 204 L615 221 Q615 233 596 237 L124 237 Q102 233 105 220Z" fill="#657770"/>
- <path d="M123 218 Q319 230 607 216" fill="none" stroke="url(#chrome)" stroke-width="5"/>
- <path d="M259 137 L259 205 M397 137 L397 205 M516 145 L516 202" stroke="#9aa9a3" stroke-width="2" fill="none"/>
- <path d="M272 153 L340 153 M380 153 L447 153" stroke="#fff" stroke-width="2" opacity=".8"/>
- <rect x="337" y="208" width="83" height="20" rx="4" fill="#e7eee9" stroke="#879a91" stroke-width="2"/>
- 
- <path d="M223 180 L251 180 M412 180 L445 180" stroke="#f8fbf9" stroke-width="3" stroke-linecap="round"/>
- <path d="M96 208 L118 202 L129 208 L122 221 L99 220Z" fill="#dbe7df"/>
- <path d="M566 202 L604 199 L612 209 L606 219 L573 218Z" fill="#f5f8f5"/>
- <g><circle cx="216" cy="231" r="39" fill="#1b2421"/><circle cx="216" cy="231" r="25" fill="#b8c5bf"/><circle cx="216" cy="231" r="16" fill="#53665e"/><circle cx="216" cy="231" r="6" fill="#e7eee9"/><path d="M216 208V254 M193 231H239 M200 215L232 247 M232 215L200 247" stroke="#e3ebe6" stroke-width="4"/></g>
- <g><circle cx="528" cy="231" r="39" fill="#1b2421"/><circle cx="528" cy="231" r="25" fill="#b8c5bf"/><circle cx="528" cy="231" r="16" fill="#53665e"/><circle cx="528" cy="231" r="6" fill="#e7eee9"/><path d="M528 208V254 M505 231H551 M512 215L544 247 M544 215L512 247" stroke="#e3ebe6" stroke-width="4"/></g>
- <path d="M143 155 L211 139 M461 84 L489 113" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
-</g></svg></div>
-  <div class="road-car road-car-b" aria-hidden="true"><svg class="premium-mpv-art" viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<ellipse cx="362" cy="274" rx="260" ry="19" fill="#10251d" opacity=".3" filter="url(#shadowA)"/>
+<!-- sleek premium multi-purpose luxury silhouette -->
+<path d="M78 218 L91 183 Q99 164 130 155 L204 137 L263 79 Q281 61 315 58 L454 60 Q481 62 501 84 L558 146 L610 162 Q632 169 642 194 L648 222 Q647 240 625 246 L95 246 Q72 242 78 218Z" fill="url(#paintA)" stroke="#dbe5e0" stroke-width="3"/>
+<path d="M218 135 L274 82 Q289 69 316 69 L357 70 L357 137Z" fill="url(#glassA)" stroke="#dce8e4" stroke-width="4"/>
+<path d="M369 70 L450 73 Q471 75 486 94 L525 140 L369 137Z" fill="url(#glassA)" stroke="#dce8e4" stroke-width="4"/>
+<path d="M533 149 L568 158 Q590 164 605 184 L548 180Z" fill="url(#glassA)" stroke="#dce8e4" stroke-width="3"/>
+<path d="M359 71 L359 231 M526 143 L513 226 M214 139 L203 226" fill="none" stroke="#879b94" stroke-width="3"/>
+<path d="M96 187 Q135 166 188 174 L176 194 L91 201Z" fill="#f7fbfa" stroke="#d3ded8" stroke-width="2"/>
+<path d="M94 190 Q132 174 180 180" fill="none" stroke="url(#lampA)" stroke-width="6" stroke-linecap="round"/>
+<path d="M581 183 L627 188 L635 205 L585 204Z" fill="#a52d32"/>
+<path d="M581 184 L626 190" stroke="#ffb4b6" stroke-width="4" stroke-linecap="round"/>
+<path d="M91 211 Q320 229 632 211 L640 230 Q637 243 616 246 L101 246 Q80 242 82 229Z" fill="#34443f"/>
+<path d="M101 224 Q340 240 628 222" fill="none" stroke="url(#metalA)" stroke-width="5"/>
+<path d="M250 146 L250 214 M405 145 L405 214 M531 155 L531 211" stroke="#9aa9a3" stroke-width="2"/>
+<path d="M266 158 L342 158 M382 158 L467 158" stroke="#fff" stroke-width="2" opacity=".65"/>
+<path d="M299 215 L299 228 M454 215 L454 228" stroke="#687a73" stroke-width="3"/>
+<path d="M318 234 L414 234" stroke="#dce5df" stroke-width="3" stroke-linecap="round"/>
+<path d="M112 207 L146 202 L153 211 L145 220 L108 219Z" fill="#f7fbfa"/>
+<path d="M596 208 L632 207 L638 218 L628 224 L596 221Z" fill="#f7fbfa"/>
+<g><circle cx="213" cy="239" r="41" fill="#17221f"/><circle cx="213" cy="239" r="29" fill="url(#metalA)"/><circle cx="213" cy="239" r="21" fill="#53645e"/><circle cx="213" cy="239" r="8" fill="#dce5df"/><path d="M213 211V267 M185 239H241 M193 219L233 259 M233 219L193 259" stroke="#eaf0ec" stroke-width="4"/></g>
+<g><circle cx="539" cy="239" r="41" fill="#17221f"/><circle cx="539" cy="239" r="29" fill="url(#metalA)"/><circle cx="539" cy="239" r="21" fill="#53645e"/><circle cx="539" cy="239" r="8" fill="#dce5df"/><path d="M539 211V267 M511 239H567 M519 219L559 259 M559 219L519 259" stroke="#eaf0ec" stroke-width="4"/></g>
+<path d="M138 160 L204 143 M464 85 L503 126" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+<path d="M280 65 Q355 47 450 65" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/>
+</svg></div>
+  <div class="road-car road-car-b" aria-hidden="true"><svg viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs>
- <linearGradient id="bodyPaint" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".38" stop-color="#e9eee9"/><stop offset=".72" stop-color="#b9c8c2"/><stop offset="1" stop-color="#f7faf8"/></linearGradient>
- <linearGradient id="glassPaint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#254b4b"/><stop offset=".5" stop-color="#8fb5b2"/><stop offset="1" stop-color="#315c5b"/></linearGradient>
- <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#73847f"/></linearGradient>
- <filter id="carShadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="8"/></filter>
+ <linearGradient id="paintB" x1="0" y1="0" x2=".15" y2="1"><stop stop-color="#ffffff"/><stop offset=".25" stop-color="#e8efed"/><stop offset=".62" stop-color="#aebfba"/><stop offset=".84" stop-color="#f5f8f6"/><stop offset="1" stop-color="#849890"/></linearGradient>
+ <linearGradient id="glassB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102d35"/><stop offset=".48" stop-color="#527b80"/><stop offset="1" stop-color="#172f38"/></linearGradient>
+ <linearGradient id="metalB" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#9baaa5"/><stop offset="1" stop-color="#eef3f0"/></linearGradient>
+ <linearGradient id="lampB" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fff"/><stop offset=".55" stop-color="#bdeaff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+ <filter id="shadowB" x="-30%" y="-50%" width="160%" height="220%"><feGaussianBlur stdDeviation="10"/></filter>
 </defs>
-<ellipse cx="367" cy="270" rx="258" ry="22" fill="#081d17" opacity=".36" filter="url(#carShadow)"/>
-<g class="car-body">
- <path d="M101 211 L116 172 Q124 156 151 148 L220 129 L276 72 Q291 57 321 56 L448 59 Q468 61 484 78 L541 140 L589 154 Q611 161 620 184 L628 216 Q628 232 607 239 L112 239 Q91 236 101 211Z" fill="url(#bodyPaint)" stroke="#e5eee9" stroke-width="3"/>
- <path d="M235 127 L287 78 Q297 68 320 68 L355 69 L355 129Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="4"/>
- <path d="M367 69 L444 72 Q460 73 472 88 L508 130 L367 130Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="4"/>
- <path d="M515 138 L553 148 Q574 153 587 170 L534 170Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="3"/>
- <path d="M355 70 L355 221 M515 138 L501 221 M226 132 L213 220" fill="none" stroke="#879b94" stroke-width="3"/>
- <path d="M117 178 Q145 162 178 165 L203 170 L194 190 L109 194Z" fill="#fff5d6" stroke="#d8ded8" stroke-width="3"/>
- <path d="M544 174 L593 177 Q602 181 605 193 L552 196Z" fill="#a33b35" stroke="#f4f7f4" stroke-width="3"/>
- <path d="M117 205 Q280 217 607 204 L615 221 Q615 233 596 237 L124 237 Q102 233 105 220Z" fill="#657770"/>
- <path d="M123 218 Q319 230 607 216" fill="none" stroke="url(#chrome)" stroke-width="5"/>
- <path d="M259 137 L259 205 M397 137 L397 205 M516 145 L516 202" stroke="#9aa9a3" stroke-width="2" fill="none"/>
- <path d="M272 153 L340 153 M380 153 L447 153" stroke="#fff" stroke-width="2" opacity=".8"/>
- <rect x="337" y="208" width="83" height="20" rx="4" fill="#e7eee9" stroke="#879a91" stroke-width="2"/>
- 
- <path d="M223 180 L251 180 M412 180 L445 180" stroke="#f8fbf9" stroke-width="3" stroke-linecap="round"/>
- <path d="M96 208 L118 202 L129 208 L122 221 L99 220Z" fill="#dbe7df"/>
- <path d="M566 202 L604 199 L612 209 L606 219 L573 218Z" fill="#f5f8f5"/>
- <g><circle cx="216" cy="231" r="39" fill="#1b2421"/><circle cx="216" cy="231" r="25" fill="#b8c5bf"/><circle cx="216" cy="231" r="16" fill="#53665e"/><circle cx="216" cy="231" r="6" fill="#e7eee9"/><path d="M216 208V254 M193 231H239 M200 215L232 247 M232 215L200 247" stroke="#e3ebe6" stroke-width="4"/></g>
- <g><circle cx="528" cy="231" r="39" fill="#1b2421"/><circle cx="528" cy="231" r="25" fill="#b8c5bf"/><circle cx="528" cy="231" r="16" fill="#53665e"/><circle cx="528" cy="231" r="6" fill="#e7eee9"/><path d="M528 208V254 M505 231H551 M512 215L544 247 M544 215L512 247" stroke="#e3ebe6" stroke-width="4"/></g>
- <path d="M143 155 L211 139 M461 84 L489 113" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
-</g></svg></div>
+<ellipse cx="362" cy="274" rx="260" ry="19" fill="#10251d" opacity=".3" filter="url(#shadowB)"/>
+<!-- sleek premium multi-purpose luxury silhouette -->
+<path d="M78 218 L91 183 Q99 164 130 155 L204 137 L263 79 Q281 61 315 58 L454 60 Q481 62 501 84 L558 146 L610 162 Q632 169 642 194 L648 222 Q647 240 625 246 L95 246 Q72 242 78 218Z" fill="url(#paintB)" stroke="#dbe5e0" stroke-width="3"/>
+<path d="M218 135 L274 82 Q289 69 316 69 L357 70 L357 137Z" fill="url(#glassB)" stroke="#dce8e4" stroke-width="4"/>
+<path d="M369 70 L450 73 Q471 75 486 94 L525 140 L369 137Z" fill="url(#glassB)" stroke="#dce8e4" stroke-width="4"/>
+<path d="M533 149 L568 158 Q590 164 605 184 L548 180Z" fill="url(#glassB)" stroke="#dce8e4" stroke-width="3"/>
+<path d="M359 71 L359 231 M526 143 L513 226 M214 139 L203 226" fill="none" stroke="#879b94" stroke-width="3"/>
+<path d="M96 187 Q135 166 188 174 L176 194 L91 201Z" fill="#f7fbfa" stroke="#d3ded8" stroke-width="2"/>
+<path d="M94 190 Q132 174 180 180" fill="none" stroke="url(#lampB)" stroke-width="6" stroke-linecap="round"/>
+<path d="M581 183 L627 188 L635 205 L585 204Z" fill="#a52d32"/>
+<path d="M581 184 L626 190" stroke="#ffb4b6" stroke-width="4" stroke-linecap="round"/>
+<path d="M91 211 Q320 229 632 211 L640 230 Q637 243 616 246 L101 246 Q80 242 82 229Z" fill="#34443f"/>
+<path d="M101 224 Q340 240 628 222" fill="none" stroke="url(#metalB)" stroke-width="5"/>
+<path d="M250 146 L250 214 M405 145 L405 214 M531 155 L531 211" stroke="#9aa9a3" stroke-width="2"/>
+<path d="M266 158 L342 158 M382 158 L467 158" stroke="#fff" stroke-width="2" opacity=".65"/>
+<path d="M299 215 L299 228 M454 215 L454 228" stroke="#687a73" stroke-width="3"/>
+<path d="M318 234 L414 234" stroke="#dce5df" stroke-width="3" stroke-linecap="round"/>
+<path d="M112 207 L146 202 L153 211 L145 220 L108 219Z" fill="#f7fbfa"/>
+<path d="M596 208 L632 207 L638 218 L628 224 L596 221Z" fill="#f7fbfa"/>
+<g><circle cx="213" cy="239" r="41" fill="#17221f"/><circle cx="213" cy="239" r="29" fill="url(#metalB)"/><circle cx="213" cy="239" r="21" fill="#53645e"/><circle cx="213" cy="239" r="8" fill="#dce5df"/><path d="M213 211V267 M185 239H241 M193 219L233 259 M233 219L193 259" stroke="#eaf0ec" stroke-width="4"/></g>
+<g><circle cx="539" cy="239" r="41" fill="#17221f"/><circle cx="539" cy="239" r="29" fill="url(#metalB)"/><circle cx="539" cy="239" r="21" fill="#53645e"/><circle cx="539" cy="239" r="8" fill="#dce5df"/><path d="M539 211V267 M511 239H567 M519 219L559 259 M559 219L519 259" stroke="#eaf0ec" stroke-width="4"/></g>
+<path d="M138 160 L204 143 M464 85 L503 126" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+<path d="M280 65 Q355 47 450 65" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/>
+</svg></div>
   <div class="road-surface"></div>
 </div><section class="trust-strip" aria-label="बुकिंग की सुविधाएँ"><div><b>01</b><span>अपनी पसंद की कार</span></div><div><b>02</b><span>आसान बुकिंग फॉर्म</span></div><div><b>03</b><span>WhatsApp पर संपर्क</span></div></section>
 <section class="section"><div class="section-title"><div><h2>हमारी गाड़ियाँ</h2><p>कार चुनें या अपनी जरूरत बताएं।</p></div></div><div class="grid" id="cars"><p class="hint">गाड़ियाँ लोड हो रही हैं…</p></div></section>
