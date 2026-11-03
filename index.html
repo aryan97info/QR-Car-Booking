@@ -5,25 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10231f">
 
-<!-- Always open the homepage at the top; do not restore an old hash/scroll position -->
-<script>
-(function(){
-  if("scrollRestoration" in history) history.scrollRestoration="manual";
-  if(location.hash) history.replaceState(null,"",location.pathname+location.search);
-  function forceTop(){
-    document.documentElement.style.scrollBehavior="auto";
-    document.body.style.scrollBehavior="auto";
-    if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
-    window.scrollTo({top:0,left:0,behavior:"instant"});
-    document.documentElement.scrollTop=0;
-    document.body.scrollTop=0;
-  }
-  forceTop();
-  window.addEventListener("pageshow",forceTop);
-  window.addEventListener("load",forceTop,{once:true});
-  window.addEventListener("DOMContentLoaded",forceTop,{once:true});
-})();
-</script>
+<!-- Keep normal browser scroll restoration; no forced scrolling on page load. -->
 <title>Aryan Car Booking</title>
 <style>
 :root{--ink:#10231f;--green:#176b52;--mint:#e7f4ee;--gold:#f2bd55;--muted:#65736e;--paper:#f7f8f5;--line:#e0e7e2}
@@ -675,7 +657,6 @@ onAuthStateChanged(auth,user=>{
   $("adminBox").classList.toggle("hidden",!isAdmin);
   if(isAdmin){
     $("adminUser").textContent=user.email;
-    $("adminBox").scrollIntoView({behavior:"smooth"});
     loadOwnerSettings().then(()=>{$("ownerWhatsAppInput").value=ownerWhatsApp;updateFareEstimate();renderPhonePeQrPreview();});
     refreshAdmin();
     if(!adminExpiryTimer)adminExpiryTimer=window.setInterval(refreshAdmin,60000);
