@@ -5,21 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10231f">
 
-<!-- Prevent Chrome from restoring an old scroll position when the site opens -->
+<!-- Always open the homepage at the top; do not restore an old hash/scroll position -->
 <script>
 (function(){
   if("scrollRestoration" in history) history.scrollRestoration="manual";
-  function openAtTop(){
-    if(location.hash) return;
-    const root=document.documentElement;
-    const previous=root.style.scrollBehavior;
-    root.style.scrollBehavior="auto";
-    window.scrollTo(0,0);
-    requestAnimationFrame(function(){window.scrollTo(0,0);});
-    setTimeout(function(){root.style.scrollBehavior=previous;},120);
+  if(location.hash) history.replaceState(null,"",location.pathname+location.search);
+  function forceTop(){
+    document.documentElement.style.scrollBehavior="auto";
+    document.body.style.scrollBehavior="auto";
+    if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    window.scrollTo({top:0,left:0,behavior:"instant"});
+    document.documentElement.scrollTop=0;
+    document.body.scrollTop=0;
   }
-  window.addEventListener("pageshow",openAtTop);
-  window.addEventListener("load",openAtTop,{once:true});
+  forceTop();
+  window.addEventListener("pageshow",forceTop);
+  window.addEventListener("load",forceTop,{once:true});
+  window.addEventListener("DOMContentLoaded",forceTop,{once:true});
+  setTimeout(forceTop,80);
+  setTimeout(forceTop,350);
+  setTimeout(forceTop,900);
 })();
 </script>
 <title>Aryan Car Booking</title>
@@ -98,7 +103,7 @@ footer{background:linear-gradient(110deg,#0b1d18,#173f32);margin-top:32px}
   --ink:#172b28;--green:#267765;--mint:#eaf4ef;--gold:#e8bd72;
   --muted:#71817b;--paper:#f5f7f4;--line:#e3ebe5;
 }
-html{scroll-behavior:smooth;scroll-padding-top:82px}
+html{scroll-behavior:auto!important;scroll-padding-top:82px}
 body{
   color:var(--ink);
   background:
@@ -345,17 +350,17 @@ body{background:radial-gradient(ellipse at 12% 6%,#e4eee7 0,transparent 34%),#f6
 .road-car-b svg{transform:scaleX(-1)}
 .wheel-spin{transform-box:fill-box;transform-origin:center;animation:wheelRoll .62s linear infinite}
 @keyframes wheelRoll{to{transform:rotate(360deg)}}
+/* No empty interval: B enters at the exact instant A exits, and vice versa. */
 @keyframes premiumDriveLeft{
- 0%{transform:translate3d(112vw,0,0);visibility:visible}
- 41.3%{transform:translate3d(-145%,0,0);visibility:visible}
- 41.31%,99.99%{transform:translate3d(-145%,0,0);visibility:hidden}
- 100%{transform:translate3d(112vw,0,0);visibility:visible}
+  0%{transform:translate3d(112vw,0,0);visibility:visible}
+  50%{transform:translate3d(-145%,0,0);visibility:visible}
+  50.001%,99.999%{transform:translate3d(-145%,0,0);visibility:hidden}
+  100%{transform:translate3d(112vw,0,0);visibility:visible}
 }
 @keyframes premiumDriveRight{
- 0%,49.99%{transform:translate3d(-145%,0,0);visibility:hidden}
- 50%{transform:translate3d(-145%,0,0);visibility:visible}
- 91.3%{transform:translate3d(112vw,0,0);visibility:visible}
- 91.31%,100%{transform:translate3d(112vw,0,0);visibility:hidden}
+  0%,49.999%{transform:translate3d(-145%,0,0);visibility:hidden}
+  50%{transform:translate3d(-145%,0,0);visibility:visible}
+  100%{transform:translate3d(112vw,0,0);visibility:visible}
 }
 .road-scene.is-touched{box-shadow:inset 0 15px 35px rgba(255,255,255,.72),inset 0 -18px 32px rgba(40,72,57,.08),0 0 0 3px rgba(83,145,111,.16),0 18px 42px rgba(29,62,45,.12)}
 .road-scene.is-touched .scene-glass{opacity:1}
