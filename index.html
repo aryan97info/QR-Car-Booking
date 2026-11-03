@@ -340,18 +340,22 @@ body{background:radial-gradient(ellipse at 12% 6%,#e4eee7 0,transparent 34%),#f6
 .road-glint{position:absolute;width:34vw;height:50px;top:28px;left:32%;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(34px);pointer-events:none}
 .road-car{position:absolute;z-index:2;width:clamp(310px,43vw,500px);height:170px;top:12px;will-change:transform;filter:drop-shadow(0 17px 12px rgba(20,43,31,.24))}
 .road-car svg{display:block;width:100%;height:100%;overflow:visible}
-.road-car-a{animation:premiumDriveLeft 14s linear infinite}
-.road-car-b{animation:premiumDriveRight 14s linear infinite}
+.road-car-a{animation:premiumDriveLeft 23s linear infinite}
+.road-car-b{animation:premiumDriveRight 23s linear infinite}
 .road-car-b svg{transform:scaleX(-1)}
+.wheel-spin{transform-box:fill-box;transform-origin:center;animation:wheelRoll .62s linear infinite}
+@keyframes wheelRoll{to{transform:rotate(360deg)}}
 @keyframes premiumDriveLeft{
- 0%{transform:translate3d(112vw,0,0)}
- 48%{transform:translate3d(-145%,0,0)}
- 100%{transform:translate3d(-145%,0,0)}
+ 0%{transform:translate3d(112vw,0,0);visibility:visible}
+ 41.3%{transform:translate3d(-145%,0,0);visibility:visible}
+ 41.31%,99.99%{transform:translate3d(-145%,0,0);visibility:hidden}
+ 100%{transform:translate3d(112vw,0,0);visibility:visible}
 }
 @keyframes premiumDriveRight{
- 0%,50%{transform:translate3d(-145%,0,0)}
- 98%{transform:translate3d(112vw,0,0)}
- 100%{transform:translate3d(112vw,0,0)}
+ 0%,49.99%{transform:translate3d(-145%,0,0);visibility:hidden}
+ 50%{transform:translate3d(-145%,0,0);visibility:visible}
+ 91.3%{transform:translate3d(112vw,0,0);visibility:visible}
+ 91.31%,100%{transform:translate3d(112vw,0,0);visibility:hidden}
 }
 .road-scene.is-touched{box-shadow:inset 0 15px 35px rgba(255,255,255,.72),inset 0 -18px 32px rgba(40,72,57,.08),0 0 0 3px rgba(83,145,111,.16),0 18px 42px rgba(29,62,45,.12)}
 .road-scene.is-touched .scene-glass{opacity:1}
@@ -370,67 +374,63 @@ body{background:radial-gradient(ellipse at 12% 6%,#e4eee7 0,transparent 34%),#f6
   <div class="scene-glass"></div><div class="road-glint"></div><div class="road-horizon"></div>
   <div class="road-car road-car-a" aria-hidden="true"><svg viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs>
- <linearGradient id="paintA" x1="0" y1="0" x2=".15" y2="1"><stop stop-color="#ffffff"/><stop offset=".25" stop-color="#e8efed"/><stop offset=".62" stop-color="#aebfba"/><stop offset=".84" stop-color="#f5f8f6"/><stop offset="1" stop-color="#849890"/></linearGradient>
- <linearGradient id="glassA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102d35"/><stop offset=".48" stop-color="#527b80"/><stop offset="1" stop-color="#172f38"/></linearGradient>
- <linearGradient id="metalA" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#9baaa5"/><stop offset="1" stop-color="#eef3f0"/></linearGradient>
- <linearGradient id="lampA" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fff"/><stop offset=".55" stop-color="#bdeaff"/><stop offset="1" stop-color="#fff"/></linearGradient>
- <filter id="shadowA" x="-30%" y="-50%" width="160%" height="220%"><feGaussianBlur stdDeviation="10"/></filter>
+ <linearGradient id="luxBodyA" x1="0" y1="0" x2=".1" y2="1"><stop stop-color="#fff"/><stop offset=".2" stop-color="#dce8e5"/><stop offset=".48" stop-color="#9eafaa"/><stop offset=".72" stop-color="#f4f7f5"/><stop offset="1" stop-color="#667a73"/></linearGradient>
+ <linearGradient id="luxGlassA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b202b"/><stop offset=".5" stop-color="#416d78"/><stop offset="1" stop-color="#102c36"/></linearGradient>
+ <linearGradient id="luxChromeA" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#8b9b95"/><stop offset="1" stop-color="#eaf0ed"/></linearGradient>
+ <filter id="luxShadowA" x="-30%" y="-60%" width="160%" height="230%"><feGaussianBlur stdDeviation="9"/></filter>
 </defs>
-<ellipse cx="362" cy="274" rx="260" ry="19" fill="#10251d" opacity=".3" filter="url(#shadowA)"/>
-<!-- sleek premium multi-purpose luxury silhouette -->
-<path d="M78 218 L91 183 Q99 164 130 155 L204 137 L263 79 Q281 61 315 58 L454 60 Q481 62 501 84 L558 146 L610 162 Q632 169 642 194 L648 222 Q647 240 625 246 L95 246 Q72 242 78 218Z" fill="url(#paintA)" stroke="#dbe5e0" stroke-width="3"/>
-<path d="M218 135 L274 82 Q289 69 316 69 L357 70 L357 137Z" fill="url(#glassA)" stroke="#dce8e4" stroke-width="4"/>
-<path d="M369 70 L450 73 Q471 75 486 94 L525 140 L369 137Z" fill="url(#glassA)" stroke="#dce8e4" stroke-width="4"/>
-<path d="M533 149 L568 158 Q590 164 605 184 L548 180Z" fill="url(#glassA)" stroke="#dce8e4" stroke-width="3"/>
-<path d="M359 71 L359 231 M526 143 L513 226 M214 139 L203 226" fill="none" stroke="#879b94" stroke-width="3"/>
-<path d="M96 187 Q135 166 188 174 L176 194 L91 201Z" fill="#f7fbfa" stroke="#d3ded8" stroke-width="2"/>
-<path d="M94 190 Q132 174 180 180" fill="none" stroke="url(#lampA)" stroke-width="6" stroke-linecap="round"/>
-<path d="M581 183 L627 188 L635 205 L585 204Z" fill="#a52d32"/>
-<path d="M581 184 L626 190" stroke="#ffb4b6" stroke-width="4" stroke-linecap="round"/>
-<path d="M91 211 Q320 229 632 211 L640 230 Q637 243 616 246 L101 246 Q80 242 82 229Z" fill="#34443f"/>
-<path d="M101 224 Q340 240 628 222" fill="none" stroke="url(#metalA)" stroke-width="5"/>
-<path d="M250 146 L250 214 M405 145 L405 214 M531 155 L531 211" stroke="#9aa9a3" stroke-width="2"/>
-<path d="M266 158 L342 158 M382 158 L467 158" stroke="#fff" stroke-width="2" opacity=".65"/>
-<path d="M299 215 L299 228 M454 215 L454 228" stroke="#687a73" stroke-width="3"/>
-<path d="M318 234 L414 234" stroke="#dce5df" stroke-width="3" stroke-linecap="round"/>
-<path d="M112 207 L146 202 L153 211 L145 220 L108 219Z" fill="#f7fbfa"/>
-<path d="M596 208 L632 207 L638 218 L628 224 L596 221Z" fill="#f7fbfa"/>
-<g><circle cx="213" cy="239" r="41" fill="#17221f"/><circle cx="213" cy="239" r="29" fill="url(#metalA)"/><circle cx="213" cy="239" r="21" fill="#53645e"/><circle cx="213" cy="239" r="8" fill="#dce5df"/><path d="M213 211V267 M185 239H241 M193 219L233 259 M233 219L193 259" stroke="#eaf0ec" stroke-width="4"/></g>
-<g><circle cx="539" cy="239" r="41" fill="#17221f"/><circle cx="539" cy="239" r="29" fill="url(#metalA)"/><circle cx="539" cy="239" r="21" fill="#53645e"/><circle cx="539" cy="239" r="8" fill="#dce5df"/><path d="M539 211V267 M511 239H567 M519 219L559 259 M559 219L519 259" stroke="#eaf0ec" stroke-width="4"/></g>
-<path d="M138 160 L204 143 M464 85 L503 126" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
-<path d="M280 65 Q355 47 450 65" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/>
+<ellipse cx="359" cy="276" rx="266" ry="18" fill="#10251d" opacity=".34" filter="url(#luxShadowA)"/>
+<!-- Different, sharper executive luxury SUV silhouette -->
+<path d="M63 220 L76 190 Q82 172 108 163 L176 146 L221 91 Q238 69 275 65 L455 66 Q485 67 506 91 L558 151 L617 167 Q642 174 651 200 L657 225 Q657 244 633 250 L88 250 Q61 246 63 220Z" fill="url(#luxBodyA)" stroke="#d5e1dc" stroke-width="3"/>
+<path d="M193 143 L236 94 Q250 78 279 77 L346 78 L346 145Z" fill="url(#luxGlassA)" stroke="#dce7e3" stroke-width="4"/>
+<path d="M358 78 L450 79 Q476 81 493 102 L527 146 L358 145Z" fill="url(#luxGlassA)" stroke="#dce7e3" stroke-width="4"/>
+<path d="M536 157 L574 165 Q595 171 612 191 L550 187Z" fill="url(#luxGlassA)" stroke="#dce7e3" stroke-width="3"/>
+<path d="M350 79 L350 231 M532 149 L520 230 M188 147 L176 230" fill="none" stroke="#7e938b" stroke-width="3"/>
+<path d="M80 188 Q119 169 166 177 L154 198 L73 204Z" fill="#f8fbfa" stroke="#cddbd4" stroke-width="2"/>
+<path d="M77 191 Q119 177 165 183" fill="none" stroke="#e8fbff" stroke-width="6" stroke-linecap="round"/>
+<path d="M596 190 L640 194 L648 209 L600 210Z" fill="#9d3037"/>
+<path d="M599 191 L642 197" stroke="#ffbfc0" stroke-width="4" stroke-linecap="round"/>
+<path d="M79 215 Q350 237 642 215 L650 235 Q648 247 626 250 L91 250 Q69 247 69 233Z" fill="#283a35"/>
+<path d="M88 226 Q345 245 638 226" fill="none" stroke="url(#luxChromeA)" stroke-width="5"/>
+<path d="M239 151 L239 222 M416 150 L416 222 M535 159 L535 219" stroke="#879890" stroke-width="2"/>
+<path d="M254 163 L329 163 M381 163 L475 163" stroke="#fff" stroke-width="2" opacity=".7"/>
+<path d="M280 218 L319 218 M433 218 L472 218" stroke="#6d8078" stroke-width="3" stroke-linecap="round"/>
+<path d="M102 210 L144 205 L151 216 L143 224 L99 222Z" fill="#f8fcfa"/>
+<path d="M604 213 L644 211 L649 223 L637 229 L605 226Z" fill="#f8fcfa"/>
+<path d="M214 72 Q351 49 469 74" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
+<path d="M265 70 L454 70" stroke="#7c9189" stroke-width="2" opacity=".45"/>
+<g class="wheel-spin"><circle cx="205" cy="242" r="43" fill="#111c19"/><circle cx="205" cy="242" r="31" fill="url(#luxChromeA)"/><circle cx="205" cy="242" r="23" fill="#42534d"/><circle cx="205" cy="242" r="8" fill="#e8efeb"/><path d="M205 219V265 M182 242H228 M189 226L221 258 M221 226L189 258" stroke="#edf3ef" stroke-width="4" stroke-linecap="round"/></g>
+<g class="wheel-spin"><circle cx="544" cy="242" r="43" fill="#111c19"/><circle cx="544" cy="242" r="31" fill="url(#luxChromeA)"/><circle cx="544" cy="242" r="23" fill="#42534d"/><circle cx="544" cy="242" r="8" fill="#e8efeb"/><path d="M544 219V265 M521 242H567 M528 226L560 258 M560 226L528 258" stroke="#edf3ef" stroke-width="4" stroke-linecap="round"/></g>
 </svg></div>
   <div class="road-car road-car-b" aria-hidden="true"><svg viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs>
- <linearGradient id="paintB" x1="0" y1="0" x2=".15" y2="1"><stop stop-color="#ffffff"/><stop offset=".25" stop-color="#e8efed"/><stop offset=".62" stop-color="#aebfba"/><stop offset=".84" stop-color="#f5f8f6"/><stop offset="1" stop-color="#849890"/></linearGradient>
- <linearGradient id="glassB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102d35"/><stop offset=".48" stop-color="#527b80"/><stop offset="1" stop-color="#172f38"/></linearGradient>
- <linearGradient id="metalB" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#9baaa5"/><stop offset="1" stop-color="#eef3f0"/></linearGradient>
- <linearGradient id="lampB" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fff"/><stop offset=".55" stop-color="#bdeaff"/><stop offset="1" stop-color="#fff"/></linearGradient>
- <filter id="shadowB" x="-30%" y="-50%" width="160%" height="220%"><feGaussianBlur stdDeviation="10"/></filter>
+ <linearGradient id="luxBodyB" x1="0" y1="0" x2=".1" y2="1"><stop stop-color="#fff"/><stop offset=".2" stop-color="#dce8e5"/><stop offset=".48" stop-color="#9eafaa"/><stop offset=".72" stop-color="#f4f7f5"/><stop offset="1" stop-color="#667a73"/></linearGradient>
+ <linearGradient id="luxGlassB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b202b"/><stop offset=".5" stop-color="#416d78"/><stop offset="1" stop-color="#102c36"/></linearGradient>
+ <linearGradient id="luxChromeB" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#8b9b95"/><stop offset="1" stop-color="#eaf0ed"/></linearGradient>
+ <filter id="luxShadowB" x="-30%" y="-60%" width="160%" height="230%"><feGaussianBlur stdDeviation="9"/></filter>
 </defs>
-<ellipse cx="362" cy="274" rx="260" ry="19" fill="#10251d" opacity=".3" filter="url(#shadowB)"/>
-<!-- sleek premium multi-purpose luxury silhouette -->
-<path d="M78 218 L91 183 Q99 164 130 155 L204 137 L263 79 Q281 61 315 58 L454 60 Q481 62 501 84 L558 146 L610 162 Q632 169 642 194 L648 222 Q647 240 625 246 L95 246 Q72 242 78 218Z" fill="url(#paintB)" stroke="#dbe5e0" stroke-width="3"/>
-<path d="M218 135 L274 82 Q289 69 316 69 L357 70 L357 137Z" fill="url(#glassB)" stroke="#dce8e4" stroke-width="4"/>
-<path d="M369 70 L450 73 Q471 75 486 94 L525 140 L369 137Z" fill="url(#glassB)" stroke="#dce8e4" stroke-width="4"/>
-<path d="M533 149 L568 158 Q590 164 605 184 L548 180Z" fill="url(#glassB)" stroke="#dce8e4" stroke-width="3"/>
-<path d="M359 71 L359 231 M526 143 L513 226 M214 139 L203 226" fill="none" stroke="#879b94" stroke-width="3"/>
-<path d="M96 187 Q135 166 188 174 L176 194 L91 201Z" fill="#f7fbfa" stroke="#d3ded8" stroke-width="2"/>
-<path d="M94 190 Q132 174 180 180" fill="none" stroke="url(#lampB)" stroke-width="6" stroke-linecap="round"/>
-<path d="M581 183 L627 188 L635 205 L585 204Z" fill="#a52d32"/>
-<path d="M581 184 L626 190" stroke="#ffb4b6" stroke-width="4" stroke-linecap="round"/>
-<path d="M91 211 Q320 229 632 211 L640 230 Q637 243 616 246 L101 246 Q80 242 82 229Z" fill="#34443f"/>
-<path d="M101 224 Q340 240 628 222" fill="none" stroke="url(#metalB)" stroke-width="5"/>
-<path d="M250 146 L250 214 M405 145 L405 214 M531 155 L531 211" stroke="#9aa9a3" stroke-width="2"/>
-<path d="M266 158 L342 158 M382 158 L467 158" stroke="#fff" stroke-width="2" opacity=".65"/>
-<path d="M299 215 L299 228 M454 215 L454 228" stroke="#687a73" stroke-width="3"/>
-<path d="M318 234 L414 234" stroke="#dce5df" stroke-width="3" stroke-linecap="round"/>
-<path d="M112 207 L146 202 L153 211 L145 220 L108 219Z" fill="#f7fbfa"/>
-<path d="M596 208 L632 207 L638 218 L628 224 L596 221Z" fill="#f7fbfa"/>
-<g><circle cx="213" cy="239" r="41" fill="#17221f"/><circle cx="213" cy="239" r="29" fill="url(#metalB)"/><circle cx="213" cy="239" r="21" fill="#53645e"/><circle cx="213" cy="239" r="8" fill="#dce5df"/><path d="M213 211V267 M185 239H241 M193 219L233 259 M233 219L193 259" stroke="#eaf0ec" stroke-width="4"/></g>
-<g><circle cx="539" cy="239" r="41" fill="#17221f"/><circle cx="539" cy="239" r="29" fill="url(#metalB)"/><circle cx="539" cy="239" r="21" fill="#53645e"/><circle cx="539" cy="239" r="8" fill="#dce5df"/><path d="M539 211V267 M511 239H567 M519 219L559 259 M559 219L519 259" stroke="#eaf0ec" stroke-width="4"/></g>
-<path d="M138 160 L204 143 M464 85 L503 126" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
-<path d="M280 65 Q355 47 450 65" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/>
+<ellipse cx="359" cy="276" rx="266" ry="18" fill="#10251d" opacity=".34" filter="url(#luxShadowB)"/>
+<!-- Different, sharper executive luxury SUV silhouette -->
+<path d="M63 220 L76 190 Q82 172 108 163 L176 146 L221 91 Q238 69 275 65 L455 66 Q485 67 506 91 L558 151 L617 167 Q642 174 651 200 L657 225 Q657 244 633 250 L88 250 Q61 246 63 220Z" fill="url(#luxBodyB)" stroke="#d5e1dc" stroke-width="3"/>
+<path d="M193 143 L236 94 Q250 78 279 77 L346 78 L346 145Z" fill="url(#luxGlassB)" stroke="#dce7e3" stroke-width="4"/>
+<path d="M358 78 L450 79 Q476 81 493 102 L527 146 L358 145Z" fill="url(#luxGlassB)" stroke="#dce7e3" stroke-width="4"/>
+<path d="M536 157 L574 165 Q595 171 612 191 L550 187Z" fill="url(#luxGlassB)" stroke="#dce7e3" stroke-width="3"/>
+<path d="M350 79 L350 231 M532 149 L520 230 M188 147 L176 230" fill="none" stroke="#7e938b" stroke-width="3"/>
+<path d="M80 188 Q119 169 166 177 L154 198 L73 204Z" fill="#f8fbfa" stroke="#cddbd4" stroke-width="2"/>
+<path d="M77 191 Q119 177 165 183" fill="none" stroke="#e8fbff" stroke-width="6" stroke-linecap="round"/>
+<path d="M596 190 L640 194 L648 209 L600 210Z" fill="#9d3037"/>
+<path d="M599 191 L642 197" stroke="#ffbfc0" stroke-width="4" stroke-linecap="round"/>
+<path d="M79 215 Q350 237 642 215 L650 235 Q648 247 626 250 L91 250 Q69 247 69 233Z" fill="#283a35"/>
+<path d="M88 226 Q345 245 638 226" fill="none" stroke="url(#luxChromeB)" stroke-width="5"/>
+<path d="M239 151 L239 222 M416 150 L416 222 M535 159 L535 219" stroke="#879890" stroke-width="2"/>
+<path d="M254 163 L329 163 M381 163 L475 163" stroke="#fff" stroke-width="2" opacity=".7"/>
+<path d="M280 218 L319 218 M433 218 L472 218" stroke="#6d8078" stroke-width="3" stroke-linecap="round"/>
+<path d="M102 210 L144 205 L151 216 L143 224 L99 222Z" fill="#f8fcfa"/>
+<path d="M604 213 L644 211 L649 223 L637 229 L605 226Z" fill="#f8fcfa"/>
+<path d="M214 72 Q351 49 469 74" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
+<path d="M265 70 L454 70" stroke="#7c9189" stroke-width="2" opacity=".45"/>
+<g class="wheel-spin"><circle cx="205" cy="242" r="43" fill="#111c19"/><circle cx="205" cy="242" r="31" fill="url(#luxChromeB)"/><circle cx="205" cy="242" r="23" fill="#42534d"/><circle cx="205" cy="242" r="8" fill="#e8efeb"/><path d="M205 219V265 M182 242H228 M189 226L221 258 M221 226L189 258" stroke="#edf3ef" stroke-width="4" stroke-linecap="round"/></g>
+<g class="wheel-spin"><circle cx="544" cy="242" r="43" fill="#111c19"/><circle cx="544" cy="242" r="31" fill="url(#luxChromeB)"/><circle cx="544" cy="242" r="23" fill="#42534d"/><circle cx="544" cy="242" r="8" fill="#e8efeb"/><path d="M544 219V265 M521 242H567 M528 226L560 258 M560 226L528 258" stroke="#edf3ef" stroke-width="4" stroke-linecap="round"/></g>
 </svg></div>
   <div class="road-surface"></div>
 </div><section class="trust-strip" aria-label="बुकिंग की सुविधाएँ"><div><b>01</b><span>अपनी पसंद की कार</span></div><div><b>02</b><span>आसान बुकिंग फॉर्म</span></div><div><b>03</b><span>WhatsApp पर संपर्क</span></div></section>
