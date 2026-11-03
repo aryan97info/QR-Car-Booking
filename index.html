@@ -4,6 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10231f">
+
+<!-- Prevent Chrome from restoring an old scroll position when the site opens -->
+<script>
+(function(){
+  if("scrollRestoration" in history) history.scrollRestoration="manual";
+  function openAtTop(){
+    if(location.hash) return;
+    const root=document.documentElement;
+    const previous=root.style.scrollBehavior;
+    root.style.scrollBehavior="auto";
+    window.scrollTo(0,0);
+    requestAnimationFrame(function(){window.scrollTo(0,0);});
+    setTimeout(function(){root.style.scrollBehavior=previous;},120);
+  }
+  window.addEventListener("pageshow",openAtTop);
+  window.addEventListener("load",openAtTop,{once:true});
+})();
+</script>
 <title>Aryan Car Booking</title>
 <style>
 :root{--ink:#10231f;--green:#176b52;--mint:#e7f4ee;--gold:#f2bd55;--muted:#65736e;--paper:#f7f8f5;--line:#e0e7e2}
