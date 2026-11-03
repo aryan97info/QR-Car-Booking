@@ -300,13 +300,57 @@ body{background:radial-gradient(ellipse at 12% 6%,#e4eee7 0,transparent 34%),#f6
 @media(max-width:760px){.hero-visual{min-height:290px;border-radius:26px}.visual-car{inset:12% -8% 12%}.ertiga-art{width:125%}.visual-tag{top:17px;left:17px;font-size:.58rem}.visual-bottom{left:17px;right:17px;bottom:14px}.hero-redesign{padding-top:36px}}
 @media(prefers-reduced-motion:reduce){.visual-car{animation:none!important}.ertiga-art,.car,.btn{transition:none!important}}
 
+
+/* Full-bleed premium glass road scene — no car branding */
+.hero-redesign{grid-template-columns:1fr!important;min-height:0!important;padding:66px 0 30px!important}
+.hero-copy{max-width:850px}
+.hero-visual{display:none!important}
+.road-scene{
+ position:relative;left:50%;width:100vw;margin-left:-50vw;height:205px;overflow:hidden;
+ isolation:isolate;pointer-events:auto;
+ background:
+  radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.92),transparent 57%),
+  linear-gradient(180deg,rgba(231,241,234,.86),rgba(210,224,215,.64) 58%,rgba(183,200,190,.78));
+ border-top:1px solid rgba(255,255,255,.9);border-bottom:1px solid rgba(255,255,255,.82);
+ box-shadow:inset 0 15px 35px rgba(255,255,255,.65),inset 0 -18px 32px rgba(40,72,57,.08),0 16px 35px rgba(29,62,45,.07);
+ backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+}
+.scene-glass{position:absolute;inset:0;z-index:-1;background:linear-gradient(112deg,transparent 10%,rgba(255,255,255,.42) 32%,transparent 51%,rgba(255,255,255,.22) 75%,transparent);opacity:.9}
+.road-horizon{position:absolute;left:0;right:0;bottom:39px;height:1px;background:linear-gradient(90deg,transparent,rgba(76,103,87,.22),transparent)}
+.road-surface{position:absolute;left:0;right:0;bottom:20px;height:2px;background:linear-gradient(90deg,transparent,rgba(71,95,79,.26),transparent)}
+.road-surface:after{content:"";position:absolute;left:0;right:0;top:8px;height:14px;background:linear-gradient(180deg,rgba(50,75,59,.07),transparent);filter:blur(7px)}
+.road-glint{position:absolute;width:34vw;height:50px;top:28px;left:32%;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(34px);pointer-events:none}
+.road-car{position:absolute;z-index:2;width:clamp(310px,43vw,500px);height:170px;top:12px;will-change:transform;filter:drop-shadow(0 17px 12px rgba(20,43,31,.24))}
+.road-car svg{display:block;width:100%;height:100%;overflow:visible}
+.road-car-a{animation:premiumDriveLeft 23s linear infinite}
+.road-car-b{animation:premiumDriveRight 23s linear infinite}
+.road-car-b svg{transform:scaleX(-1)}
+@keyframes premiumDriveLeft{
+ 0%{transform:translate3d(112vw,0,0)}
+ 43%{transform:translate3d(-145%,0,0)}
+ 100%{transform:translate3d(-145%,0,0)}
+}
+@keyframes premiumDriveRight{
+ 0%,45%{transform:translate3d(-145%,0,0)}
+ 88%{transform:translate3d(112vw,0,0)}
+ 100%{transform:translate3d(112vw,0,0)}
+}
+.road-scene.is-touched{box-shadow:inset 0 15px 35px rgba(255,255,255,.72),inset 0 -18px 32px rgba(40,72,57,.08),0 0 0 3px rgba(83,145,111,.16),0 18px 42px rgba(29,62,45,.12)}
+.road-scene.is-touched .scene-glass{opacity:1}
+@media(max-width:720px){
+ .hero-redesign{padding:38px 0 24px!important}
+ .road-scene{height:165px}
+ .road-car{width:330px;height:145px;top:8px}
+}
+@media(prefers-reduced-motion:reduce){.road-car{animation:none!important}.road-car-a{left:calc(50% - 165px);transform:none!important}.road-car-b{display:none}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap nav"><div class="brand">ARYAN <span>CAR</span> BOOKING</div><div class="nav-actions"><a class="pill" href="#booking">बुकिंग करें ↗</a><button class="pill" id="adminOpen" type="button">Admin</button></div></div></header>
 <main class="wrap">
-<section class="hero hero-redesign"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> आपकी सवारी, आपकी सुविधा</div><h1>सफर हो शानदार,<br><em>बुकिंग हो आसान।</em></h1><p>परिवार के साथ यात्रा हो या जरूरी काम—अपनी पसंद की गाड़ी चुनें और कुछ ही मिनटों में बुकिंग रिक्वेस्ट भेजें।</p><div class="hero-actions"><a class="btn gold" href="#booking">अपनी गाड़ी बुक करें <span>↗</span></a><span class="hero-note">सीधा WhatsApp संपर्क · आसान प्रक्रिया</span></div><div class="hero-proof"><span>✓ आसान बुकिंग</span><span>✓ साफ किराया जानकारी</span><span>✓ सीधे संपर्क</span></div></div><div class="hero-visual"><div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><div class="visual-tag">COMFORT • SAFETY • JOURNEY</div><div class="visual-car" id="heroCar" role="img" aria-label="Maruti Suzuki Ertiga car illustration">
-<svg class="ertiga-art" viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<section class="hero hero-redesign"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> आपकी सवारी, आपकी सुविधा</div><h1>सफर हो शानदार,<br><em>बुकिंग हो आसान।</em></h1><p>परिवार के साथ यात्रा हो या जरूरी काम—अपनी पसंद की गाड़ी चुनें और कुछ ही मिनटों में बुकिंग रिक्वेस्ट भेजें।</p><div class="hero-actions"><a class="btn gold" href="#booking">अपनी गाड़ी बुक करें <span>↗</span></a><span class="hero-note">सीधा WhatsApp संपर्क · आसान प्रक्रिया</span></div><div class="hero-proof"><span>✓ आसान बुकिंग</span><span>✓ साफ किराया जानकारी</span><span>✓ सीधे संपर्क</span></div></div></section><div class="road-scene" id="roadScene" aria-label="लक्ज़री कारों का स्क्रीन पर सहजता से गुजरता एनिमेशन">
+  <div class="scene-glass"></div><div class="road-glint"></div><div class="road-horizon"></div>
+  <div class="road-car road-car-a" aria-hidden="true"><svg class="premium-mpv-art" viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs>
  <linearGradient id="bodyPaint" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".38" stop-color="#e9eee9"/><stop offset=".72" stop-color="#b9c8c2"/><stop offset="1" stop-color="#f7faf8"/></linearGradient>
  <linearGradient id="glassPaint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#254b4b"/><stop offset=".5" stop-color="#8fb5b2"/><stop offset="1" stop-color="#315c5b"/></linearGradient>
@@ -327,14 +371,45 @@ body{background:radial-gradient(ellipse at 12% 6%,#e4eee7 0,transparent 34%),#f6
  <path d="M259 137 L259 205 M397 137 L397 205 M516 145 L516 202" stroke="#9aa9a3" stroke-width="2" fill="none"/>
  <path d="M272 153 L340 153 M380 153 L447 153" stroke="#fff" stroke-width="2" opacity=".8"/>
  <rect x="337" y="208" width="83" height="20" rx="4" fill="#e7eee9" stroke="#879a91" stroke-width="2"/>
- <text x="378" y="222" font-size="11" font-weight="700" text-anchor="middle" fill="#23473b">ERTIGA</text>
+ 
  <path d="M223 180 L251 180 M412 180 L445 180" stroke="#f8fbf9" stroke-width="3" stroke-linecap="round"/>
  <path d="M96 208 L118 202 L129 208 L122 221 L99 220Z" fill="#dbe7df"/>
  <path d="M566 202 L604 199 L612 209 L606 219 L573 218Z" fill="#f5f8f5"/>
  <g><circle cx="216" cy="231" r="39" fill="#1b2421"/><circle cx="216" cy="231" r="25" fill="#b8c5bf"/><circle cx="216" cy="231" r="16" fill="#53665e"/><circle cx="216" cy="231" r="6" fill="#e7eee9"/><path d="M216 208V254 M193 231H239 M200 215L232 247 M232 215L200 247" stroke="#e3ebe6" stroke-width="4"/></g>
  <g><circle cx="528" cy="231" r="39" fill="#1b2421"/><circle cx="528" cy="231" r="25" fill="#b8c5bf"/><circle cx="528" cy="231" r="16" fill="#53665e"/><circle cx="528" cy="231" r="6" fill="#e7eee9"/><path d="M528 208V254 M505 231H551 M512 215L544 247 M544 215L512 247" stroke="#e3ebe6" stroke-width="4"/></g>
  <path d="M143 155 L211 139 M461 84 L489 113" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
-</g></svg></div><div class="visual-bottom"><span>ARYAN</span><strong>हर सफर, खास सफर।</strong></div><div class="visual-glow"></div></div></section><section class="trust-strip" aria-label="बुकिंग की सुविधाएँ"><div><b>01</b><span>अपनी पसंद की कार</span></div><div><b>02</b><span>आसान बुकिंग फॉर्म</span></div><div><b>03</b><span>WhatsApp पर संपर्क</span></div></section>
+</g></svg></div>
+  <div class="road-car road-car-b" aria-hidden="true"><svg class="premium-mpv-art" viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+ <linearGradient id="bodyPaint" x1="0" y1="0" x2=".2" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".38" stop-color="#e9eee9"/><stop offset=".72" stop-color="#b9c8c2"/><stop offset="1" stop-color="#f7faf8"/></linearGradient>
+ <linearGradient id="glassPaint" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#254b4b"/><stop offset=".5" stop-color="#8fb5b2"/><stop offset="1" stop-color="#315c5b"/></linearGradient>
+ <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#73847f"/></linearGradient>
+ <filter id="carShadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<ellipse cx="367" cy="270" rx="258" ry="22" fill="#081d17" opacity=".36" filter="url(#carShadow)"/>
+<g class="car-body">
+ <path d="M101 211 L116 172 Q124 156 151 148 L220 129 L276 72 Q291 57 321 56 L448 59 Q468 61 484 78 L541 140 L589 154 Q611 161 620 184 L628 216 Q628 232 607 239 L112 239 Q91 236 101 211Z" fill="url(#bodyPaint)" stroke="#e5eee9" stroke-width="3"/>
+ <path d="M235 127 L287 78 Q297 68 320 68 L355 69 L355 129Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="4"/>
+ <path d="M367 69 L444 72 Q460 73 472 88 L508 130 L367 130Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="4"/>
+ <path d="M515 138 L553 148 Q574 153 587 170 L534 170Z" fill="url(#glassPaint)" stroke="#d8e2dd" stroke-width="3"/>
+ <path d="M355 70 L355 221 M515 138 L501 221 M226 132 L213 220" fill="none" stroke="#879b94" stroke-width="3"/>
+ <path d="M117 178 Q145 162 178 165 L203 170 L194 190 L109 194Z" fill="#fff5d6" stroke="#d8ded8" stroke-width="3"/>
+ <path d="M544 174 L593 177 Q602 181 605 193 L552 196Z" fill="#a33b35" stroke="#f4f7f4" stroke-width="3"/>
+ <path d="M117 205 Q280 217 607 204 L615 221 Q615 233 596 237 L124 237 Q102 233 105 220Z" fill="#657770"/>
+ <path d="M123 218 Q319 230 607 216" fill="none" stroke="url(#chrome)" stroke-width="5"/>
+ <path d="M259 137 L259 205 M397 137 L397 205 M516 145 L516 202" stroke="#9aa9a3" stroke-width="2" fill="none"/>
+ <path d="M272 153 L340 153 M380 153 L447 153" stroke="#fff" stroke-width="2" opacity=".8"/>
+ <rect x="337" y="208" width="83" height="20" rx="4" fill="#e7eee9" stroke="#879a91" stroke-width="2"/>
+ 
+ <path d="M223 180 L251 180 M412 180 L445 180" stroke="#f8fbf9" stroke-width="3" stroke-linecap="round"/>
+ <path d="M96 208 L118 202 L129 208 L122 221 L99 220Z" fill="#dbe7df"/>
+ <path d="M566 202 L604 199 L612 209 L606 219 L573 218Z" fill="#f5f8f5"/>
+ <g><circle cx="216" cy="231" r="39" fill="#1b2421"/><circle cx="216" cy="231" r="25" fill="#b8c5bf"/><circle cx="216" cy="231" r="16" fill="#53665e"/><circle cx="216" cy="231" r="6" fill="#e7eee9"/><path d="M216 208V254 M193 231H239 M200 215L232 247 M232 215L200 247" stroke="#e3ebe6" stroke-width="4"/></g>
+ <g><circle cx="528" cy="231" r="39" fill="#1b2421"/><circle cx="528" cy="231" r="25" fill="#b8c5bf"/><circle cx="528" cy="231" r="16" fill="#53665e"/><circle cx="528" cy="231" r="6" fill="#e7eee9"/><path d="M528 208V254 M505 231H551 M512 215L544 247 M544 215L512 247" stroke="#e3ebe6" stroke-width="4"/></g>
+ <path d="M143 155 L211 139 M461 84 L489 113" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+</g></svg></div>
+  <div class="road-surface"></div>
+</div><section class="trust-strip" aria-label="बुकिंग की सुविधाएँ"><div><b>01</b><span>अपनी पसंद की कार</span></div><div><b>02</b><span>आसान बुकिंग फॉर्म</span></div><div><b>03</b><span>WhatsApp पर संपर्क</span></div></section>
 <section class="section"><div class="section-title"><div><h2>हमारी गाड़ियाँ</h2><p>कार चुनें या अपनी जरूरत बताएं।</p></div></div><div class="grid" id="cars"><p class="hint">गाड़ियाँ लोड हो रही हैं…</p></div></section>
 <section class="section" id="booking"><div class="section-title"><div><h2>बुकिंग रिक्वेस्ट</h2><p>जानकारी भरें, फिर WhatsApp पर भेजें।</p></div></div>
 <div class="booking-layout"><form class="panel" id="bookingForm"><div class="form-grid">
@@ -807,7 +882,7 @@ async function refreshAdmin(){
 </script>
 
 <script>
-(()=>{const stage=document.querySelector(".hero-visual");if(!stage)return;let timer;const tap=()=>{stage.classList.add("is-touched");clearTimeout(timer);timer=setTimeout(()=>stage.classList.remove("is-touched"),850)};stage.addEventListener("pointerdown",tap,{passive:true});stage.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tap()}});stage.setAttribute("tabindex","0");stage.setAttribute("aria-label","Floating Ertiga car animation. Tap to animate.");})();
+(()=>{const stage=document.querySelector("#roadScene");if(!stage)return;let timer;stage.addEventListener("pointerdown",()=>{stage.classList.add("is-touched");clearTimeout(timer);timer=setTimeout(()=>stage.classList.remove("is-touched"),850)},{passive:true});})();
 </script>
 
 </body>
